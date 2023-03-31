@@ -5,7 +5,7 @@ using System.Configuration;
 
 namespace ohjelmistotuotanto
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form // te
     {
         private DatabaseManager _dbManager;
 
