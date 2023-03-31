@@ -1,6 +1,6 @@
 namespace ohjelmistotuotanto
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form // test
     {
         public Form1()
         {
