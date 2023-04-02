@@ -5,11 +5,11 @@ using System.Configuration;
 
 namespace ohjelmistotuotanto
 {
-    public partial class Form1 : Form // te
+    public partial class VillageNewbies : Form // te
     {
         private DatabaseManager _dbManager;
 
-        public Form1()
+        public VillageNewbies()
         {
             InitializeComponent();
         }

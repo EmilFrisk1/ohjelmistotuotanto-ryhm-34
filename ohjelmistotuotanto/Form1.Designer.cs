@@ -1,6 +1,6 @@
 ﻿namespace ohjelmistotuotanto
 {
-    partial class Form1
+    partial class VillageNewbies
     {
         /// <summary>
         ///  Required designer variable.
@@ -41,14 +41,14 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click_1;
             // 
-            // Form1
+            // VillageNewbies
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(806, 650);
             Controls.Add(button1);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "VillageNewbies";
+            Text = "Village Newbies";
             FormClosed += Form1_FormClosed_1;
             Load += Form1_Load_1;
             ResumeLayout(false);
