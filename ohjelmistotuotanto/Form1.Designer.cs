@@ -62,60 +62,60 @@
             // 
             // button2
             // 
-            button2.BackColor = Color.Orange;
-            button2.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.ForeColor = Color.Black;
+            button2.BackColor = Color.DarkSlateGray;
+            button2.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+            button2.ForeColor = Color.Silver;
             button2.Location = new Point(191, 137);
             button2.Name = "button2";
-            button2.Size = new Size(451, 50);
+            button2.Size = new Size(451, 66);
             button2.TabIndex = 2;
             button2.Text = "varaukset";
             button2.UseVisualStyleBackColor = false;
             // 
             // button3
             // 
-            button3.BackColor = Color.Orange;
-            button3.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.ForeColor = Color.Black;
+            button3.BackColor = Color.DarkSlateGray;
+            button3.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+            button3.ForeColor = Color.Silver;
             button3.Location = new Point(191, 249);
             button3.Name = "button3";
-            button3.Size = new Size(451, 50);
+            button3.Size = new Size(451, 66);
             button3.TabIndex = 3;
             button3.Text = "palvelut";
             button3.UseVisualStyleBackColor = false;
             // 
             // button4
             // 
-            button4.BackColor = Color.Orange;
+            button4.BackColor = Color.DarkSlateGray;
             button4.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            button4.ForeColor = Color.Black;
+            button4.ForeColor = Color.Silver;
             button4.Location = new Point(191, 362);
             button4.Name = "button4";
-            button4.Size = new Size(451, 50);
+            button4.Size = new Size(451, 66);
             button4.TabIndex = 4;
             button4.Text = "asiakkaat";
             button4.UseVisualStyleBackColor = false;
             // 
             // button5
             // 
-            button5.BackColor = Color.Orange;
+            button5.BackColor = Color.DarkSlateGray;
             button5.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            button5.ForeColor = Color.Black;
+            button5.ForeColor = Color.Silver;
             button5.Location = new Point(191, 466);
             button5.Name = "button5";
-            button5.Size = new Size(451, 50);
+            button5.Size = new Size(451, 66);
             button5.TabIndex = 5;
             button5.Text = "alueet";
             button5.UseVisualStyleBackColor = false;
             // 
             // button6
             // 
-            button6.BackColor = Color.Orange;
+            button6.BackColor = Color.DarkSlateGray;
             button6.Font = new Font("Segoe UI", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            button6.ForeColor = Color.Black;
+            button6.ForeColor = Color.Silver;
             button6.Location = new Point(191, 558);
             button6.Name = "button6";
-            button6.Size = new Size(451, 50);
+            button6.Size = new Size(451, 66);
             button6.TabIndex = 6;
             button6.Text = "laskut";
             button6.UseVisualStyleBackColor = false;
@@ -125,7 +125,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(806, 650);
+            ClientSize = new Size(804, 733);
             Controls.Add(button6);
             Controls.Add(button5);
             Controls.Add(button4);
