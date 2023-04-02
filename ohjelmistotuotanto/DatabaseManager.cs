@@ -7,44 +7,12 @@ public class DatabaseManager
 {
     private MySqlConnection _connection;
     private IConfiguration _configuration;
+    private string _connectionString;
 
     public DatabaseManager(IConfiguration configuration)
     {
         _configuration = configuration;
-        Connect();
-    }
-
-    private async void Connect()
-    {
-        string connectionString = _configuration.GetConnectionString("MySqlConnection");
-        _connection = new MySqlConnection(connectionString);
-
-        int maxAttempts = 3;
-        int currentAttempt = 0;
-        bool connected = false;
-
-        while (currentAttempt < maxAttempts && !connected) //  try to connect 3 times if failure
-        {
-            try
-            {
-                _connection.Open();
-                MessageBox.Show("Connection to the database was successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                connected = true;
-            }
-            catch (MySqlException ex)
-            {
-                currentAttempt++;
-
-                if (currentAttempt == maxAttempts)
-                {
-                    MessageBox.Show($"Error connecting to the database after {maxAttempts} attempts: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    await Task.Delay(1000);
-                }
-            }
-        }
+        _connectionString = _configuration.GetConnectionString("MySqlConnection");
     }
 
     // Add other database-related methods here, e.g., for querying or updating the database
@@ -57,23 +25,56 @@ public class DatabaseManager
         }
     }
 
-
-    public void InsertArea(string column1Value)
+    // 1. Connect 2. Database operation 3. disconnect || 3 max tries
+    public async Task ExecuteWithRetry(Func<MySqlConnection, Task> operation) 
     {
-        try
-        {
-            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO area (name) VALUES (@column1Value)", _connection))
-            {
-                cmd.Parameters.AddWithValue("@column1Value", column1Value);
+        int maxAttempts = 3;
+        int currentAttempt = 0;
 
-                cmd.ExecuteNonQuery();
-            }
-        }
-        catch (MySqlException ex)
+        while (currentAttempt < maxAttempts)
         {
-            // Handle errors, e.g., by logging the exception or showing an error message
-            Console.WriteLine($"Error inserting data into the database: {ex.Message}");
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(_connectionString))
+                {
+                    connection.Open();
+
+                    await operation(connection);
+
+                    connection.Close();
+                }
+
+                // If the operation is successful, break out of the loop
+                break;
+            }
+            catch (MySqlException ex)
+            {
+                currentAttempt++;
+
+                if (currentAttempt == maxAttempts)
+                {
+                    MessageBox.Show($"Error connecting to the database after {maxAttempts} attempts: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+                else
+                {
+                    await Task.Delay(1000);
+                }
+            }
         }
     }
 
+
+    public async Task InsertArea(string areaName)
+    {
+        await ExecuteWithRetry(async (connection) =>
+        {
+            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO area (name) VALUES (@areaName)", connection))
+            {
+                cmd.Parameters.AddWithValue("@areaName", areaName);
+
+                await cmd.ExecuteNonQueryAsync();
+            }
+        });
+    }
 }
