@@ -9,8 +9,13 @@ public class DatabaseManager
     private IConfiguration _configuration;
     private string _connectionString;
 
-    public DatabaseManager(IConfiguration configuration)
+    public DatabaseManager()
     {
+        var builder = new ConfigurationBuilder() // setup config json file 
+              .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+              .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+        IConfiguration configuration = builder.Build();
+
         _configuration = configuration;
         _connectionString = _configuration.GetConnectionString("MySqlConnection");
     }
