@@ -17,7 +17,7 @@ namespace ohjelmistotuotanto
         private void button1_Click_1(object sender, EventArgs e)
         {
             // add something to DB
-            _dbManager.InsertArea("Varkaus");
+            _dbManager.InsertArea("Kuopio");
         }
 
         private void Form1_Load_1(object sender, EventArgs e)
@@ -29,5 +29,11 @@ namespace ohjelmistotuotanto
         {
             _dbManager.CloseConnection();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+        
     }
-}
+} //testi kommentti
