@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks; //testi 04.04
+using System.Windows.Forms.VisualStyles;
 
 namespace ohjelmistotuotanto
 {
     class ComponentFunctions
     {
 
-        public static Button CreateButton(Control container, string text, Font font, int tabI, Point loc, Size sz, string name)
+        public static Button CreateButton(string text, Font font, int tabI, Point loc, Size sz, string name, Color? backColor = null, Color? foreColor = null)
         {
             var button = new Button();
             button.Text = text;
@@ -18,11 +19,16 @@ namespace ohjelmistotuotanto
             button.Location = loc;
             button.Size = sz;
             button.Name = name;
-            container.Controls.Add(button);
+
+            if (backColor.HasValue)
+                button.BackColor = backColor.Value;
+
+            if (foreColor.HasValue)
+                button.ForeColor = foreColor.Value;
             return button;
         }
 
-        public static Label CreateLabel(Control container, string name, Font font, int tabI, Point loc, string name2, bool isErrorLbl = false)
+        public static Label CreateLabel(string name,Font font , int tabI, Point loc, string name2, bool isErrorLbl = false)
         {
             var label = new Label();
             label.Font = font;
@@ -31,12 +37,8 @@ namespace ohjelmistotuotanto
             label.Location = loc;
             label.AutoSize = true;
             label.Name = name2;
-
             if (isErrorLbl)
                 label.ForeColor = Color.Red;
-
-            container.Controls.Add(label);
-
             return label;
         }
 

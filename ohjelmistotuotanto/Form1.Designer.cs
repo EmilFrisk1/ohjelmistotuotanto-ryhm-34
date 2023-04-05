@@ -125,7 +125,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(804, 733);
+            this.ClientSize = new System.Drawing.Size(984, 761);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -134,6 +134,7 @@
             this.Controls.Add(this.mainMenuHeader);
             this.Controls.Add(this.button1);
             this.Name = "VillageNewbies";
+            this.Tag = "";
             this.Text = "Village Newbies";
             this.ResumeLayout(false);
             this.PerformLayout();
