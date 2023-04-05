@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.Asn1.Crmf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,35 +11,49 @@ namespace ohjelmistotuotanto
     class ComponentFunctions
     {
 
-        public static Button CreateButton(string text, Font font, int tabI, Point loc, Size sz, string name, Color? backColor = null, Color? foreColor = null)
+        public static Button CreateButton(Control container, string text, Font font, int tabI, Point loc, Size sz, string name, Color clr, Color bc, EventHandler mouseEnterEventHandler, EventHandler mouseLeaveEventHandler)
         {
             var button = new Button();
-            button.Text = text;
+            button.Text = text; // styles
             button.Font = font;
             button.TabIndex = tabI;
             button.Location = loc;
             button.Size = sz;
             button.Name = name;
+            button.ForeColor = clr;
+            button.BackColor = bc;
 
-            if (backColor.HasValue)
-                button.BackColor = backColor.Value;
+            button.MouseEnter += mouseEnterEventHandler; // Add events
+            button.MouseLeave += mouseLeaveEventHandler;
 
-            if (foreColor.HasValue)
-                button.ForeColor = foreColor.Value;
+            container.Controls.Add(button);
             return button;
         }
 
-        public static Label CreateLabel(string name,Font font , int tabI, Point loc, string name2, bool isErrorLbl = false)
+        public static Label CreateLabel(Control container, Color fc, string txt, Font font, int tabI, Point loc, string name, bool isErrorLbl = false, bool bc = false)
         {
             var label = new Label();
             label.Font = font;
             label.TabIndex = tabI;
-            label.Text = name;
+            label.Text = txt;
             label.Location = loc;
             label.AutoSize = true;
-            label.Name = name2;
+            label.Name = name;
+            label.ForeColor = fc;
+
+            if (bc)
+            {
+                label.BackColor = Color.Transparent; 
+            } else
+            {
+                label.BackColor = SystemColors.Control; // default
+            }
+
             if (isErrorLbl)
                 label.ForeColor = Color.Red;
+
+            container.Controls.Add(label);
+
             return label;
         }
 
@@ -52,6 +67,29 @@ namespace ohjelmistotuotanto
             container.Controls.Add(tb);
 
             return tb;
+        }
+
+        public static PictureBox CreatePrevButton(Control container, Point loc, Size sz)
+        { // get projectDir
+            string workingDirectory = Environment.CurrentDirectory;
+            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
+
+
+            PictureBox prevButton = new PictureBox();
+            prevButton.Name = "prevBtn";
+            prevButton.BackColor = Color.Transparent;
+            prevButton.Size = sz;
+            prevButton.Location = loc;
+            string imageLocation;
+            string imagePath = projectDirectory + "\\img\\arrow_back.png"; // TODO - tähän vois ettii jonkun hienomman nuolen vaikka joku puinen nuoli menis hyvin teemaan, jos ois viel silverin värinen nii sopis teksiten kaa hyvin
+            prevButton.Image = System.Drawing.Image.FromFile(imagePath);
+            prevButton.Click += new EventHandler(ComponentEvents.ClickPrevArr);
+            //prevButton.MouseEnter += new EventHandler(HoverEnterPrevArr);
+            //prevButton.MouseLeave += new EventHandler(HoverLeavePrevArr);
+            container.Controls.Add(prevButton);
+            prevButton.Hide();
+
+            return prevButton;
         }
     }
 }
