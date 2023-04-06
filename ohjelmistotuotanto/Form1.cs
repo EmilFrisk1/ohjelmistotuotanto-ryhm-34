@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace ohjelmistotuotanto
 {
-    public partial class VillageNewbies : Form
+    public partial class VillageNewbies : Form // asdasdasdasdadasd
     {
         //public static Form formVaraukset; // luodaan varaukset form
 
