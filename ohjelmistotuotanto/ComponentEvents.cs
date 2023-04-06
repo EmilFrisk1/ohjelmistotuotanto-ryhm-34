@@ -21,33 +21,5 @@ namespace ohjelmistotuotanto
             Button button = (Button)sender;
             button.BackColor = Color.DarkSlateGray; // make it normal again
         }
-
-        static public void HandleButtonMainMenuClick(object sender, EventArgs e)
-        {// identify the button
-            Button button = (Button)sender;
-            if (button.Name == "mainMenuRrvtBtn")
-            {
-                VillageNewbies.menuhistory.Add(Constants.rrvtMenu); // update menuhistory
-                // update GUI
-                VillageNewbies.mainMenuHide();
-                VillageNewbies.rrvtMenuShow();
-                VillageNewbies.prevButtonShow();
-            }
-        }
-
-        static public void ClickPrevArr(object sender, EventArgs e)
-        {
-            string currentMenu = VillageNewbies.menuhistory[VillageNewbies.menuhistory.Count - 1];
-
-            if (currentMenu == Constants.rrvtMenu)
-            {
-                // Update menuhistory - remove last item
-                VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
-
-                // Update GUI
-                VillageNewbies.rrvtMenuHide();
-                VillageNewbies.mainMenuShow();
-            }
-        }
     }
 }

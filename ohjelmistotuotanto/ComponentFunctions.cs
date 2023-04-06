@@ -68,28 +68,5 @@ namespace ohjelmistotuotanto
 
             return tb;
         }
-
-        public static PictureBox CreatePrevButton(Control container, Point loc, Size sz)
-        { // get projectDir
-            string workingDirectory = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-
-
-            PictureBox prevButton = new PictureBox();
-            prevButton.Name = "prevBtn";
-            prevButton.BackColor = Color.Transparent;
-            prevButton.Size = sz;
-            prevButton.Location = loc;
-            string imageLocation;
-            string imagePath = projectDirectory + "\\img\\arrow_back.png"; // TODO - tähän vois ettii jonkun hienomman nuolen vaikka joku puinen nuoli menis hyvin teemaan, jos ois viel silverin värinen nii sopis teksiten kaa hyvin
-            prevButton.Image = System.Drawing.Image.FromFile(imagePath);
-            prevButton.Click += new EventHandler(ComponentEvents.ClickPrevArr);
-            //prevButton.MouseEnter += new EventHandler(HoverEnterPrevArr);
-            //prevButton.MouseLeave += new EventHandler(HoverLeavePrevArr);
-            container.Controls.Add(prevButton);
-            prevButton.Hide();
-
-            return prevButton;
-        }
     }
 }
