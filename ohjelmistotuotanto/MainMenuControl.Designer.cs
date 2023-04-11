@@ -60,7 +60,7 @@
             reservationsBtn.TabIndex = 1;
             reservationsBtn.Text = "Varaukset";
             reservationsBtn.UseVisualStyleBackColor = false;
-            reservationsBtn.Click += button1_Click;
+            reservationsBtn.Click += reservationsBtn_Click;
             // 
             // servicesBtn
             // 
