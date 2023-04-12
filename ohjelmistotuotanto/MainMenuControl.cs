@@ -36,8 +36,7 @@ namespace ohjelmistotuotanto
 
         private async void areasBtn_Click(object sender, EventArgs e)
         {
-            var test = await VillageNewbies._dbManager.SelectAsync("area", null, "id", 3);
-            var i = 3;
+           
         }
     }
 }
