@@ -15,7 +15,6 @@ namespace ohjelmistotuotanto
         private MainMenuControl mainMenuControl;
         private ReservationMenuControl reservationMenuControl;
         private ServicesMenuControl servicesMenuControl;
-        private CustomersMenuControl customersMenuControl;
 
         static PictureBox prevButton;
 
@@ -34,29 +33,25 @@ namespace ohjelmistotuotanto
             mainMenuControl = new MainMenuControl();
             reservationMenuControl = new ReservationMenuControl();
             servicesMenuControl = new ServicesMenuControl();
-            customersMenuControl = new CustomersMenuControl();
 
             // hide controls
             mainMenuControl.Hide();
             reservationMenuControl.Hide();
             servicesMenuControl.Hide();
-            customersMenuControl.Hide();
 
             // Subscribe to the MenuSwitchRequested event for each User Control
             SubscribeToMenuSwitchEvents(mainMenuControl);
             SubscribeToMenuSwitchEvents(reservationMenuControl);
             SubscribeToMenuSwitchEvents(servicesMenuControl);
-            SubscribeToMenuSwitchEvents(customersMenuControl);
 
             mainMenuControl.Dock = DockStyle.Fill;
             reservationMenuControl.Dock = DockStyle.Fill;
             servicesMenuControl.Dock = DockStyle.Fill;
-            customersMenuControl.Dock = DockStyle.Fill;
+
             // add controls to app container
             appContainer.Controls.Add(mainMenuControl);
             appContainer.Controls.Add(reservationMenuControl);
             appContainer.Controls.Add(servicesMenuControl);
-            appContainer.Controls.Add(customersMenuControl);
 
             // Show the initial User Control
             SwitchMenuControl(Constants.mainMenu);
@@ -91,6 +86,9 @@ namespace ohjelmistotuotanto
             } else if (menu == Constants.srvcMenu)
             {
                 servicesMenuControl.Visible = true;
+            } else if (menu == "testMenu")
+            {
+                testMenu.Visible = true;
             }
             else if (menu == Constants.customersMenu)
             {
@@ -112,6 +110,9 @@ namespace ohjelmistotuotanto
             else if (userControl is ReservationMenuControl servicesMenuControl)
             {
                 servicesMenuControl.MenuSwitchRequested += SwitchMenuControl;
+            } else if (userControl is TestMenu testMenu)
+            {
+                testMenu.MenuSwitchRequested += SwitchMenuControl;
             }
             else if (userControl is CustomersMenuControl customersMenuControl)
             {
