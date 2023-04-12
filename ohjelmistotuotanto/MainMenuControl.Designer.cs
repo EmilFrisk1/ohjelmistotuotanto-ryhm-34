@@ -109,6 +109,7 @@
             areasBtn.TabIndex = 5;
             areasBtn.Text = "Alueet";
             areasBtn.UseVisualStyleBackColor = false;
+            areasBtn.Click += areasBtn_Click;
             // 
             // MainMenuControl
             // 

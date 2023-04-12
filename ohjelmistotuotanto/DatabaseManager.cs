@@ -82,4 +82,73 @@ public class DatabaseManager
             }
         });
     }
+
+    public async Task UpdateDataAsync(string tableName, Dictionary<string, object> columnValues, string conditionColumn, object conditionValue)
+    {
+        await ExecuteWithRetry(async (connection) =>
+        {
+            var setColumns = string.Join(", ", columnValues.Keys.Select(key => key + "=@" + key));
+
+            using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tableName} SET {setColumns} WHERE {conditionColumn}=@{conditionColumn}", connection))
+            {
+                foreach (var entry in columnValues)
+                {
+                    cmd.Parameters.AddWithValue("@" + entry.Key, entry.Value);
+                }
+
+                cmd.Parameters.AddWithValue("@" + conditionColumn, conditionValue);
+
+                await cmd.ExecuteNonQueryAsync();
+            }
+        });
+    }
+
+    public async Task DeleteAsync(string tableName, string conditionColumn, object conditionValue)
+    {
+        await ExecuteWithRetry(async (connection) =>
+        {
+            using (MySqlCommand cmd = new MySqlCommand($"DELETE FROM {tableName} WHERE {conditionColumn}=@{conditionColumn}", connection))
+            {
+                cmd.Parameters.AddWithValue("@" + conditionColumn, conditionValue);
+
+                await cmd.ExecuteNonQueryAsync();
+            }
+        });
+    }
+
+    public async Task<List<Dictionary<string, object>>> SelectAsync(string tableName, string conditionColumn = null, object conditionValue = null, List<string> columns = null)
+    {
+        List<Dictionary<string, object>> results = new List<Dictionary<string, object>>();
+
+        await ExecuteWithRetry(async (connection) =>
+        {
+            string selectedColumns = columns != null ? string.Join(", ", columns) : "*";
+            string whereClause = (conditionColumn != null && conditionValue != null) ? $"WHERE {conditionColumn}=@{conditionColumn}" : "";
+
+            using (MySqlCommand cmd = new MySqlCommand($"SELECT {selectedColumns} FROM {tableName} {whereClause}", connection))
+            {
+                if (conditionColumn != null && conditionValue != null)
+                {
+                    cmd.Parameters.AddWithValue("@" + conditionColumn, conditionValue);
+                }
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        var row = new Dictionary<string, object>();
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            row[reader.GetName(i)] = reader.GetValue(i);
+                        }
+                        results.Add(row);
+                    }
+                }
+            }
+        });
+
+        return results;
+    }
+
+
 }

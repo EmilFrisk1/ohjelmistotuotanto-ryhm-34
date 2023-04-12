@@ -21,7 +21,7 @@ namespace ohjelmistotuotanto
 
         public static List<string> menuhistory = new List<string>() { Constants.mainMenu };
 
-        private DatabaseManager _dbManager;
+        public static DatabaseManager _dbManager;
 
         public VillageNewbies()
         {
