@@ -11,5 +11,6 @@ namespace ohjelmistotuotanto
         public static string mainMenu = "mainMenu";
         public static string rrvtMenu = "rrvtMenu";
         public static string srvcMenu = "serviceMenu";
+        public static string customersMenu = "customersMenu";
     }
 }

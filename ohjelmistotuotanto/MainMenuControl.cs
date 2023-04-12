@@ -33,5 +33,11 @@ namespace ohjelmistotuotanto
             this.Hide();
             MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
         }
+
+        private void customersBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.customersMenu);
+        }
     }
 }
