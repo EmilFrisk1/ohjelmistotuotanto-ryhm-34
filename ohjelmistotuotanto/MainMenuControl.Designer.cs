@@ -51,16 +51,15 @@
             // 
             // reservationsBtn
             // 
-            reservationsBtn.BackColor = Color.DarkSlateGray;
-            reservationsBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            reservationsBtn.ForeColor = Color.Silver;
-            reservationsBtn.Location = new Point(176, 136);
-            reservationsBtn.Name = "reservationsBtn";
-            reservationsBtn.Size = new Size(451, 62);
-            reservationsBtn.TabIndex = 1;
-            reservationsBtn.Text = "Varaukset";
-            reservationsBtn.UseVisualStyleBackColor = false;
-            reservationsBtn.Click += reservationsBtn_Click;
+            this.reservationsBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.reservationsBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationsBtn.ForeColor = System.Drawing.Color.Silver;
+            this.reservationsBtn.Location = new System.Drawing.Point(176, 136);
+            this.reservationsBtn.Name = "reservationsBtn";
+            this.reservationsBtn.Size = new System.Drawing.Size(451, 62);
+            this.reservationsBtn.TabIndex = 1;
+            this.reservationsBtn.Text = "Varaukset";
+            this.reservationsBtn.UseVisualStyleBackColor = false;
             // 
             // servicesBtn
             // 

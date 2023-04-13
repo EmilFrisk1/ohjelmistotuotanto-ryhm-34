@@ -10,32 +10,20 @@ using System.Windows.Forms;
 
 namespace ohjelmistotuotanto
 {
-    public partial class CustomersMenuControl : UserControl
+    public partial class CustomersAddControl : UserControl
     {
         public delegate void MenuSwitchRequestHandler(string newControl); // Function pointer 
         public event MenuSwitchRequestHandler MenuSwitchRequested;
-        public CustomersMenuControl()
+        public CustomersAddControl()
         {
             InitializeComponent();
+            dataGridView1.BringToFront();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            // Go back to prev menu
-            // Hide current menu and show new one
             this.Hide();
-            MenuSwitchRequested?.Invoke(Constants.mainMenu);
-        }
-
-        private void aBtn1_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            MenuSwitchRequested?.Invoke(Constants.customersAdd);
-        }
-
-        private void aBtn2_Click(object sender, EventArgs e)
-        {
-            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.customersMenu);
         }
     }
 }
