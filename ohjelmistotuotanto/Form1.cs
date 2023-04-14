@@ -86,13 +86,10 @@ namespace ohjelmistotuotanto
             } else if (menu == Constants.srvcMenu)
             {
                 servicesMenuControl.Visible = true;
-            } else if (menu == "testMenu")
-            {
-                testMenu.Visible = true;
-            }
+            } 
             else if (menu == Constants.customersMenu)
             {
-                customersMenuControl.Visible= true;
+                //customersMenuControl.Visible= true;
             }
         }
 
