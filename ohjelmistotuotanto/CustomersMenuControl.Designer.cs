@@ -36,6 +36,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.aBtn4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@
             this.aBtn2.TabIndex = 2;
             this.aBtn2.Text = "Lisää";
             this.aBtn2.UseVisualStyleBackColor = false;
+            this.aBtn2.Click += new System.EventHandler(this.aBtn2_Click);
             // 
             // aBtn3
             // 
@@ -74,6 +76,7 @@
             this.aBtn1.TabIndex = 5;
             this.aBtn1.Text = "Hae";
             this.aBtn1.UseVisualStyleBackColor = false;
+            this.aBtn1.Click += new System.EventHandler(this.aBtn1_Click);
             // 
             // contextMenuStrip1
             // 
@@ -96,18 +99,31 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(25, 136);
+            this.pictureBox1.Location = new System.Drawing.Point(33, 32);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(124, 62);
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // aBtn4
+            // 
+            this.aBtn4.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.aBtn4.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.aBtn4.ForeColor = System.Drawing.Color.Silver;
+            this.aBtn4.Location = new System.Drawing.Point(177, 432);
+            this.aBtn4.Name = "aBtn4";
+            this.aBtn4.Size = new System.Drawing.Size(451, 62);
+            this.aBtn4.TabIndex = 9;
+            this.aBtn4.Text = "Päivitä";
+            this.aBtn4.UseVisualStyleBackColor = false;
+            // 
             // CustomersMenuControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Controls.Add(this.aBtn4);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.aBtn1);
@@ -129,5 +145,6 @@
         private ContextMenuStrip contextMenuStrip1;
         private Label label1;
         private PictureBox pictureBox1;
+        private Button aBtn4;
     }
 }

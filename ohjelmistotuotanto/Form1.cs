@@ -15,6 +15,9 @@ namespace ohjelmistotuotanto
         private MainMenuControl mainMenuControl;
         private ReservationMenuControl reservationMenuControl;
         private ServicesMenuControl servicesMenuControl;
+        private TestMenu testMenu;
+        private CustomersMenuControl customersMenuControl;
+        private CustomersAddControl customersAddControl;//TODO- Pitäisi olla customersSearchControl nimellä
 
         static PictureBox prevButton;
 
@@ -33,25 +36,40 @@ namespace ohjelmistotuotanto
             mainMenuControl = new MainMenuControl();
             reservationMenuControl = new ReservationMenuControl();
             servicesMenuControl = new ServicesMenuControl();
+            testMenu = new TestMenu();
+            customersMenuControl = new CustomersMenuControl();
+            customersAddControl = new CustomersAddControl();
 
             // hide controls
             mainMenuControl.Hide();
             reservationMenuControl.Hide();
             servicesMenuControl.Hide();
+            testMenu.Hide();
+            customersMenuControl.Hide();
+            customersAddControl.Hide();
 
             // Subscribe to the MenuSwitchRequested event for each User Control
             SubscribeToMenuSwitchEvents(mainMenuControl);
             SubscribeToMenuSwitchEvents(reservationMenuControl);
             SubscribeToMenuSwitchEvents(servicesMenuControl);
+            SubscribeToMenuSwitchEvents(testMenu);
+            SubscribeToMenuSwitchEvents(customersMenuControl);
+            SubscribeToMenuSwitchEvents(customersAddControl);
 
             mainMenuControl.Dock = DockStyle.Fill;
             reservationMenuControl.Dock = DockStyle.Fill;
             servicesMenuControl.Dock = DockStyle.Fill;
+            testMenu.Dock = DockStyle.Fill;
+            customersMenuControl.Dock = DockStyle.Fill;
+            customersAddControl.Dock = DockStyle.Fill;
 
             // add controls to app container
             appContainer.Controls.Add(mainMenuControl);
             appContainer.Controls.Add(reservationMenuControl);
             appContainer.Controls.Add(servicesMenuControl);
+            appContainer.Controls.Add(testMenu);
+            appContainer.Controls.Add(customersMenuControl);
+            appContainer.Controls.Add(customersAddControl);
 
             // Show the initial User Control
             SwitchMenuControl(Constants.mainMenu);
@@ -89,7 +107,11 @@ namespace ohjelmistotuotanto
             } 
             else if (menu == Constants.customersMenu)
             {
-                //customersMenuControl.Visible= true;
+                customersMenuControl.Visible = true;
+            }
+            else if (menu == Constants.customersAdd)
+            {
+                customersAddControl.Visible = true;
             }
         }
 
@@ -114,6 +136,10 @@ namespace ohjelmistotuotanto
             else if (userControl is CustomersMenuControl customersMenuControl)
             {
                 customersMenuControl.MenuSwitchRequested += SwitchMenuControl;
+            }
+            else if(userControl is CustomersAddControl customersAddControl)
+            {
+                customersAddControl.MenuSwitchRequested += SwitchMenuControl;
             }
         }
 
