@@ -20,24 +20,16 @@ namespace ohjelmistotuotanto
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            MenuSwitchRequested?.Invoke(Constants.srvcMenu); //SwitchMenuControl(Constants.srvcMenu); sama asia
-        }
-
-        private void reservationsBtn_Click(object sender, EventArgs e)
-        {
-            // same thing as SwitchMenuControl(new ReservationMenuControl());
-            // hide current menu and show new menu
-            this.Hide();
-            MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
-        }
-
         private void customersBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
             MenuSwitchRequested?.Invoke(Constants.customersMenu);
+        }
+
+        private void reservationsBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
         }
     }
 }
