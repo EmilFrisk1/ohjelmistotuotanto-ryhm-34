@@ -15,7 +15,6 @@ namespace ohjelmistotuotanto
         private MainMenuControl mainMenuControl;
         private ReservationMenuControl reservationMenuControl;
         private ServicesMenuControl servicesMenuControl;
-        private TestMenu testMenu;
         private CustomersMenuControl customersMenuControl;
         private CustomersAddControl customersAddControl;//TODO- Pitäisi olla customersSearchControl nimellä
 
@@ -36,7 +35,6 @@ namespace ohjelmistotuotanto
             mainMenuControl = new MainMenuControl();
             reservationMenuControl = new ReservationMenuControl();
             servicesMenuControl = new ServicesMenuControl();
-            testMenu = new TestMenu();
             customersMenuControl = new CustomersMenuControl();
             customersAddControl = new CustomersAddControl();
 
@@ -44,7 +42,6 @@ namespace ohjelmistotuotanto
             mainMenuControl.Hide();
             reservationMenuControl.Hide();
             servicesMenuControl.Hide();
-            testMenu.Hide();
             customersMenuControl.Hide();
             customersAddControl.Hide();
 
@@ -52,14 +49,12 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(mainMenuControl);
             SubscribeToMenuSwitchEvents(reservationMenuControl);
             SubscribeToMenuSwitchEvents(servicesMenuControl);
-            SubscribeToMenuSwitchEvents(testMenu);
             SubscribeToMenuSwitchEvents(customersMenuControl);
             SubscribeToMenuSwitchEvents(customersAddControl);
 
             mainMenuControl.Dock = DockStyle.Fill;
             reservationMenuControl.Dock = DockStyle.Fill;
             servicesMenuControl.Dock = DockStyle.Fill;
-            testMenu.Dock = DockStyle.Fill;
             customersMenuControl.Dock = DockStyle.Fill;
             customersAddControl.Dock = DockStyle.Fill;
 
@@ -67,7 +62,6 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(mainMenuControl);
             appContainer.Controls.Add(reservationMenuControl);
             appContainer.Controls.Add(servicesMenuControl);
-            appContainer.Controls.Add(testMenu);
             appContainer.Controls.Add(customersMenuControl);
             appContainer.Controls.Add(customersAddControl);
 
@@ -129,9 +123,6 @@ namespace ohjelmistotuotanto
             else if (userControl is ReservationMenuControl servicesMenuControl)
             {
                 servicesMenuControl.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is TestMenu testMenu)
-            {
-                testMenu.MenuSwitchRequested += SwitchMenuControl;
             }
             else if (userControl is CustomersMenuControl customersMenuControl)
             {
