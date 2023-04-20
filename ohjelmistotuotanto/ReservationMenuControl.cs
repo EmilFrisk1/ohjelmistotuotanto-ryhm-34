@@ -19,17 +19,30 @@ namespace ohjelmistotuotanto
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void searchBtn_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void prevBtn_Click(object sender, EventArgs e)
         {
-            // Go back to prev menu
-            // Hide current menu and show new one
             this.Hide();
             MenuSwitchRequested?.Invoke(Constants.mainMenu);
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -49,6 +49,7 @@
             updateBtn.TabIndex = 15;
             updateBtn.Text = "Päivitä";
             updateBtn.UseVisualStyleBackColor = false;
+            updateBtn.Click += updateBtn_Click;
             // 
             // prevBtn
             // 
@@ -59,6 +60,7 @@
             prevBtn.Size = new Size(124, 62);
             prevBtn.TabIndex = 14;
             prevBtn.TabStop = false;
+            prevBtn.Click += prevBtn_Click;
             // 
             // label1
             // 
@@ -83,6 +85,7 @@
             searchBtn.TabIndex = 12;
             searchBtn.Text = "Hae";
             searchBtn.UseVisualStyleBackColor = false;
+            searchBtn.Click += searchBtn_Click;
             // 
             // deleteBtn
             // 
@@ -95,6 +98,7 @@
             deleteBtn.TabIndex = 11;
             deleteBtn.Text = "Poista";
             deleteBtn.UseVisualStyleBackColor = false;
+            deleteBtn.Click += deleteBtn_Click;
             // 
             // addBtn
             // 
@@ -107,6 +111,7 @@
             addBtn.TabIndex = 10;
             addBtn.Text = "Lisää";
             addBtn.UseVisualStyleBackColor = false;
+            addBtn.Click += addBtn_Click;
             // 
             // ReservationMenuControl
             // 
