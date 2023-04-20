@@ -30,25 +30,27 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddReservationMenuControl));
             panel1 = new Panel();
+            da = new Label();
             label8 = new Label();
-            cottagesCbx = new ComboBox();
+            cottageCbx = new ComboBox();
             label1 = new Label();
             textBox1 = new TextBox();
-            label2 = new Label();
             prevBtn = new PictureBox();
             label3 = new Label();
             panel2 = new Panel();
             label4 = new Label();
-            comboBox1 = new ComboBox();
+            customerCbx = new ComboBox();
             label5 = new Label();
             textBox2 = new TextBox();
             label6 = new Label();
             panel3 = new Panel();
+            dateErrorLabel = new Label();
             whereDateLabel = new Label();
             fromDatePicker = new DateTimePicker();
             label9 = new Label();
             whereDatePicker = new DateTimePicker();
             addReservationBtn = new Button();
+            formErrorLabel = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)prevBtn).BeginInit();
             panel2.SuspendLayout();
@@ -59,47 +61,59 @@
             // 
             panel1.BackColor = Color.Transparent;
             panel1.BorderStyle = BorderStyle.Fixed3D;
+            panel1.Controls.Add(da);
             panel1.Controls.Add(label8);
-            panel1.Controls.Add(cottagesCbx);
+            panel1.Controls.Add(cottageCbx);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(textBox1);
-            panel1.Controls.Add(label2);
             panel1.ForeColor = Color.Silver;
             panel1.Location = new Point(176, 147);
             panel1.Name = "panel1";
             panel1.Size = new Size(451, 186);
             panel1.TabIndex = 14;
             // 
+            // da
+            // 
+            da.AutoSize = true;
+            da.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            da.ForeColor = Color.WhiteSmoke;
+            da.Location = new Point(-2, 72);
+            da.Name = "da";
+            da.Size = new Size(61, 37);
+            da.TabIndex = 13;
+            da.Text = "hae";
+            // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.ForeColor = Color.Silver;
+            label8.Font = new Font("Segoe UI Semibold", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.ForeColor = Color.WhiteSmoke;
             label8.Location = new Point(145, -1);
             label8.Name = "label8";
-            label8.Size = new Size(122, 50);
+            label8.Size = new Size(152, 50);
             label8.TabIndex = 12;
-            label8.Text = "Mökki";
+            label8.Text = "Mökki *";
             // 
-            // cottagesCbx
+            // cottageCbx
             // 
-            cottagesCbx.BackColor = Color.DarkSlateGray;
-            cottagesCbx.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            cottagesCbx.ForeColor = Color.Silver;
-            cottagesCbx.FormattingEnabled = true;
-            cottagesCbx.Items.AddRange(new object[] { "" });
-            cottagesCbx.Location = new Point(105, 118);
-            cottagesCbx.Name = "cottagesCbx";
-            cottagesCbx.Size = new Size(315, 29);
-            cottagesCbx.TabIndex = 1;
+            cottageCbx.BackColor = Color.DarkSlateGray;
+            cottageCbx.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            cottageCbx.ForeColor = Color.Silver;
+            cottageCbx.FormattingEnabled = true;
+            cottageCbx.Items.AddRange(new object[] { "moi 1", "moi 2", "moi 3" });
+            cottageCbx.Location = new Point(105, 118);
+            cottageCbx.Name = "cottageCbx";
+            cottageCbx.Size = new Size(315, 29);
+            cottageCbx.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.WhiteSmoke;
             label1.Location = new Point(-1, 110);
             label1.Name = "label1";
-            label1.Size = new Size(92, 37);
+            label1.Size = new Size(95, 37);
             label1.TabIndex = 2;
             label1.Text = "valitse";
             // 
@@ -113,16 +127,6 @@
             textBox1.Size = new Size(315, 29);
             textBox1.TabIndex = 3;
             // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(-1, 64);
-            label2.Name = "label2";
-            label2.Size = new Size(60, 37);
-            label2.TabIndex = 4;
-            label2.Text = "hae";
-            // 
             // prevBtn
             // 
             prevBtn.BackColor = Color.Transparent;
@@ -133,6 +137,7 @@
             prevBtn.SizeMode = PictureBoxSizeMode.StretchImage;
             prevBtn.TabIndex = 16;
             prevBtn.TabStop = false;
+            prevBtn.Click += prevBtn_Click;
             // 
             // label3
             // 
@@ -151,7 +156,7 @@
             panel2.BackColor = Color.Transparent;
             panel2.BorderStyle = BorderStyle.Fixed3D;
             panel2.Controls.Add(label4);
-            panel2.Controls.Add(comboBox1);
+            panel2.Controls.Add(customerCbx);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(textBox2);
             panel2.Controls.Add(label6);
@@ -164,33 +169,34 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.ForeColor = Color.Silver;
+            label4.Font = new Font("Segoe UI Semibold", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.WhiteSmoke;
             label4.Location = new Point(145, -1);
             label4.Name = "label4";
-            label4.Size = new Size(143, 50);
+            label4.Size = new Size(172, 50);
             label4.TabIndex = 12;
-            label4.Text = "Asiakas";
+            label4.Text = "Asiakas *";
             // 
-            // comboBox1
+            // customerCbx
             // 
-            comboBox1.BackColor = Color.DarkSlateGray;
-            comboBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox1.ForeColor = Color.Silver;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "" });
-            comboBox1.Location = new Point(105, 118);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(315, 29);
-            comboBox1.TabIndex = 1;
+            customerCbx.BackColor = Color.DarkSlateGray;
+            customerCbx.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            customerCbx.ForeColor = Color.Silver;
+            customerCbx.FormattingEnabled = true;
+            customerCbx.Items.AddRange(new object[] { "hei 1", "hei 2", "hei 3" });
+            customerCbx.Location = new Point(105, 118);
+            customerCbx.Name = "customerCbx";
+            customerCbx.Size = new Size(315, 29);
+            customerCbx.TabIndex = 1;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.ForeColor = Color.WhiteSmoke;
             label5.Location = new Point(-1, 110);
             label5.Name = "label5";
-            label5.Size = new Size(92, 37);
+            label5.Size = new Size(95, 37);
             label5.TabIndex = 2;
             label5.Text = "valitse";
             // 
@@ -207,10 +213,11 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ForeColor = Color.WhiteSmoke;
             label6.Location = new Point(-1, 64);
             label6.Name = "label6";
-            label6.Size = new Size(60, 37);
+            label6.Size = new Size(61, 37);
             label6.TabIndex = 4;
             label6.Text = "hae";
             // 
@@ -218,6 +225,7 @@
             // 
             panel3.BackColor = Color.Transparent;
             panel3.BorderStyle = BorderStyle.Fixed3D;
+            panel3.Controls.Add(dateErrorLabel);
             panel3.Controls.Add(whereDateLabel);
             panel3.Controls.Add(fromDatePicker);
             panel3.Controls.Add(label9);
@@ -225,17 +233,29 @@
             panel3.ForeColor = Color.Transparent;
             panel3.Location = new Point(176, 614);
             panel3.Name = "panel3";
-            panel3.Size = new Size(451, 100);
+            panel3.Size = new Size(451, 152);
             panel3.TabIndex = 19;
+            // 
+            // dateErrorLabel
+            // 
+            dateErrorLabel.AutoSize = true;
+            dateErrorLabel.BackColor = Color.Transparent;
+            dateErrorLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            dateErrorLabel.ForeColor = Color.Cyan;
+            dateErrorLabel.Location = new Point(45, 96);
+            dateErrorLabel.Name = "dateErrorLabel";
+            dateErrorLabel.Size = new Size(337, 37);
+            dateErrorLabel.TabIndex = 22;
+            dateErrorLabel.Text = "Valitse mihin asti varaus on";
             // 
             // whereDateLabel
             // 
             whereDateLabel.AutoSize = true;
-            whereDateLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            whereDateLabel.ForeColor = Color.Silver;
+            whereDateLabel.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            whereDateLabel.ForeColor = Color.WhiteSmoke;
             whereDateLabel.Location = new Point(288, 6);
             whereDateLabel.Name = "whereDateLabel";
-            whereDateLabel.Size = new Size(85, 37);
+            whereDateLabel.Size = new Size(88, 37);
             whereDateLabel.TabIndex = 18;
             whereDateLabel.Text = "Mihin";
             // 
@@ -249,11 +269,11 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            label9.ForeColor = Color.Silver;
+            label9.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.ForeColor = Color.WhiteSmoke;
             label9.Location = new Point(75, 6);
             label9.Name = "label9";
-            label9.Size = new Size(82, 37);
+            label9.Size = new Size(85, 37);
             label9.TabIndex = 15;
             label9.Text = "Mistä";
             // 
@@ -268,19 +288,34 @@
             // 
             addReservationBtn.BackColor = Color.DarkSlateGray;
             addReservationBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            addReservationBtn.ForeColor = Color.Silver;
-            addReservationBtn.Location = new Point(176, 755);
+            addReservationBtn.ForeColor = Color.WhiteSmoke;
+            addReservationBtn.Location = new Point(176, 806);
             addReservationBtn.Name = "addReservationBtn";
             addReservationBtn.Size = new Size(451, 62);
             addReservationBtn.TabIndex = 20;
             addReservationBtn.Text = "Lisää varaus";
             addReservationBtn.UseVisualStyleBackColor = false;
+            addReservationBtn.Click += addReservationBtn_Click;
+            // 
+            // formErrorLabel
+            // 
+            formErrorLabel.AutoSize = true;
+            formErrorLabel.BackColor = Color.Transparent;
+            formErrorLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            formErrorLabel.ForeColor = Color.Cyan;
+            formErrorLabel.Location = new Point(207, 886);
+            formErrorLabel.Name = "formErrorLabel";
+            formErrorLabel.Size = new Size(388, 37);
+            formErrorLabel.TabIndex = 21;
+            formErrorLabel.Text = "Täytä kaikki pakolliset kentät (*)";
+            formErrorLabel.Visible = false;
             // 
             // AddReservationMenuControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.test3;
+            Controls.Add(formErrorLabel);
             Controls.Add(addReservationBtn);
             Controls.Add(panel3);
             Controls.Add(panel2);
@@ -288,7 +323,7 @@
             Controls.Add(label3);
             Controls.Add(panel1);
             Name = "AddReservationMenuControl";
-            Size = new Size(804, 860);
+            Size = new Size(804, 944);
             Load += AddReservationMenuControl_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -305,15 +340,14 @@
 
         private Panel panel1;
         private Label label8;
-        private ComboBox cottagesCbx;
+        private ComboBox cottageCbx;
         private Label label1;
         private TextBox textBox1;
-        private Label label2;
         private PictureBox prevBtn;
         private Label label3;
         private Panel panel2;
         private Label label4;
-        private ComboBox comboBox1;
+        private ComboBox customerCbx;
         private Label label5;
         private TextBox textBox2;
         private Label label6;
@@ -323,5 +357,8 @@
         private Label label9;
         private DateTimePicker whereDatePicker;
         private Button addReservationBtn;
+        private Label da;
+        private Label formErrorLabel;
+        private Label dateErrorLabel;
     }
 }
