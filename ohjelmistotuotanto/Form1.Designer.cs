@@ -78,7 +78,7 @@
             appContainer.Dock = DockStyle.Fill;
             appContainer.Location = new Point(0, 25);
             appContainer.Name = "appContainer";
-            appContainer.Size = new Size(804, 736);
+            appContainer.Size = new Size(804, 860);
             appContainer.TabIndex = 3;
             // 
             // VillageNewbies
@@ -86,12 +86,13 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(804, 761);
+            ClientSize = new Size(804, 885);
             Controls.Add(appContainer);
             Controls.Add(toolStrip1);
             Controls.Add(button2);
             Controls.Add(button1);
             Name = "VillageNewbies";
+            StartPosition = FormStartPosition.CenterScreen;
             Tag = "";
             Text = "Village Newbies";
             Load += VillageNewbies_Load;

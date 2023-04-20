@@ -32,7 +32,8 @@ namespace ohjelmistotuotanto
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.addRrvtMenu);
         }
 
         private void deleteBtn_Click(object sender, EventArgs e)
@@ -41,6 +42,11 @@ namespace ohjelmistotuotanto
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ReservationMenuControl_Load(object sender, EventArgs e)
         {
 
         }

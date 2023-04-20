@@ -126,6 +126,7 @@
             Controls.Add(addBtn);
             Name = "ReservationMenuControl";
             Size = new Size(804, 736);
+            Load += ReservationMenuControl_Load;
             ((System.ComponentModel.ISupportInitialize)prevBtn).EndInit();
             ResumeLayout(false);
             PerformLayout();
