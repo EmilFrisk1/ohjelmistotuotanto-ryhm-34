@@ -56,6 +56,10 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(customersMenuControl);
             SubscribeToMenuSwitchEvents(customersAddControl);
 
+            // Add app status strip to all menu's that need it
+            mainMenuControl.statusStrip = appStatusStrip;
+            addReservationMenuControl.statusStrip = appStatusStrip;
+
             // Make the controls fill the whole panel (fullscreen)
             mainMenuControl.Dock = DockStyle.Fill;
             reservationMenuControl.Dock = DockStyle.Fill;

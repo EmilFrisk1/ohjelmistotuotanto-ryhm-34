@@ -15,6 +15,7 @@ namespace ohjelmistotuotanto
     {
         public delegate void MenuSwitchRequestHandler(string menu); // Function pointer 
         public event MenuSwitchRequestHandler MenuSwitchRequested;
+        public StatusStrip statusStrip;
 
         public AddReservationMenuControl()
         {
@@ -43,13 +44,16 @@ namespace ohjelmistotuotanto
             // Check that all form fields are valid
             if (cottageCbx.SelectedIndex == -1 || string.IsNullOrEmpty(cottageCbx.Text) || customerCbx.SelectedIndex == -1 || string.IsNullOrEmpty(cottageCbx.Text))
             {
-                formErrorLabel.Visible = true;
+                //formErrorLabel.Visible = true;
+                //formErrorLabel1.Visible = true;
+                statusStrip.Visible = true;
             }
             else
             { // no error hide it
-                if (formErrorLabel.Visible)
+                if (statusStrip.Visible)
                 {
-                    formErrorLabel.Visible = false;
+                    //formErrorLabel.Visible = false;
+                    statusStrip.Visible = false;
                 }
             }
 
@@ -66,7 +70,9 @@ namespace ohjelmistotuotanto
             }
 
             // Check if the date is available to reserve for this cottage
+            string selectedDate = fromDatePicker.Value.ToString("yy-MM-dd"); ;
 
+            MessageBox.Show($"The selected date is: {selectedDate}");
         }
     }
 }

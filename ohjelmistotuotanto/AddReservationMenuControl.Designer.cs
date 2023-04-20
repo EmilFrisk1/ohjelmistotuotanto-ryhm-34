@@ -50,7 +50,6 @@
             label9 = new Label();
             whereDatePicker = new DateTimePicker();
             addReservationBtn = new Button();
-            formErrorLabel = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)prevBtn).BeginInit();
             panel2.SuspendLayout();
@@ -247,6 +246,7 @@
             dateErrorLabel.Size = new Size(337, 37);
             dateErrorLabel.TabIndex = 22;
             dateErrorLabel.Text = "Valitse mihin asti varaus on";
+            dateErrorLabel.Visible = false;
             // 
             // whereDateLabel
             // 
@@ -297,25 +297,11 @@
             addReservationBtn.UseVisualStyleBackColor = false;
             addReservationBtn.Click += addReservationBtn_Click;
             // 
-            // formErrorLabel
-            // 
-            formErrorLabel.AutoSize = true;
-            formErrorLabel.BackColor = Color.Transparent;
-            formErrorLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            formErrorLabel.ForeColor = Color.Cyan;
-            formErrorLabel.Location = new Point(207, 886);
-            formErrorLabel.Name = "formErrorLabel";
-            formErrorLabel.Size = new Size(388, 37);
-            formErrorLabel.TabIndex = 21;
-            formErrorLabel.Text = "Täytä kaikki pakolliset kentät (*)";
-            formErrorLabel.Visible = false;
-            // 
             // AddReservationMenuControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.test3;
-            Controls.Add(formErrorLabel);
             Controls.Add(addReservationBtn);
             Controls.Add(panel3);
             Controls.Add(panel2);
@@ -358,7 +344,6 @@
         private DateTimePicker whereDatePicker;
         private Button addReservationBtn;
         private Label da;
-        private Label formErrorLabel;
         private Label dateErrorLabel;
     }
 }

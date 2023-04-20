@@ -15,6 +15,7 @@ namespace ohjelmistotuotanto
     {
         public delegate void MenuSwitchRequestHandler(string newControl); // Function pointer 
         public event MenuSwitchRequestHandler MenuSwitchRequested;
+        public StatusStrip statusStrip;
         public MainMenuControl()
         {
             InitializeComponent();
@@ -30,6 +31,16 @@ namespace ohjelmistotuotanto
         {
             this.Hide();
             MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            statusStrip.Show();
+        }
+
+        private void MainMenuControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

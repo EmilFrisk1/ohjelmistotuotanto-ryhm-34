@@ -101,4 +101,23 @@ public class DatabaseManager
             }
         });
     }
+
+    //public async Task checkAvailabilityAndReserve(int cottageId, int customerId, startDate, endDate)
+    //{
+    //    await ExecuteWithRetry(async (connection) =>
+    //    {
+    //        var columns = string.Join(", ", columnValues.Keys);
+    //        var parameters = string.Join(", ", columnValues.Keys.Select(key => "@" + key));
+
+    //        using (MySqlCommand cmd = new MySqlCommand($"INSERT INTO {tableName} ({columns}) VALUES ({parameters})", connection))
+    //        {
+    //            foreach (var entry in columnValues)
+    //            {
+    //                cmd.Parameters.AddWithValue("@" + entry.Key, entry.Value);
+    //            }
+
+    //            await cmd.ExecuteNonQueryAsync();
+    //        }
+    //    });
+    //}
 }
