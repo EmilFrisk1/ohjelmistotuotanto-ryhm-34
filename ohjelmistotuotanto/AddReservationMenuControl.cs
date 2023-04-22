@@ -31,6 +31,9 @@ namespace ohjelmistotuotanto
             // Set the MinDate and MaxDate to the current date
             fromDatePicker.MinDate = DateTime.Today;
             whereDatePicker.MinDate = DateTime.Today;
+
+            // TODO - search all the customers from DB And attach their id to the combobox
+            // TODO - search all the cottages from DB And attach their id to the combobox
         }
 
         private void prevBtn_Click(object sender, EventArgs e)
@@ -39,14 +42,13 @@ namespace ohjelmistotuotanto
             MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
         }
 
-        private void addReservationBtn_Click(object sender, EventArgs e)
+        async private void addReservationBtn_Click(object sender, EventArgs e)
         {
             // Check that all form fields are valid
             if (cottageCbx.SelectedIndex == -1 || string.IsNullOrEmpty(cottageCbx.Text) || customerCbx.SelectedIndex == -1 || string.IsNullOrEmpty(cottageCbx.Text))
             {
-                //formErrorLabel.Visible = true;
-                //formErrorLabel1.Visible = true;
                 statusStrip.Visible = true;
+                return;
             }
             else
             { // no error hide it
@@ -57,9 +59,16 @@ namespace ohjelmistotuotanto
                 }
             }
 
-            if (fromDatePicker.Value == whereDatePicker.Value) // special validation
+            if (fromDatePicker.Value == whereDatePicker.Value) // special validation for dates
             {
                 dateErrorLabel.Visible = true;
+                dateErrorLabel.Text = "Valitse mihin asti varaus on";
+                return;
+            } else if (fromDatePicker.Value > whereDatePicker.Value)
+            {
+                dateErrorLabel.Visible = true;
+                dateErrorLabel.Text = "Mihin liian pieni";
+                return;
             }
             else
             { // no error hide it
@@ -69,10 +78,21 @@ namespace ohjelmistotuotanto
                 }
             }
 
-            // Check if the date is available to reserve for this cottage
-            string selectedDate = fromDatePicker.Value.ToString("yy-MM-dd"); ;
+            string startDate = fromDatePicker.Value.ToString("yyyy-MM-dd");
+            string endDate = whereDatePicker.Value.ToString("yyyy-MM-dd");
+            int customerId = 1;
+            int cottageId = 1;
 
-            MessageBox.Show($"The selected date is: {selectedDate}");
+            var res = VillageNewbies._dbManager.CallCheckAvailabilityAndReserveAsync(cottageId, startDate, endDate, customerId);
+
+            if (res.Result == -1)
+            {
+                MessageBox.Show("Tämä varaushaarukka onjo käytössä");
+            }
+            else
+            {
+                MessageBox.Show("Varaus lisätty onnistuneesti"); // TODO - what next? mainmenu?
+            }
         }
     }
 }

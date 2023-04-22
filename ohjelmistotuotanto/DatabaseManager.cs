@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
+using System.Data;
 
 public class DatabaseManager
 {
@@ -29,9 +30,7 @@ public class DatabaseManager
             _connection.Close();
         }
     }
-
-    // 1. Connect 2. Database operation 3. disconnect || 3 max tries
-    public async Task ExecuteWithRetry(Func<MySqlConnection, Task> operation) 
+    public async Task<int> ExecuteWithRetry(Func<MySqlConnection, Task<int>> operation)
     {
         int maxAttempts = 3;
         int currentAttempt = 0;
@@ -44,13 +43,13 @@ public class DatabaseManager
                 {
                     connection.Open();
 
-                    await operation(connection);
+                    int result = await operation(connection);
 
                     connection.Close();
-                }
 
-                // If the operation is successful, break out of the loop
-                break;
+                    // If the operation is successful, return the result
+                    return result;
+                }
             }
             catch (MySqlException ex)
             {
@@ -67,25 +66,14 @@ public class DatabaseManager
                 }
             }
         }
+
+        // Return default value if operation fails after maxAttempts
+        return -1;
     }
 
-
-    public async Task InsertArea(string areaName)
+    public async Task<int> InsertDataAsync(string tableName, Dictionary<string, object> columnValues)
     {
-        await ExecuteWithRetry(async (connection) =>
-        {
-            using (MySqlCommand cmd = new MySqlCommand("INSERT INTO area (name) VALUES (@areaName)", connection))
-            {
-                cmd.Parameters.AddWithValue("@areaName", areaName);
-
-                await cmd.ExecuteNonQueryAsync();
-            }
-        });
-    }
-
-    public async Task InsertDataAsync(string tableName, Dictionary<string, object> columnValues)
-    {
-        await ExecuteWithRetry(async (connection) =>
+        int affectedRows = await ExecuteWithRetry(async (connection) =>
         {
             var columns = string.Join(", ", columnValues.Keys);
             var parameters = string.Join(", ", columnValues.Keys.Select(key => "@" + key));
@@ -97,9 +85,39 @@ public class DatabaseManager
                     cmd.Parameters.AddWithValue("@" + entry.Key, entry.Value);
                 }
 
-                await cmd.ExecuteNonQueryAsync();
+                return await cmd.ExecuteNonQueryAsync();
             }
         });
+
+        return affectedRows;
+    }
+
+    public async Task<int> CallCheckAvailabilityAndReserveAsync(int cottageId, string startDate, string endDate, int customerId)
+    {
+        int reservationId = -1;
+
+        reservationId = await ExecuteWithRetry(async (connection) =>
+        {
+            using (MySqlCommand cmd = new MySqlCommand("check_availability_and_reserve", connection))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@p_cottage_id", cottageId);
+                cmd.Parameters.AddWithValue("@p_start_date", startDate);
+                cmd.Parameters.AddWithValue("@p_end_date", endDate);
+                cmd.Parameters.AddWithValue("@p_customer_id", customerId);
+
+                cmd.Parameters.Add(new MySqlParameter("@p_reservation_id", MySqlDbType.Int32));
+                cmd.Parameters["@p_reservation_id"].Direction = ParameterDirection.Output;
+
+                await cmd.ExecuteNonQueryAsync();
+
+                reservationId = (int)cmd.Parameters["@p_reservation_id"].Value;
+                return reservationId;
+            }
+        });
+
+        return reservationId;
     }
 
     //public async Task checkAvailabilityAndReserve(int cottageId, int customerId, startDate, endDate)
