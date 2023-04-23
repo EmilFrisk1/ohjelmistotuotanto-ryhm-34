@@ -3,6 +3,9 @@ using MySql.Data.MySqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
 using System.Data;
+using System.Data.Common;
+using System.ComponentModel;
+using ohjelmistotuotanto;
 
 public class DatabaseManager
 {
@@ -30,7 +33,48 @@ public class DatabaseManager
             _connection.Close();
         }
     }
-    public async Task<int> ExecuteWithRetry(Func<MySqlConnection, Task<int>> operation)
+    //public async Task<int> ExecuteWithRetry(Func<MySqlConnection, Task<int>> operation)
+    //{
+    //    int maxAttempts = 3;
+    //    int currentAttempt = 0;
+
+    //    while (currentAttempt < maxAttempts)
+    //    {
+    //        try
+    //        {
+    //            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+    //            {
+    //                connection.Open();
+
+    //                int result = await operation(connection);
+
+    //                connection.Close();
+
+    //                // If the operation is successful, return the result
+    //                return result;
+    //            }
+    //        }
+    //        catch (MySqlException ex)
+    //        {
+    //            currentAttempt++;
+
+    //            if (currentAttempt == maxAttempts)
+    //            {
+    //                MessageBox.Show($"Error connecting to the database after {maxAttempts} attempts: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    //                break;
+    //            }
+    //            else
+    //            {
+    //                await Task.Delay(1000);
+    //            }
+    //        }
+    //    }
+
+    //    // Return default value if operation fails after maxAttempts
+    //    return -1;
+    //}
+
+    public async Task<T> ExecuteWithRetry<T>(Func<MySqlConnection, Task<T>> operation)
     {
         int maxAttempts = 3;
         int currentAttempt = 0;
@@ -43,7 +87,7 @@ public class DatabaseManager
                 {
                     connection.Open();
 
-                    int result = await operation(connection);
+                    T result = await operation(connection);
 
                     connection.Close();
 
@@ -68,8 +112,9 @@ public class DatabaseManager
         }
 
         // Return default value if operation fails after maxAttempts
-        return -1;
+        return default(T);
     }
+
 
     public async Task<int> InsertDataAsync(string tableName, Dictionary<string, object> columnValues)
     {
@@ -91,6 +136,38 @@ public class DatabaseManager
 
         return affectedRows;
     }
+
+    public async Task<DataTable> SelectDataAsync(string tableName, List<string> columnNames = null, string whereClause = "")
+    {
+        DataTable dataTable = new DataTable();
+
+        return await ExecuteWithRetry(async (connection) =>
+        {
+            string columns = "*";
+
+            if (columnNames != null && columnNames.Count > 0)
+            {
+                columns = string.Join(", ", columnNames);
+            }
+
+            string query = $"SELECT {columns} FROM {tableName}";
+
+            if (!string.IsNullOrEmpty(whereClause))
+            {
+                query += $" WHERE {whereClause}";
+            }
+
+            using (MySqlCommand cmd = new MySqlCommand(query, connection))
+            {
+                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    dataTable.Load(reader);
+                }
+            }
+            return dataTable;
+        });
+    }
+
 
     public async Task<int> CallCheckAvailabilityAndReserveAsync(int cottageId, string startDate, string endDate, int customerId)
     {
@@ -119,23 +196,4 @@ public class DatabaseManager
 
         return reservationId;
     }
-
-    //public async Task checkAvailabilityAndReserve(int cottageId, int customerId, startDate, endDate)
-    //{
-    //    await ExecuteWithRetry(async (connection) =>
-    //    {
-    //        var columns = string.Join(", ", columnValues.Keys);
-    //        var parameters = string.Join(", ", columnValues.Keys.Select(key => "@" + key));
-
-    //        using (MySqlCommand cmd = new MySqlCommand($"INSERT INTO {tableName} ({columns}) VALUES ({parameters})", connection))
-    //        {
-    //            foreach (var entry in columnValues)
-    //            {
-    //                cmd.Parameters.AddWithValue("@" + entry.Key, entry.Value);
-    //            }
-
-    //            await cmd.ExecuteNonQueryAsync();
-    //        }
-    //    });
-    //}
 }

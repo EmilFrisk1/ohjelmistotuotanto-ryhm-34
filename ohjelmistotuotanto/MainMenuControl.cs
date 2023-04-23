@@ -42,5 +42,20 @@ namespace ohjelmistotuotanto
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var test = VillageNewbies._dbManager.SelectDataAsync("area", null, "id=1");
+            var a = 5;
+            foreach (DataRow row in test.Result.Rows)
+            {
+                var firstColumnValue = row[0];
+                var secondColumnValue = row[1];
+
+                // Process the data as needed
+               MessageBox.Show($"id: {firstColumnValue}, area name: {secondColumnValue}");
+            }
+
+        }
     }
 }

@@ -34,14 +34,14 @@
             label8 = new Label();
             cottageCbx = new ComboBox();
             label1 = new Label();
-            textBox1 = new TextBox();
+            cottageTxtBox = new TextBox();
             prevBtn = new PictureBox();
             label3 = new Label();
             panel2 = new Panel();
             label4 = new Label();
             customerCbx = new ComboBox();
             label5 = new Label();
-            textBox2 = new TextBox();
+            customerTxtBox = new TextBox();
             label6 = new Label();
             panel3 = new Panel();
             dateErrorLabel = new Label();
@@ -64,7 +64,7 @@
             panel1.Controls.Add(label8);
             panel1.Controls.Add(cottageCbx);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(textBox1);
+            panel1.Controls.Add(cottageTxtBox);
             panel1.ForeColor = Color.Silver;
             panel1.Location = new Point(176, 147);
             panel1.Name = "panel1";
@@ -96,10 +96,10 @@
             // cottageCbx
             // 
             cottageCbx.BackColor = Color.DarkSlateGray;
+            cottageCbx.DropDownStyle = ComboBoxStyle.DropDownList;
             cottageCbx.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             cottageCbx.ForeColor = Color.Silver;
             cottageCbx.FormattingEnabled = true;
-            cottageCbx.Items.AddRange(new object[] { "moi 1", "moi 2", "moi 3" });
             cottageCbx.Location = new Point(105, 118);
             cottageCbx.Name = "cottageCbx";
             cottageCbx.Size = new Size(315, 29);
@@ -116,15 +116,16 @@
             label1.TabIndex = 2;
             label1.Text = "valitse";
             // 
-            // textBox1
+            // cottageTxtBox
             // 
-            textBox1.BackColor = Color.DarkSlateGray;
-            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox1.ForeColor = Color.Silver;
-            textBox1.Location = new Point(105, 72);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(315, 29);
-            textBox1.TabIndex = 3;
+            cottageTxtBox.BackColor = Color.DarkSlateGray;
+            cottageTxtBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            cottageTxtBox.ForeColor = Color.Silver;
+            cottageTxtBox.Location = new Point(105, 72);
+            cottageTxtBox.Name = "cottageTxtBox";
+            cottageTxtBox.Size = new Size(315, 29);
+            cottageTxtBox.TabIndex = 3;
+            cottageTxtBox.TextChanged += cottageTxtBox_TextChanged;
             // 
             // prevBtn
             // 
@@ -157,7 +158,7 @@
             panel2.Controls.Add(label4);
             panel2.Controls.Add(customerCbx);
             panel2.Controls.Add(label5);
-            panel2.Controls.Add(textBox2);
+            panel2.Controls.Add(customerTxtBox);
             panel2.Controls.Add(label6);
             panel2.ForeColor = Color.Silver;
             panel2.Location = new Point(176, 373);
@@ -179,10 +180,11 @@
             // customerCbx
             // 
             customerCbx.BackColor = Color.DarkSlateGray;
+            customerCbx.DropDownStyle = ComboBoxStyle.DropDownList;
             customerCbx.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             customerCbx.ForeColor = Color.Silver;
             customerCbx.FormattingEnabled = true;
-            customerCbx.Items.AddRange(new object[] { "hei 1", "hei 2", "hei 3" });
+            customerCbx.Items.AddRange(new object[] { "" });
             customerCbx.Location = new Point(105, 118);
             customerCbx.Name = "customerCbx";
             customerCbx.Size = new Size(315, 29);
@@ -199,15 +201,16 @@
             label5.TabIndex = 2;
             label5.Text = "valitse";
             // 
-            // textBox2
+            // customerTxtBox
             // 
-            textBox2.BackColor = Color.DarkSlateGray;
-            textBox2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            textBox2.ForeColor = Color.Silver;
-            textBox2.Location = new Point(105, 72);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(315, 29);
-            textBox2.TabIndex = 3;
+            customerTxtBox.BackColor = Color.DarkSlateGray;
+            customerTxtBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            customerTxtBox.ForeColor = Color.Silver;
+            customerTxtBox.Location = new Point(105, 72);
+            customerTxtBox.Name = "customerTxtBox";
+            customerTxtBox.Size = new Size(315, 29);
+            customerTxtBox.TabIndex = 3;
+            customerTxtBox.TextChanged += customerTxtBox_TextChanged;
             // 
             // label6
             // 
@@ -328,14 +331,14 @@
         private Label label8;
         private ComboBox cottageCbx;
         private Label label1;
-        private TextBox textBox1;
+        private TextBox cottageTxtBox;
         private PictureBox prevBtn;
         private Label label3;
         private Panel panel2;
         private Label label4;
         private ComboBox customerCbx;
         private Label label5;
-        private TextBox textBox2;
+        private TextBox customerTxtBox;
         private Label label6;
         private Panel panel3;
         private Label whereDateLabel;
