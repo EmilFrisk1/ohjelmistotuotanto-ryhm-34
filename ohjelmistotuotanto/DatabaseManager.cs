@@ -33,46 +33,6 @@ public class DatabaseManager
             _connection.Close();
         }
     }
-    //public async Task<int> ExecuteWithRetry(Func<MySqlConnection, Task<int>> operation)
-    //{
-    //    int maxAttempts = 3;
-    //    int currentAttempt = 0;
-
-    //    while (currentAttempt < maxAttempts)
-    //    {
-    //        try
-    //        {
-    //            using (MySqlConnection connection = new MySqlConnection(_connectionString))
-    //            {
-    //                connection.Open();
-
-    //                int result = await operation(connection);
-
-    //                connection.Close();
-
-    //                // If the operation is successful, return the result
-    //                return result;
-    //            }
-    //        }
-    //        catch (MySqlException ex)
-    //        {
-    //            currentAttempt++;
-
-    //            if (currentAttempt == maxAttempts)
-    //            {
-    //                MessageBox.Show($"Error connecting to the database after {maxAttempts} attempts: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    //                break;
-    //            }
-    //            else
-    //            {
-    //                await Task.Delay(1000);
-    //            }
-    //        }
-    //    }
-
-    //    // Return default value if operation fails after maxAttempts
-    //    return -1;
-    //}
 
     public async Task<T> ExecuteWithRetry<T>(Func<MySqlConnection, Task<T>> operation)
     {

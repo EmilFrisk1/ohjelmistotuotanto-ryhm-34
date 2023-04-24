@@ -50,10 +50,24 @@
             label9 = new Label();
             whereDatePicker = new DateTimePicker();
             addReservationBtn = new Button();
+            panel4 = new Panel();
+            serviceErrorLabel = new Label();
+            clientServicesContainer = new Panel();
+            label13 = new Label();
+            label12 = new Label();
+            label11 = new Label();
+            addServiceBtn = new Button();
+            label2 = new Label();
+            servicesCbx = new ComboBox();
+            label7 = new Label();
+            serviceQuantityTxtBox = new TextBox();
+            label10 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)prevBtn).BeginInit();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
+            panel4.SuspendLayout();
+            clientServicesContainer.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -233,7 +247,7 @@
             panel3.Controls.Add(label9);
             panel3.Controls.Add(whereDatePicker);
             panel3.ForeColor = Color.Transparent;
-            panel3.Location = new Point(176, 614);
+            panel3.Location = new Point(176, 1066);
             panel3.Name = "panel3";
             panel3.Size = new Size(451, 152);
             panel3.TabIndex = 19;
@@ -292,7 +306,7 @@
             addReservationBtn.BackColor = Color.DarkSlateGray;
             addReservationBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
             addReservationBtn.ForeColor = Color.WhiteSmoke;
-            addReservationBtn.Location = new Point(176, 806);
+            addReservationBtn.Location = new Point(177, 1241);
             addReservationBtn.Name = "addReservationBtn";
             addReservationBtn.Size = new Size(451, 62);
             addReservationBtn.TabIndex = 20;
@@ -300,11 +314,159 @@
             addReservationBtn.UseVisualStyleBackColor = false;
             addReservationBtn.Click += addReservationBtn_Click;
             // 
+            // panel4
+            // 
+            panel4.BackColor = Color.Transparent;
+            panel4.BorderStyle = BorderStyle.Fixed3D;
+            panel4.Controls.Add(serviceErrorLabel);
+            panel4.Controls.Add(clientServicesContainer);
+            panel4.Controls.Add(label11);
+            panel4.Controls.Add(addServiceBtn);
+            panel4.Controls.Add(label2);
+            panel4.Controls.Add(servicesCbx);
+            panel4.Controls.Add(label7);
+            panel4.Controls.Add(serviceQuantityTxtBox);
+            panel4.Controls.Add(label10);
+            panel4.ForeColor = Color.Silver;
+            panel4.Location = new Point(176, 585);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(451, 448);
+            panel4.TabIndex = 21;
+            // 
+            // serviceErrorLabel
+            // 
+            serviceErrorLabel.AutoSize = true;
+            serviceErrorLabel.BackColor = Color.Transparent;
+            serviceErrorLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            serviceErrorLabel.ForeColor = Color.Cyan;
+            serviceErrorLabel.Location = new Point(74, 169);
+            serviceErrorLabel.Name = "serviceErrorLabel";
+            serviceErrorLabel.Size = new Size(252, 37);
+            serviceErrorLabel.TabIndex = 23;
+            serviceErrorLabel.Text = "Valitse jokin palvelu";
+            serviceErrorLabel.Visible = false;
+            // 
+            // clientServicesContainer
+            // 
+            clientServicesContainer.AutoScroll = true;
+            clientServicesContainer.BorderStyle = BorderStyle.Fixed3D;
+            clientServicesContainer.Controls.Add(label13);
+            clientServicesContainer.Controls.Add(label12);
+            clientServicesContainer.Location = new Point(3, 292);
+            clientServicesContainer.Name = "clientServicesContainer";
+            clientServicesContainer.Size = new Size(441, 136);
+            clientServicesContainer.TabIndex = 16;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.ForeColor = Color.WhiteSmoke;
+            label13.Location = new Point(216, 7);
+            label13.Name = "label13";
+            label13.Size = new Size(58, 21);
+            label13.TabIndex = 20;
+            label13.Text = "Määrä";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.ForeColor = Color.WhiteSmoke;
+            label12.Location = new Point(10, 7);
+            label12.Name = "label12";
+            label12.Size = new Size(67, 21);
+            label12.TabIndex = 19;
+            label12.Text = "Palvelu";
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI Semibold", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.ForeColor = Color.WhiteSmoke;
+            label11.Location = new Point(61, 230);
+            label11.Name = "label11";
+            label11.Size = new Size(335, 50);
+            label11.TabIndex = 15;
+            label11.Text = "Asiakkaan palvelut";
+            // 
+            // addServiceBtn
+            // 
+            addServiceBtn.BackColor = Color.DarkSlateGray;
+            addServiceBtn.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            addServiceBtn.ForeColor = Color.WhiteSmoke;
+            addServiceBtn.Location = new Point(332, 169);
+            addServiceBtn.Name = "addServiceBtn";
+            addServiceBtn.Size = new Size(88, 34);
+            addServiceBtn.TabIndex = 13;
+            addServiceBtn.Text = "lisää";
+            addServiceBtn.UseVisualStyleBackColor = false;
+            addServiceBtn.Click += addServiceBtn_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.WhiteSmoke;
+            label2.Location = new Point(145, -1);
+            label2.Name = "label2";
+            label2.Size = new Size(156, 50);
+            label2.TabIndex = 12;
+            label2.Text = "Palvelut";
+            // 
+            // servicesCbx
+            // 
+            servicesCbx.BackColor = Color.DarkSlateGray;
+            servicesCbx.DropDownStyle = ComboBoxStyle.DropDownList;
+            servicesCbx.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            servicesCbx.ForeColor = Color.Silver;
+            servicesCbx.FormattingEnabled = true;
+            servicesCbx.Items.AddRange(new object[] { "" });
+            servicesCbx.Location = new Point(105, 74);
+            servicesCbx.Name = "servicesCbx";
+            servicesCbx.Size = new Size(315, 29);
+            servicesCbx.TabIndex = 1;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.ForeColor = Color.WhiteSmoke;
+            label7.Location = new Point(-1, 110);
+            label7.Name = "label7";
+            label7.Size = new Size(93, 37);
+            label7.TabIndex = 2;
+            label7.Text = "määrä";
+            // 
+            // serviceQuantityTxtBox
+            // 
+            serviceQuantityTxtBox.BackColor = Color.DarkSlateGray;
+            serviceQuantityTxtBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            serviceQuantityTxtBox.ForeColor = Color.Silver;
+            serviceQuantityTxtBox.Location = new Point(105, 120);
+            serviceQuantityTxtBox.Name = "serviceQuantityTxtBox";
+            serviceQuantityTxtBox.Size = new Size(315, 29);
+            serviceQuantityTxtBox.TabIndex = 3;
+            serviceQuantityTxtBox.Text = "1";
+            serviceQuantityTxtBox.KeyPress += serviceQuantity_KeyPress;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.ForeColor = Color.WhiteSmoke;
+            label10.Location = new Point(-1, 64);
+            label10.Name = "label10";
+            label10.Size = new Size(115, 37);
+            label10.TabIndex = 4;
+            label10.Text = "palvelut";
+            // 
             // AddReservationMenuControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.test3;
+            Controls.Add(panel4);
             Controls.Add(addReservationBtn);
             Controls.Add(panel3);
             Controls.Add(panel2);
@@ -312,7 +474,7 @@
             Controls.Add(label3);
             Controls.Add(panel1);
             Name = "AddReservationMenuControl";
-            Size = new Size(804, 944);
+            Size = new Size(804, 1350);
             Load += AddReservationMenuControl_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -321,6 +483,10 @@
             panel2.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            clientServicesContainer.ResumeLayout(false);
+            clientServicesContainer.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -348,5 +514,17 @@
         private Button addReservationBtn;
         private Label da;
         private Label dateErrorLabel;
+        private Panel panel4;
+        private Label label2;
+        private ComboBox servicesCbx;
+        private Label label7;
+        private TextBox serviceQuantityTxtBox;
+        private Label label10;
+        private Label label11;
+        private Button addServiceBtn;
+        private Panel clientServicesContainer;
+        private Label label13;
+        private Label label12;
+        private Label serviceErrorLabel;
     }
 }

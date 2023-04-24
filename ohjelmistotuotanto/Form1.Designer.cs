@@ -79,17 +79,19 @@
             // 
             // appContainer
             // 
+            appContainer.AutoScroll = true;
+            appContainer.AutoScrollMinSize = new Size(0, 1350);
             appContainer.Controls.Add(appStatusStrip);
             appContainer.Dock = DockStyle.Fill;
             appContainer.Location = new Point(0, 25);
             appContainer.Name = "appContainer";
-            appContainer.Size = new Size(804, 944);
+            appContainer.Size = new Size(804, 796);
             appContainer.TabIndex = 3;
             // 
             // appStatusStrip
             // 
             appStatusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
-            appStatusStrip.Location = new Point(0, 902);
+            appStatusStrip.Location = new Point(0, 1006);
             appStatusStrip.Name = "appStatusStrip";
             appStatusStrip.Size = new Size(804, 42);
             appStatusStrip.TabIndex = 0;
@@ -102,7 +104,7 @@
             toolStripStatusLabel1.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             toolStripStatusLabel1.ForeColor = Color.Cyan;
             toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(758, 37);
+            toolStripStatusLabel1.Size = new Size(789, 37);
             toolStripStatusLabel1.Spring = true;
             toolStripStatusLabel1.Text = "Täytä kaikki pakolliset kentät (*)";
             // 
@@ -111,7 +113,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            ClientSize = new Size(804, 969);
+            ClientSize = new Size(804, 821);
             Controls.Add(appContainer);
             Controls.Add(toolStrip1);
             Controls.Add(button2);

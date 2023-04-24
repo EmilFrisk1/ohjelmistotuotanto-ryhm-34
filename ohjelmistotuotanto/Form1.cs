@@ -60,6 +60,9 @@ namespace ohjelmistotuotanto
             mainMenuControl.statusStrip = appStatusStrip;
             addReservationMenuControl.statusStrip = appStatusStrip;
 
+            // add appContainer reference to all menu's that need it
+            addReservationMenuControl.appContainer = appContainer;
+
             // Make the controls fill the whole panel (fullscreen)
             mainMenuControl.Dock = DockStyle.Fill;
             reservationMenuControl.Dock = DockStyle.Fill;
