@@ -107,7 +107,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.test3;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             Controls.Add(prevBtn);
             Controls.Add(label6);
             Controls.Add(deleteBtn);

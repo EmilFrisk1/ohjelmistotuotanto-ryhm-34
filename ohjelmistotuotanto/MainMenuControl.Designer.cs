@@ -35,8 +35,6 @@
             billsBtn = new Button();
             customersBtn = new Button();
             areasBtn = new Button();
-            button1 = new Button();
-            button2 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -113,33 +111,11 @@
             areasBtn.Text = "Alueet";
             areasBtn.UseVisualStyleBackColor = false;
             // 
-            // button1
-            // 
-            button1.Location = new Point(692, 136);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 6;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(692, 175);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 7;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
             // MainMenuControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            Controls.Add(button2);
-            Controls.Add(button1);
             Controls.Add(areasBtn);
             Controls.Add(customersBtn);
             Controls.Add(billsBtn);
@@ -161,7 +137,5 @@
         private Button billsBtn;
         private Button customersBtn;
         private Button areasBtn;
-        private Button button1;
-        private Button button2;
     }
 }

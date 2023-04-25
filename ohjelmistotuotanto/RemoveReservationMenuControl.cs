@@ -32,7 +32,8 @@ namespace ohjelmistotuotanto
                 int reservationId = (int)selectedRow.Cells["Id"].Value;
 
                 var response = VillageNewbies._dbManager.DeleteReservationAsync(reservationId);
-                if (response != null || response.Result != -1) {
+                if (response != null || response.Result != -1)
+                {
                     MessageBox.Show("Varaus poistettu onnistuneesti");
                     GetReservations();
                 }
