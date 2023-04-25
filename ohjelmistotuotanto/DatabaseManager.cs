@@ -156,4 +156,121 @@ public class DatabaseManager
 
         return reservationId;
     }
+
+    public async Task<List<ReservationDetails>> GetReservationWithDetails()
+    {
+        List<ReservationDetails> reservationDetailsList = new List<ReservationDetails>();
+
+        await ExecuteWithRetry(async (connection) =>
+        {
+            using (MySqlCommand cmd = new MySqlCommand("get_reservation_with_details", connection))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        reservationDetailsList.Add(new ReservationDetails
+                        {
+                            Id = reader.GetInt32(0),
+                            LoppuPvm = reader.GetDateTime("end_date"),
+                            AloitusPvm = reader.GetDateTime("start_date"),
+                            Email = reader.GetString("email"),
+                            MökinNimi = reader.GetString("cottage_name")
+                        });
+                    }
+                }
+                return reservationDetailsList;
+            }
+        });
+
+        return reservationDetailsList;
+    }
+
+    public async Task<List<Reservation>> SearchReservations(string query)
+    {
+        List<Reservation> reservationsList = new List<Reservation>();
+
+        await ExecuteWithRetry(async (connection) =>
+        {
+            using (MySqlCommand cmd = new MySqlCommand(query, connection))
+            {
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        reservationsList.Add(new Reservation
+                        {
+                            Id = reader.GetInt32(0),
+                            MökkiId = reader.GetInt32(0),
+                            AloitusPvm = reader.GetDateTime("start_date"),
+                            LoppuPvm = reader.GetDateTime("end_date"),
+                            AsiakasId = reader.GetInt32(0),
+                        });
+                    }
+                }
+                return reservationsList;
+            }
+        });
+
+        return reservationsList;
+    }
+
+
+    public async Task<int> DeleteReservationAsync(int reservationId)
+    {
+        int affectedRows = -1;
+
+        affectedRows = await ExecuteWithRetry(async (connection) =>
+        {
+            // First, delete the rows in the reservation_service table
+            string deleteReservationServiceQuery = $"DELETE FROM reservation_service WHERE reservation_id = @reservationId";
+            using (MySqlCommand cmd = new MySqlCommand(deleteReservationServiceQuery, connection))
+            {
+                cmd.Parameters.AddWithValue("@reservationId", reservationId);
+                await cmd.ExecuteNonQueryAsync();
+            }
+
+            // Next, delete the row in the reservation table
+            string deleteReservationQuery = $"DELETE FROM reservation WHERE id = @reservationId";
+            using (MySqlCommand cmd = new MySqlCommand(deleteReservationQuery, connection))
+            {
+                cmd.Parameters.AddWithValue("@reservationId", reservationId);
+                affectedRows = await cmd.ExecuteNonQueryAsync();
+            }
+
+            return affectedRows;
+        });
+
+        return affectedRows;
+    }
+
+
+    public async Task<int> DeleteDataAsync(string tableName, string whereClause)
+    {
+        int affectedRows = -1;
+
+        affectedRows = await ExecuteWithRetry(async (connection) =>
+        {
+            string query = $"DELETE FROM {tableName}";
+
+            if (string.IsNullOrEmpty(whereClause))
+            {
+                return -1;
+            } else
+            {
+                query += $" WHERE {whereClause}";
+            }
+
+            using (MySqlCommand cmd = new MySqlCommand(query, connection))
+            {
+                affectedRows = await cmd.ExecuteNonQueryAsync();
+            }
+            return affectedRows;
+        });
+
+        return affectedRows;
+    }
+
 }

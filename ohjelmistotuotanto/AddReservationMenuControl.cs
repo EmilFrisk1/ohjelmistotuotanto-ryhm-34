@@ -44,7 +44,6 @@ namespace ohjelmistotuotanto
             Customers = new List<Customer>() { new Customer { Id = -1, Email = string.Empty } };
             Services = new List<Service>() { new Service { Id = -1, Name = string.Empty } };
             ClientServices = new List<ClientServices>();
-
             ServiceTextBoxes = new List<TextBox>();
             ServiceButtons = new List<Button>();
 
@@ -64,7 +63,7 @@ namespace ohjelmistotuotanto
             var cottages = VillageNewbies._dbManager.SelectDataAsync("cottage", new List<string>() { "id", "cottage_name" });
             setUpCottagesCbx(cottages);
 
-            // TODO - Get services and display then on a combobox | each entry linked with id
+            // Get services and display then on a combobox | each entry linked with id
             var services = VillageNewbies._dbManager.SelectDataAsync("service", new List<string>() { "id", "name" });
             setUpServicesCbx(services);
         }
@@ -73,6 +72,8 @@ namespace ohjelmistotuotanto
         {
             this.Hide();
             MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
+            HideErrors(statusStrip, dateErrorLabel, serviceErrorLabel);
+            menuDefaultState();
         }
 
         async private void addReservationBtn_Click(object sender, EventArgs e)
@@ -131,25 +132,29 @@ namespace ohjelmistotuotanto
             else
             {
                 MessageBox.Show("Varaus lisätty onnistuneesti"); // TODO - what next? mainmenu?
-                // Clear the menu to default state
 
-                foreach (var clientService in ClientServices)
+                // LInk the reservation with the possible services
+                if (ClientServices.Count > 0)
                 {
-                    Dictionary<string, object> columnValues = new Dictionary<string, object>
+                    foreach (var clientService in ClientServices)
                     {
-                        { "reservation_id", reservationId },
-                        { "service_id", clientService.Id },
-                        { "quantity", clientService.Quantity }
-                    };
+                        Dictionary<string, object> columnValues = new Dictionary<string, object>
+                        {
+                            { "reservation_id", reservationId },
+                            { "service_id", clientService.Id },
+                            { "quantity", clientService.Quantity }
+                        };
 
-                    int result = await VillageNewbies._dbManager.InsertDataAsync("reservation_service", columnValues);
+                        int result = await VillageNewbies._dbManager.InsertDataAsync("reservation_service", columnValues);
 
-                    if (result <= 0)
-                    {
-                        MessageBox.Show("Jokin meni pieleen");
+                        if (result <= 0)
+                        {
+                            MessageBox.Show("Jokin meni pieleen");
+                        }
                     }
                 }
 
+                // Clear the menu to default state
                 menuDefaultState();
             }
         }
@@ -304,7 +309,6 @@ namespace ohjelmistotuotanto
             }
         }
 
-
         private void serviceQuantity_KeyPress(object sender, KeyPressEventArgs e)
         {
             // Only allow numbers and backspace
@@ -440,5 +444,24 @@ namespace ohjelmistotuotanto
                 }
             }
         }
+
+        private static void HideErrors(StatusStrip statusStrip, Label dateErrorLabel, Label serviceErrorLabel)
+        {
+            if (statusStrip.Visible)
+            {
+                statusStrip.Visible = false;
+            }
+
+            if (dateErrorLabel.Visible)
+            {
+                dateErrorLabel.Visible = false;
+            }
+
+            if (serviceErrorLabel.Visible)
+            {
+                serviceErrorLabel.Visible = false;
+            }
+        }
+
     }
 }

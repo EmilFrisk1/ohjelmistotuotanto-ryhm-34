@@ -10,9 +10,12 @@ namespace ohjelmistotuotanto
     {
         public static string mainMenu = "mainMenu";
         public static string rrvtMenu = "rrvtMenu";
+        public static string removeRrvtMenu = "removeRrvtMenu";
         public static string addRrvtMenu = "addRrvtMenu";
+        public static string searchRrvtMenu = "searchRrvtMenu";
         public static string srvcMenu = "serviceMenu";
         public static string customersMenu = "customersMenu";
         public static string customersAdd = "customersAdd";
+        public static string searchResults = "searchResults";
     }
 }

@@ -21,7 +21,8 @@ namespace ohjelmistotuotanto
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.searchRrvtMenu);
         }
 
         private void prevBtn_Click(object sender, EventArgs e)
@@ -38,7 +39,8 @@ namespace ohjelmistotuotanto
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.removeRrvtMenu);
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
