@@ -19,8 +19,11 @@ namespace ohjelmistotuotanto
         private SearchReservationMenuControl searchReservationMenuControl;
         private ServicesMenuControl servicesMenuControl;
         private CustomersMenuControl customersMenuControl;
-        private CustomersAddControl customersAddControl;//TODO- Pitäisi olla customersSearchControl nimellä
+        private CustomersAddControl customersAddControl;//TODO- Pitäisi olla customersSearchControl nimellä 
+        
         private DisplaySearchResultsMenuControl displaySearchResultsMenuControl;
+        private CustomersSearchControl customersSearchControl;
+        private CustomersDeleteControl customersDeleteControl;
 
         static PictureBox prevButton;
 
@@ -47,6 +50,8 @@ namespace ohjelmistotuotanto
             customersAddControl = new CustomersAddControl();
             searchReservationMenuControl = new SearchReservationMenuControl();
             displaySearchResultsMenuControl = new DisplaySearchResultsMenuControl();
+            customersSearchControl = new CustomersSearchControl();
+            customersDeleteControl = new CustomersDeleteControl();
 
             // hide controls
             mainMenuControl.Hide();
@@ -58,6 +63,8 @@ namespace ohjelmistotuotanto
             customersAddControl.Hide();
             addReservationMenuControl.Hide();
             displaySearchResultsMenuControl.Hide();
+            customersSearchControl.Hide();
+            customersDeleteControl.Hide();
 
             // Subscribe to the MenuSwitchRequested event for each User Control
             SubscribeToMenuSwitchEvents(mainMenuControl);
@@ -69,6 +76,8 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(customersMenuControl);
             SubscribeToMenuSwitchEvents(customersAddControl);
             SubscribeToMenuSwitchEvents(displaySearchResultsMenuControl);
+            SubscribeToMenuSwitchEvents(customersSearchControl);
+            SubscribeToMenuSwitchEvents(customersDeleteControl);
 
 
             // Add app status strip to all menu's that need it
@@ -88,6 +97,8 @@ namespace ohjelmistotuotanto
             removeReservationMenuControl.Dock = DockStyle.Fill;
             searchReservationMenuControl.Dock = DockStyle.Fill;
             displaySearchResultsMenuControl.Dock = DockStyle.Fill;
+            customersSearchControl.Dock = DockStyle.Fill;
+            customersDeleteControl.Dock = DockStyle.Fill;
 
             // add controls to app container
             appContainer.Controls.Add(mainMenuControl);
@@ -99,7 +110,8 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(removeReservationMenuControl);
             appContainer.Controls.Add(searchReservationMenuControl);
             appContainer.Controls.Add(searchReservationMenuControl);
-
+            appContainer.Controls.Add(customersSearchControl);
+            appContainer.Controls.Add(customersDeleteControl);
             // Show the initial User Control
             SwitchMenuControl(Constants.mainMenu);
         }
@@ -165,6 +177,16 @@ namespace ohjelmistotuotanto
                 searchReservationMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
             }
+            else if (menu == Constants.customersSearch)
+            {
+                customersSearchControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+            }
+            else if (menu == Constants.customersDelete)
+            {
+                customersDeleteControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+            }
         }
 
 
@@ -202,6 +224,14 @@ namespace ohjelmistotuotanto
             } else if (userControl is DisplaySearchResultsMenuControl displaySearchResultsMenuControl)
             {
                 displaySearchResultsMenuControl.MenuSwitchRequested += SwitchMenuControl;
+            }
+            else if (userControl is CustomersSearchControl customersSearchControl)
+            {
+                customersSearchControl.MenuSwitchRequested += SwitchMenuControl;
+            }
+            else if (userControl is CustomersDeleteControl customersDeleteControl)
+            {
+                customersDeleteControl.MenuSwitchRequested += SwitchMenuControl;
             }
         }
 

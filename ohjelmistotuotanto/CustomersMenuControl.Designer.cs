@@ -64,6 +64,7 @@
             this.aBtn3.TabIndex = 4;
             this.aBtn3.Text = "Poista";
             this.aBtn3.UseVisualStyleBackColor = false;
+            this.aBtn3.Click += new System.EventHandler(this.aBtn3_Click);
             // 
             // aBtn1
             // 
