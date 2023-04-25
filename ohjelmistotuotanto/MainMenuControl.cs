@@ -33,26 +33,8 @@ namespace ohjelmistotuotanto
             MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            statusStrip.Show();
-        }
-
         private void MainMenuControl_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            var test = VillageNewbies._dbManager.GetReservationWithDetails();
-            foreach (var item in test.Result)
-            {
-                //foreach(var details in item)
-                //{
-
-                //}
-            }
 
         }
     }

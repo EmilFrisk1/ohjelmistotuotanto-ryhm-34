@@ -83,8 +83,9 @@ namespace ohjelmistotuotanto
             else
             {
                 // Transport the matches to the search resulst menu
+                this.Hide();
+                MenuSwitchRequested?.Invoke(Constants.displayResultsMenu); // TODO - some problems with this logic probably the event
                 EventUtility.RaiseDisplayReservationSearchResults(response);
-                MenuSwitchRequested?.Invoke(Constants.searchResults); // TODO - some problems with this logic probably the event
             }
         }
 

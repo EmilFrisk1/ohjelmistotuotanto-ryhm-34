@@ -112,6 +112,8 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(searchReservationMenuControl);
             appContainer.Controls.Add(customersSearchControl);
             appContainer.Controls.Add(customersDeleteControl);
+            appContainer.Controls.Add(displaySearchResultsMenuControl);
+
             // Show the initial User Control
             SwitchMenuControl(Constants.mainMenu);
         }
@@ -175,6 +177,10 @@ namespace ohjelmistotuotanto
             } else if (menu == Constants.searchResults)
             {
                 searchReservationMenuControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+            } else if (menu == Constants.displayResultsMenu)
+            {
+                displaySearchResultsMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
             }
             else if (menu == Constants.customersSearch)

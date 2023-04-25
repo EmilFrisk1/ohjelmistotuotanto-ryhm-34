@@ -23,7 +23,6 @@ namespace ohjelmistotuotanto
         {
             // initialize event listeners
             EventUtility.DisplayReservationSearchResults += DisplaySearchResults;
-
         }
 
         public void DisplaySearchResults<T>(List<T> results)
