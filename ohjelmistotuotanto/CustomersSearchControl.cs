@@ -10,17 +10,26 @@ using System.Windows.Forms;
 
 namespace ohjelmistotuotanto
 {
-    public partial class CustomersAddControl : UserControl
+    public partial class CustomersSearchControl : UserControl
     {
         public delegate void MenuSwitchRequestHandler(string newControl); // Function pointer 
         public event MenuSwitchRequestHandler MenuSwitchRequested;
-        public CustomersAddControl()
+        public CustomersSearchControl()
         {
             InitializeComponent();
-            
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void addCustomertxtBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void prevBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
             MenuSwitchRequested?.Invoke(Constants.customersMenu);

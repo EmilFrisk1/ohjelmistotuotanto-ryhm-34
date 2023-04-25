@@ -18,5 +18,7 @@ namespace ohjelmistotuotanto
         public static string customersAdd = "customersAdd";
         public static string searchResults = "searchResults";
         public static string displayResultsMenu = "displayResultsMenu";
+        public static string customersSearch = "customersSearch";
+        public static string customersDelete = "customersDelete";
     }
 }
