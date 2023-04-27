@@ -24,17 +24,38 @@ namespace ohjelmistotuotanto
             GetReservations();
         }
 
-        private void deleteBtn_Click(object sender, EventArgs e)
+        private async void deleteBtn_Click(object sender, EventArgs e)
         {
             if (IsAnyRowSelected())
             {
                 DataGridViewRow selectedRow = reservationContainer.SelectedRows[0];
                 int reservationId = (int)selectedRow.Cells["Id"].Value;
 
-                var response = VillageNewbies._dbManager.DeleteReservationAsync(reservationId);
-                if (response != null || response.Result != -1)
+                Dictionary<string, object> reservationColumnValues = new Dictionary<string, object>
+                        {
+                            { "reservation_status", "cancelled" }
+                        };
+
+                var response = await VillageNewbies._dbManager.AlterDataAsync("reservation", reservationColumnValues, $"id = {reservationId}"); 
+                if (response != null || response <= 0)
                 {
-                    MessageBox.Show("Varaus poistettu onnistuneesti");
+                    MessageBox.Show("Varaus peruttu onnistuneesti");
+
+                    Dictionary<string, object> billColumnValues = new Dictionary<string, object>
+                        {
+                            { "status", "CANCELLED" }
+                        };
+
+                    // alter the bill status for this reservation
+                    var billAlterRes = await VillageNewbies._dbManager.AlterDataAsync("bill", billColumnValues, $"reservation_id = {reservationId}");
+                    if (billAlterRes != null || billAlterRes <= 0)
+                    {
+                        MessageBox.Show("Lasku muutettu");
+                    } else
+                    {
+                        MessageBox.Show("Jokin meni pieleen");
+                    }
+
                     GetReservations();
                 }
             }
@@ -55,17 +76,17 @@ namespace ohjelmistotuotanto
             MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
         }
 
-        private void GetReservations()
+        private async void GetReservations()
         {
-            var response = VillageNewbies._dbManager.GetReservationWithDetails();
+            var response = await VillageNewbies._dbManager.GetReservationWithDetails();
 
-            if (response.Result == null || response.Result.Count == 0)
+            if (response == null || response.Count <= 0)
             {
                 MessageBox.Show("Varauksia ei ole");
             }
             else
             {
-                reservationContainer.DataSource = response.Result;
+                reservationContainer.DataSource = response;
             }
         }
     }

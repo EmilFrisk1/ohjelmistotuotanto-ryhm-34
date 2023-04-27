@@ -75,7 +75,6 @@ public class DatabaseManager
         return default(T);
     }
 
-
     public async Task<int> InsertDataAsync(string tableName, Dictionary<string, object> columnValues)
     {
         int affectedRows = await ExecuteWithRetry(async (connection) =>
@@ -96,6 +95,30 @@ public class DatabaseManager
 
         return affectedRows;
     }
+
+
+    public async Task<int> AlterDataAsync(string tableName, Dictionary<string, object> columnValues, string condition)
+    {
+        int affectedRows = await ExecuteWithRetry(async (connection) =>
+        {
+            var setValues = string.Join(", ", columnValues.Keys.Select(key => $"{key} = @{key}"));
+
+            var debugString = $"UPDATE {tableName} SET {setValues} WHERE {condition}";
+
+            using (MySqlCommand cmd = new MySqlCommand($"UPDATE {tableName} SET {setValues} WHERE {condition}", connection))
+            {
+                foreach (var entry in columnValues)
+                {
+                    cmd.Parameters.AddWithValue("@" + entry.Key, entry.Value);
+                }
+
+                return await cmd.ExecuteNonQueryAsync();
+            }
+        });
+
+        return affectedRows;
+    }
+
 
     public async Task<DataTable> SelectDataAsync(string tableName, List<string> columnNames = null, string whereClause = "")
     {
@@ -187,6 +210,29 @@ public class DatabaseManager
 
         return reservationDetailsList;
     }
+
+    public async Task<int> CalculateReservationTotal(int reservationId)
+    {
+        int totalPrice = -1;
+        return totalPrice = await ExecuteWithRetry(async (connection) =>
+        {
+            string getTotalPriceQuery = $"SELECT " +
+            $"DATEDIFF(reservation.end_date, reservation.start_date) * cottage.price + COALESCE(SUM(service.price * reservation_service.quantity), 0) AS total_price" +
+            $" FROM reservation" +
+            $" JOIN cottage ON reservation.cottage_id = cottage.id" +
+            $" LEFT JOIN reservation_service ON reservation.id = reservation_service.reservation_id" +
+            $" LEFT JOIN service ON reservation_service.service_id = service.id" +
+            $" WHERE reservation.id = @reservationId" +
+            $" GROUP BY reservation_service.reservation_id;";
+            using (MySqlCommand cmd = new MySqlCommand(getTotalPriceQuery, connection))
+            {
+                cmd.Parameters.AddWithValue("@reservationId", reservationId);
+                object result = await cmd.ExecuteScalarAsync();
+                return result != DBNull.Value ? Convert.ToInt32(result) : -1;
+            }
+        });
+    }
+
 
     public async Task<List<Reservation>> SearchReservations(string query)
     {

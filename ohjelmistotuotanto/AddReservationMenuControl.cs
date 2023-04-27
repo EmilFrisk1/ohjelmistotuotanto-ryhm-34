@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -37,37 +38,6 @@ namespace ohjelmistotuotanto
             InitializeComponent();
         }
 
-        private void AddReservationMenuControl_Load(object sender, EventArgs e)
-        {
-            // Initialize all needed lists
-            Cottages = new List<Cottage>() { new Cottage { Id = -1, Name = string.Empty } };
-            Customers = new List<Customer>() { new Customer { Id = -1, Email = string.Empty } };
-            Services = new List<Service>() { new Service { Id = -1, Name = string.Empty } };
-            ClientServices = new List<ClientServices>();
-            ServiceTextBoxes = new List<TextBox>();
-            ServiceButtons = new List<Button>();
-
-            // Set the default value to the current date
-            fromDatePicker.Value = DateTime.Today;
-            whereDatePicker.Value = DateTime.Today;
-
-            // Set the MinDate and MaxDate to the current date
-            fromDatePicker.MinDate = DateTime.Today;
-            whereDatePicker.MinDate = DateTime.Today;
-
-            // Get customers and display then on a combobox | each entry linked with id
-            var customers = VillageNewbies._dbManager.SelectDataAsync("customer", new List<string>() { "id", "email" });
-            setUpCustomersCbx(customers);
-
-            // Get cottages and display then on a combobox | each entry linked with id
-            var cottages = VillageNewbies._dbManager.SelectDataAsync("cottage", new List<string>() { "id", "cottage_name" });
-            setUpCottagesCbx(cottages);
-
-            // Get services and display then on a combobox | each entry linked with id
-            var services = VillageNewbies._dbManager.SelectDataAsync("service", new List<string>() { "id", "name" });
-            setUpServicesCbx(services);
-        }
-
         private void prevBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -75,90 +45,6 @@ namespace ohjelmistotuotanto
             HideErrors(statusStrip, dateErrorLabel, serviceErrorLabel);
             menuDefaultState();
         }
-
-        async private void addReservationBtn_Click(object sender, EventArgs e)
-        {
-            // Check that all form fields are valid
-            if (cottageCbx.SelectedIndex == -1 || string.IsNullOrEmpty(cottageCbx.Text) || customerCbx.SelectedIndex == -1 || string.IsNullOrEmpty(cottageCbx.Text))
-            {
-                statusStrip.Visible = true;
-                // Scroll the form to the bottom to show the status label
-                appContainer.VerticalScroll.Value = appContainer.VerticalScroll.Maximum;
-
-                return;
-            }
-            else
-            { // no error hide it
-                if (statusStrip.Visible)
-                {
-                    //formErrorLabel.Visible = false;
-                    statusStrip.Visible = false;
-                }
-            }
-
-            if (fromDatePicker.Value == whereDatePicker.Value) // special validation for dates
-            {
-                dateErrorLabel.Visible = true;
-                dateErrorLabel.Text = "Valitse mihin asti varaus on";
-                return;
-            }
-            else if (fromDatePicker.Value > whereDatePicker.Value)
-            {
-                dateErrorLabel.Visible = true;
-                dateErrorLabel.Text = "Mihin liian pieni";
-                return;
-            }
-            else
-            { // no error hide it
-                if (dateErrorLabel.Visible)
-                {
-                    dateErrorLabel.Visible = false;
-                }
-            }
-
-            // Prepare column data
-            string startDate = fromDatePicker.Value.ToString("yyyy-MM-dd");
-            string endDate = whereDatePicker.Value.ToString("yyyy-MM-dd");
-            int customerId = (int)customerCbx.SelectedValue;
-            int cottageId = (int)cottageCbx.SelectedValue;
-
-            var res = VillageNewbies._dbManager.CallCheckAvailabilityAndReserveAsync(cottageId, startDate, endDate, customerId);
-
-            int reservationId = res.Result;
-            if (reservationId == -1) 
-            {
-                MessageBox.Show("Tämä varaushaarukka onjo käytössä");
-            }
-            else
-            {
-                MessageBox.Show("Varaus lisätty onnistuneesti"); // TODO - what next? mainmenu?
-
-                // LInk the reservation with the possible services
-                if (ClientServices.Count > 0)
-                {
-                    foreach (var clientService in ClientServices)
-                    {
-                        Dictionary<string, object> columnValues = new Dictionary<string, object>
-                        {
-                            { "reservation_id", reservationId },
-                            { "service_id", clientService.Id },
-                            { "quantity", clientService.Quantity }
-                        };
-
-                        int result = await VillageNewbies._dbManager.InsertDataAsync("reservation_service", columnValues);
-
-                        if (result <= 0)
-                        {
-                            MessageBox.Show("Jokin meni pieleen");
-                        }
-                    }
-                }
-
-                // Clear the menu to default state
-                menuDefaultState();
-            }
-        }
-
 
         private void setUpCustomersCbx(Task<DataTable> customers)
         {
@@ -208,117 +94,6 @@ namespace ohjelmistotuotanto
                 servicesCbx.DataSource = Services;
                 servicesCbx.DisplayMember = "Name";
                 servicesCbx.ValueMember = "Id";
-            }
-        }
-
-        private void customerTxtBox_TextChanged(object sender, EventArgs e)
-        {
-            ComboBoxUtility.FilterCustomers(customerCbx, Customers, customerTxtBox.Text);
-        }
-
-        private void cottageTxtBox_TextChanged(object sender, EventArgs e)
-        {
-            ComboBoxUtility.FilterCottages(cottageCbx, Cottages, cottageTxtBox.Text);
-        }
-
-        private void addServiceBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Input validation
-                // Check that user has selected a service
-                if (servicesCbx.SelectedIndex == -1 || string.IsNullOrEmpty(servicesCbx.Text))
-                {
-                    serviceErrorLabel.Visible = true;
-                    serviceErrorLabel.Text = "Valitse jokin palvelu";
-                    return;
-                }
-                else
-                {// hide err
-                    if (serviceErrorLabel.Visible)
-                    {
-                        serviceErrorLabel.Visible = false;
-                    }
-                }
-
-                // Check that the quantity is bigger than 0
-                int serviceQuantity = 0;
-                int.TryParse(serviceQuantityTxtBox.Text, out serviceQuantity);
-
-                if (serviceQuantity <= 0)
-                {
-                    serviceErrorLabel.Visible = true;
-                    serviceErrorLabel.Text = "määrä liian pieni";
-                    return;
-                }
-                else
-                { // hide err
-                    if (serviceErrorLabel.Visible)
-                    {
-                        serviceErrorLabel.Visible = false;
-                    }
-                }
-
-                // Check that the service is not already added
-                var srvc = ClientServices.FirstOrDefault(service => service.Id == (int)servicesCbx.SelectedValue);
-                if (srvc != null)
-                {
-                    serviceErrorLabel.Visible = true;
-                    serviceErrorLabel.Text = "Palvelu onjo lisätty";
-                    return;
-                }
-                else
-                { // hide err
-                    if (serviceErrorLabel.Visible)
-                    {
-                        serviceErrorLabel.Visible = false;
-                    }
-                }
-
-                // Input OK - set quantity back to one
-                serviceQuantityTxtBox.Text = "1";
-
-                // Layout cooridnates for clients service rows and columns
-                int baseX1 = 10;
-                int baseX2 = 216;
-                int baseX3 = 300;
-                int baseY = 34;
-                int margin = 10;
-                int rowHeight = 29;
-
-                // Get comboBox service values and make it into an object
-                string serviceName = servicesCbx.Text;
-                int serviceId = (int)servicesCbx.SelectedValue;
-                ClientServices.Add(new ClientServices() { Id = serviceId, Name = serviceName, Quantity = serviceQuantity });
-                int row = ClientServices.Count - 1;
-
-                // Create controls
-                TextBox serviceNameTxtBox = CreateTextBox(serviceName, new Point(baseX1, baseY + (row * (rowHeight + margin))), new Size(194, rowHeight), $"1-{serviceName}_{serviceId}");
-                TextBox clientServiceQuantityTxtBox = CreateTextBox(serviceQuantity.ToString(), new Point(baseX2, baseY + (row * (rowHeight + margin))), new Size(74, rowHeight), $"2-{serviceName}_{serviceId}");
-                Button deleteBtn = CreateButton("poista", new Point(baseX3, baseY + (row * (rowHeight + margin))), new Size(88, rowHeight), $"del-{serviceName}_{serviceId}");
-
-
-                // save them to list
-                ServiceTextBoxes.Add(serviceNameTxtBox);
-                ServiceTextBoxes.Add(clientServiceQuantityTxtBox);
-                ServiceButtons.Add(deleteBtn);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Jokin meni pieleen");
-            }
-        }
-
-        private void serviceQuantity_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Only allow numbers and backspace
-            if (Regex.IsMatch(e.KeyChar.ToString(), @"^[0-9]+$") || e.KeyChar == (char)8)
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
             }
         }
 
@@ -463,5 +238,258 @@ namespace ohjelmistotuotanto
             }
         }
 
+        private void AddReservationMenuControl_Load_1(object sender, EventArgs e)
+        {
+            // Initialize all needed lists
+            Cottages = new List<Cottage>() { new Cottage { Id = -1, Name = string.Empty } };
+            Customers = new List<Customer>() { new Customer { Id = -1, Email = string.Empty } };
+            Services = new List<Service>() { new Service { Id = -1, Name = string.Empty } };
+            ClientServices = new List<ClientServices>();
+            ServiceTextBoxes = new List<TextBox>();
+            ServiceButtons = new List<Button>();
+
+            // Set the default value to the current date
+            fromDatePicker.Value = DateTime.Today;
+            whereDatePicker.Value = DateTime.Today;
+
+            // Set the MinDate and MaxDate to the current date
+            fromDatePicker.MinDate = DateTime.Today;
+            whereDatePicker.MinDate = DateTime.Today;
+
+            // Get customers and display then on a combobox | each entry linked with id
+            var customers = VillageNewbies._dbManager.SelectDataAsync("customer", new List<string>() { "id", "email" });
+            setUpCustomersCbx(customers);
+
+            MessageBox.Show("wat");
+            // Get cottages and display then on a combobox | each entry linked with id
+            var cottages = VillageNewbies._dbManager.SelectDataAsync("cottage", new List<string>() { "id", "cottage_name" });
+            setUpCottagesCbx(cottages);
+
+            // Get services and display then on a combobox | each entry linked with id
+            var services = VillageNewbies._dbManager.SelectDataAsync("service", new List<string>() { "id", "name" });
+            setUpServicesCbx(services);
+        }
+
+        private async void addReservationBtn_Click_1(object sender, EventArgs e)
+        {
+            // Check that all form fields are valid
+            if (cottageCbx.SelectedIndex == -1 || string.IsNullOrEmpty(cottageCbx.Text) || customerCbx.SelectedIndex == -1 || string.IsNullOrEmpty(cottageCbx.Text))
+            {
+                statusStrip.Visible = true;
+                // Scroll the form to the bottom to show the status label
+                appContainer.VerticalScroll.Value = appContainer.VerticalScroll.Maximum;
+
+                return;
+            }
+            else
+            { // no error hide it
+                if (statusStrip.Visible)
+                {
+                    //formErrorLabel.Visible = false;
+                    statusStrip.Visible = false;
+                }
+            }
+
+            if (fromDatePicker.Value == whereDatePicker.Value) // special validation for dates
+            {
+                dateErrorLabel.Visible = true;
+                dateErrorLabel.Text = "Valitse mihin asti varaus on";
+                return;
+            }
+            else if (fromDatePicker.Value > whereDatePicker.Value)
+            {
+                dateErrorLabel.Visible = true;
+                dateErrorLabel.Text = "Mihin liian pieni";
+                return;
+            }
+            else
+            { // no error hide it
+                if (dateErrorLabel.Visible)
+                {
+                    dateErrorLabel.Visible = false;
+                }
+            }
+
+            // Prepare column data
+            string startDate = fromDatePicker.Value.ToString("yyyy-MM-dd");
+            string endDate = whereDatePicker.Value.ToString("yyyy-MM-dd");
+            int customerId = (int)customerCbx.SelectedValue;
+            int cottageId = (int)cottageCbx.SelectedValue;
+
+            var res = VillageNewbies._dbManager.CallCheckAvailabilityAndReserveAsync(cottageId, startDate, endDate, customerId);
+
+            int reservationId = res.Result;
+            if (reservationId == -1)
+            {
+                MessageBox.Show("Tämä varaushaarukka onjo käytössä");
+            }
+            else
+            {
+                MessageBox.Show("Varaus lisätty onnistuneesti"); // TODO - what next? mainmenu?
+
+                // LInk the reservation with the possible services
+                if (ClientServices.Count > 0)
+                {
+                    foreach (var clientService in ClientServices)
+                    {
+                        Dictionary<string, object> columnValues = new Dictionary<string, object>
+                        {
+                            { "reservation_id", reservationId },
+                            { "service_id", clientService.Id },
+                            { "quantity", clientService.Quantity }
+                        };
+
+                        int result = await VillageNewbies._dbManager.InsertDataAsync("reservation_service", columnValues);
+
+                        if (result <= 0)
+                        {
+                            MessageBox.Show("Jokin meni pieleen");
+                        } else
+                        {
+                            // calculate total
+                            var totalCost = await VillageNewbies._dbManager.CalculateReservationTotal(reservationId);
+                            if (totalCost == -1)
+                            {
+                                MessageBox.Show("Jokin meni pieleen hinnan laskusssa");
+                            } else
+                            {// Create bill
+                                // add 30 days to the last day of the reservation
+                                string dueDate = DateTime.ParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture).AddDays(30).ToString("yyyy-MM-dd");
+
+                                Dictionary<string, object> billColumnValues = new Dictionary<string, object>
+                                {
+                                    { "sum", totalCost },
+                                    { "due_date", dueDate },
+                                    { "status", "PENDING" },
+                                    { "reservation_id", reservationId }
+                                };
+
+                                
+                                int billInsRes = await VillageNewbies._dbManager.InsertDataAsync("bill", billColumnValues);
+
+                                if (billInsRes <= 0)
+                                {
+                                    MessageBox.Show("Jokin meni pieleen");
+                                } 
+                            }
+                        }
+                    }
+                }
+
+                // Clear the menu to default state
+                menuDefaultState();
+            }
+        }
+
+        private void addServiceBtn_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                // Input validation
+                // Check that user has selected a service
+                if (servicesCbx.SelectedIndex == -1 || string.IsNullOrEmpty(servicesCbx.Text))
+                {
+                    serviceErrorLabel.Visible = true;
+                    serviceErrorLabel.Text = "Valitse jokin palvelu";
+                    return;
+                }
+                else
+                {// hide err
+                    if (serviceErrorLabel.Visible)
+                    {
+                        serviceErrorLabel.Visible = false;
+                    }
+                }
+
+                // Check that the quantity is bigger than 0
+                int serviceQuantity = 0;
+                int.TryParse(serviceQuantityTxtBox.Text, out serviceQuantity);
+
+                if (serviceQuantity <= 0)
+                {
+                    serviceErrorLabel.Visible = true;
+                    serviceErrorLabel.Text = "määrä liian pieni";
+                    return;
+                }
+                else
+                { // hide err
+                    if (serviceErrorLabel.Visible)
+                    {
+                        serviceErrorLabel.Visible = false;
+                    }
+                }
+
+                // Check that the service is not already added
+                var srvc = ClientServices.FirstOrDefault(service => service.Id == (int)servicesCbx.SelectedValue);
+                if (srvc != null)
+                {
+                    serviceErrorLabel.Visible = true;
+                    serviceErrorLabel.Text = "Palvelu onjo lisätty";
+                    return;
+                }
+                else
+                { // hide err
+                    if (serviceErrorLabel.Visible)
+                    {
+                        serviceErrorLabel.Visible = false;
+                    }
+                }
+
+                // Input OK - set quantity back to one
+                serviceQuantityTxtBox.Text = "1";
+
+                // Layout cooridnates for clients service rows and columns
+                int baseX1 = 10;
+                int baseX2 = 216;
+                int baseX3 = 300;
+                int baseY = 34;
+                int margin = 10;
+                int rowHeight = 29;
+
+                // Get comboBox service values and make it into an object
+                string serviceName = servicesCbx.Text;
+                int serviceId = (int)servicesCbx.SelectedValue;
+                ClientServices.Add(new ClientServices() { Id = serviceId, Name = serviceName, Quantity = serviceQuantity });
+                int row = ClientServices.Count - 1;
+
+                // Create controls
+                TextBox serviceNameTxtBox = CreateTextBox(serviceName, new Point(baseX1, baseY + (row * (rowHeight + margin))), new Size(194, rowHeight), $"1-{serviceName}_{serviceId}");
+                TextBox clientServiceQuantityTxtBox = CreateTextBox(serviceQuantity.ToString(), new Point(baseX2, baseY + (row * (rowHeight + margin))), new Size(74, rowHeight), $"2-{serviceName}_{serviceId}");
+                Button deleteBtn = CreateButton("poista", new Point(baseX3, baseY + (row * (rowHeight + margin))), new Size(88, rowHeight), $"del-{serviceName}_{serviceId}");
+
+
+                // save them to list
+                ServiceTextBoxes.Add(serviceNameTxtBox);
+                ServiceTextBoxes.Add(clientServiceQuantityTxtBox);
+                ServiceButtons.Add(deleteBtn);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Jokin meni pieleen");
+            }
+        }
+
+        private void serviceQuantityTxtBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Only allow numbers and backspace
+            if (Regex.IsMatch(e.KeyChar.ToString(), @"^[0-9]+$") || e.KeyChar == (char)8)
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void customerTxtBox_TextChanged_1(object sender, EventArgs e)
+        {
+            ComboBoxUtility.FilterCustomers(customerCbx, Customers, customerTxtBox.Text);
+        }
+
+        private void cottageTxtBox_TextChanged_1(object sender, EventArgs e)
+        {
+            ComboBoxUtility.FilterCottages(cottageCbx, Cottages, cottageTxtBox.Text);
+        }
     }
 }
