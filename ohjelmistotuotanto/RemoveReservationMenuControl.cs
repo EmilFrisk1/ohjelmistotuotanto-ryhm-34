@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +15,9 @@ namespace ohjelmistotuotanto
     {
         public delegate void MenuSwitchRequestHandler(string newControl); // Function pointer 
         public event MenuSwitchRequestHandler MenuSwitchRequested;
+        private bool isFirstLoad = true;
+        private static int counter = 0;
+
         public RemoveReservationMenuControl()
         {
             InitializeComponent();
@@ -21,6 +25,7 @@ namespace ohjelmistotuotanto
 
         private void RemoveReservationMenuControl_Load(object sender, EventArgs e)
         {
+            isFirstLoad = false;
             GetReservations();
         }
 
@@ -28,36 +33,7 @@ namespace ohjelmistotuotanto
         {
             if (IsAnyRowSelected())
             {
-                DataGridViewRow selectedRow = reservationContainer.SelectedRows[0];
-                int reservationId = (int)selectedRow.Cells["Id"].Value;
-
-                Dictionary<string, object> reservationColumnValues = new Dictionary<string, object>
-                        {
-                            { "reservation_status", "cancelled" }
-                        };
-
-                var response = await VillageNewbies._dbManager.AlterDataAsync("reservation", reservationColumnValues, $"id = {reservationId}"); 
-                if (response != null || response <= 0)
-                {
-                    MessageBox.Show("Varaus peruttu onnistuneesti");
-
-                    Dictionary<string, object> billColumnValues = new Dictionary<string, object>
-                        {
-                            { "status", "CANCELLED" }
-                        };
-
-                    // alter the bill status for this reservation
-                    var billAlterRes = await VillageNewbies._dbManager.AlterDataAsync("bill", billColumnValues, $"reservation_id = {reservationId}");
-                    if (billAlterRes != null || billAlterRes <= 0)
-                    {
-                        MessageBox.Show("Lasku muutettu");
-                    } else
-                    {
-                        MessageBox.Show("Jokin meni pieleen");
-                    }
-
-                    GetReservations();
-                }
+                RemoveReservation();
             }
             else
             {
@@ -82,11 +58,41 @@ namespace ohjelmistotuotanto
 
             if (response == null || response.Count <= 0)
             {
+                reservationContainer.DataSource = null;
+                reservationContainer.DataSource = response;
                 MessageBox.Show("Varauksia ei ole");
             }
             else
             {
+                reservationContainer.DataSource = null;
                 reservationContainer.DataSource = response;
+            }
+        }
+
+        private async void RemoveReservation()
+        {
+            DataGridViewRow selectedRow = reservationContainer.SelectedRows[0];
+            int reservationId = (int)selectedRow.Cells["Id"].Value;
+
+            // remove reservation
+
+            var response = await VillageNewbies._dbManager.DeleteDataAsync("reservation", $"id = {reservationId}");
+            if (response != null || response <= 0)
+            {
+                MessageBox.Show("Varaus poistettu onnistuneesti");
+                GetReservations();
+            }
+        }
+
+        private void RemoveReservationMenuControl_VisibleChanged(object sender, EventArgs e)
+        {
+            counter++;
+            if (isFirstLoad || counter <= 2)
+                return;
+
+            if (this.Visible)
+            {
+                GetReservations();
             }
         }
     }

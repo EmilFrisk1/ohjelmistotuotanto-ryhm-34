@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.Common;
 using System.ComponentModel;
 using ohjelmistotuotanto;
+using System.Globalization;
 
 public class DatabaseManager
 {
@@ -317,6 +318,47 @@ public class DatabaseManager
         });
 
         return affectedRows;
+    }
+    public async void CreateBill(int reservationId, string endDate)
+    {
+        try
+        {
+            // Update the reservation to indicate its not cancelable anymore
+            Dictionary<string, object> reservationColumnValues = new Dictionary<string, object>
+                        {
+                            { "reservation_status", "ACTIVE" }
+                        };
+            var response = await VillageNewbies._dbManager.AlterDataAsync("reservation", reservationColumnValues, $"id = {reservationId}");
+
+            var totalCost = await VillageNewbies._dbManager.CalculateReservationTotal(reservationId);
+            if (totalCost == -1)
+            {
+                throw new Exception("Error occurred while inserting data into the database.");
+            }
+            else
+            {
+                // add 30 days to the last day of the reservation for due date
+                string dueDate = DateTime.ParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture).AddDays(30).ToString("yyyy-MM-dd");
+
+                Dictionary<string, object> billColumnValues = new Dictionary<string, object>
+                                {
+                                    { "sum", totalCost },
+                                    { "due_date", dueDate },
+                                    { "status", "PENDING" },
+                                    { "reservation_id", reservationId }
+                                };
+
+                int billInsRes = await VillageNewbies._dbManager.InsertDataAsync("bill", billColumnValues);
+                if (billInsRes <= 0)
+                {
+                    throw new Exception("Error occurred while inserting data into the database.");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Jokin meni pieleen laskun teossa. \n" + ex.Message);
+        }
     }
 
 }

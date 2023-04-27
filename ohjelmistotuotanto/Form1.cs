@@ -1,8 +1,10 @@
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System.Configuration;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Configuration;
+using System.Globalization;
 using System.Windows.Forms;
 
 
@@ -118,9 +120,11 @@ namespace ohjelmistotuotanto
             SwitchMenuControl(Constants.mainMenu);
         }
 
-        private void VillageNewbies_Load(object sender, EventArgs e)
+        private async void VillageNewbies_Load(object sender, EventArgs e)
         {
             _dbManager = new DatabaseManager(); // setup dbmanager
+
+            CheckReservations();
 
             SetupUserControllers();
         }
@@ -253,6 +257,25 @@ namespace ohjelmistotuotanto
         private void mainMenuToolStrip_Click(object sender, EventArgs e)
         { // TODO - hide the menu where this was clicked from (probably need to implement menuhistory)
             SwitchMenuControl(Constants.mainMenu);
+        }
+
+        // Updates reservations if they are within 7 days to be uncancelable and form a bill.
+        private async void CheckReservations()
+        {
+            // Get all reservations that has not been billed yet
+            var reservations = await _dbManager.SelectDataAsync("reservation", null, "reservation_status = 'PENDING'");
+
+            foreach (DataRow row in reservations.Rows)
+            {
+                var startDate = (DateTime)row["start_date"];
+                var distanceInDays = (startDate - DateTime.Now).Days;
+                if (distanceInDays <= 7)
+                { // Reservation cannot be cancelled anymore create bill 
+                    var reservationId = (int)row["id"];
+                    var endDate = (DateTime)row["end_date"];
+                    _dbManager.CreateBill(reservationId, endDate.ToString("yyyy-MM-dd"));
+                }
+            }
         }
     }
 }

@@ -38,14 +38,6 @@ namespace ohjelmistotuotanto
             InitializeComponent();
         }
 
-        private void prevBtn_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
-            HideErrors(statusStrip, dateErrorLabel, serviceErrorLabel);
-            menuDefaultState();
-        }
-
         private void setUpCustomersCbx(Task<DataTable> customers)
         {
             if (customers.Result?.Rows != null && customers.Result.Rows.Count > 0)
@@ -260,7 +252,6 @@ namespace ohjelmistotuotanto
             var customers = VillageNewbies._dbManager.SelectDataAsync("customer", new List<string>() { "id", "email" });
             setUpCustomersCbx(customers);
 
-            MessageBox.Show("wat");
             // Get cottages and display then on a combobox | each entry linked with id
             var cottages = VillageNewbies._dbManager.SelectDataAsync("cottage", new List<string>() { "id", "cottage_name" });
             setUpCottagesCbx(cottages);
@@ -315,6 +306,13 @@ namespace ohjelmistotuotanto
             string endDate = whereDatePicker.Value.ToString("yyyy-MM-dd");
             int customerId = (int)customerCbx.SelectedValue;
             int cottageId = (int)cottageCbx.SelectedValue;
+            var distanceInDays = (fromDatePicker.Value - DateTime.Now).Days;
+            bool reservationCancelable = true;
+
+            if (distanceInDays <= 7)
+            {
+                reservationCancelable = false;
+            }
 
             var res = VillageNewbies._dbManager.CallCheckAvailabilityAndReserveAsync(cottageId, startDate, endDate, customerId);
 
@@ -330,50 +328,13 @@ namespace ohjelmistotuotanto
                 // LInk the reservation with the possible services
                 if (ClientServices.Count > 0)
                 {
-                    foreach (var clientService in ClientServices)
-                    {
-                        Dictionary<string, object> columnValues = new Dictionary<string, object>
-                        {
-                            { "reservation_id", reservationId },
-                            { "service_id", clientService.Id },
-                            { "quantity", clientService.Quantity }
-                        };
+                    AddServices(reservationId);
+                }
 
-                        int result = await VillageNewbies._dbManager.InsertDataAsync("reservation_service", columnValues);
-
-                        if (result <= 0)
-                        {
-                            MessageBox.Show("Jokin meni pieleen");
-                        } else
-                        {
-                            // calculate total
-                            var totalCost = await VillageNewbies._dbManager.CalculateReservationTotal(reservationId);
-                            if (totalCost == -1)
-                            {
-                                MessageBox.Show("Jokin meni pieleen hinnan laskusssa");
-                            } else
-                            {// Create bill
-                                // add 30 days to the last day of the reservation
-                                string dueDate = DateTime.ParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture).AddDays(30).ToString("yyyy-MM-dd");
-
-                                Dictionary<string, object> billColumnValues = new Dictionary<string, object>
-                                {
-                                    { "sum", totalCost },
-                                    { "due_date", dueDate },
-                                    { "status", "PENDING" },
-                                    { "reservation_id", reservationId }
-                                };
-
-                                
-                                int billInsRes = await VillageNewbies._dbManager.InsertDataAsync("bill", billColumnValues);
-
-                                if (billInsRes <= 0)
-                                {
-                                    MessageBox.Show("Jokin meni pieleen");
-                                } 
-                            }
-                        }
-                    }
+                // add a bill if reservation is not cancelable
+                if (!reservationCancelable)
+                {
+                    VillageNewbies._dbManager.CreateBill(reservationId, endDate);
                 }
 
                 // Clear the menu to default state
@@ -490,6 +451,41 @@ namespace ohjelmistotuotanto
         private void cottageTxtBox_TextChanged_1(object sender, EventArgs e)
         {
             ComboBoxUtility.FilterCottages(cottageCbx, Cottages, cottageTxtBox.Text);
+        }
+
+        private async void AddServices(int reservationId)
+        {
+            try
+            {
+                foreach (var clientService in ClientServices)
+                {
+                    Dictionary<string, object> columnValues = new Dictionary<string, object>
+                        {
+                            { "reservation_id", reservationId },
+                            { "service_id", clientService.Id },
+                            { "quantity", clientService.Quantity }
+                        };
+
+                    int result = await VillageNewbies._dbManager.InsertDataAsync("reservation_service", columnValues);
+
+                    if (result <= 0)
+                    {
+                        throw new Exception("Error occurred while inserting data into the database.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Jokin meni pieleen palvelun lisäämisessä. \n" + ex.Message);
+            }
+        }
+
+        private void prevBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
+            HideErrors(statusStrip, dateErrorLabel, serviceErrorLabel);
+            menuDefaultState();
         }
     }
 }

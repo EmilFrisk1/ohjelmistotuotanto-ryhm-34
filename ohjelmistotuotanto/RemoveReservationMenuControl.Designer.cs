@@ -116,6 +116,7 @@
             Name = "RemoveReservationMenuControl";
             Size = new Size(804, 736);
             Load += RemoveReservationMenuControl_Load;
+            VisibleChanged += RemoveReservationMenuControl_VisibleChanged;
             ((System.ComponentModel.ISupportInitialize)reservationContainer).EndInit();
             ((System.ComponentModel.ISupportInitialize)prevBtn).EndInit();
             ResumeLayout(false);
