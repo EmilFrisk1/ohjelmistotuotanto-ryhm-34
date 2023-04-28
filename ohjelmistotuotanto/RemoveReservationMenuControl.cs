@@ -49,6 +49,7 @@ namespace ohjelmistotuotanto
         private void prevBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
+            VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
             MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
         }
 

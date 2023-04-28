@@ -145,57 +145,70 @@ namespace ohjelmistotuotanto
             {
                 mainMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                // Reset menuhistory
+                menuhistory.RemoveRange(1, menuhistory.Count - 1);
             }
             else if (menu == Constants.rrvtMenu)
             {
                 reservationMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.rrvtMenu);
             }
             else if (menu == Constants.addRrvtMenu)
             {
                 addReservationMenuControl.Visible = true;
                 appContainer.AutoScrollMinSize = new Size(0, 1350);
+                menuhistory.Add(Constants.addRrvtMenu);
             } else if (menu == Constants.searchRrvtMenu)
             {
                 searchReservationMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.searchRrvtMenu);
             }
             else if (menu == Constants.srvcMenu)
             {
                 servicesMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.srvcMenu);
             }
             else if (menu == Constants.customersMenu)
             {
                 customersMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.customersMenu);
             }
             else if (menu == Constants.customersAdd)
             {
                 customersAddControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.customersAdd);
             } else if (menu == Constants.removeRrvtMenu)
             {
                 removeReservationMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.removeRrvtMenu);
             } else if (menu == Constants.searchResults)
             {
                 searchReservationMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.searchRrvtMenu);
             } else if (menu == Constants.displayResultsMenu)
             {
                 displaySearchResultsMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.displayResultsMenu);
             }
             else if (menu == Constants.customersSearch)
             {
                 customersSearchControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.customersSearch);
             }
             else if (menu == Constants.customersDelete)
             {
                 customersDeleteControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.customersDelete);
             }
         }
 
@@ -217,6 +230,7 @@ namespace ohjelmistotuotanto
             else if (userControl is AddReservationMenuControl addReservationMenuControl)
             {
                 addReservationMenuControl.MenuSwitchRequested += SwitchMenuControl;
+                
             } else if (userControl is SearchReservationMenuControl searchReservationMenuControl) 
             {
                 searchReservationMenuControl.MenuSwitchRequested += SwitchMenuControl;

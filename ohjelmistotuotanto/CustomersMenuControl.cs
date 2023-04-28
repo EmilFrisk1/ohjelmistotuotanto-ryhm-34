@@ -24,6 +24,7 @@ namespace ohjelmistotuotanto
             // Go back to prev menu
             // Hide current menu and show new one
             this.Hide();
+            VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
             MenuSwitchRequested?.Invoke(Constants.mainMenu);
         }
 

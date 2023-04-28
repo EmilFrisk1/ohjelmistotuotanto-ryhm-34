@@ -23,6 +23,7 @@ namespace ohjelmistotuotanto
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             this.Hide();
+            VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
             MenuSwitchRequested?.Invoke(Constants.customersMenu);
         }
     }

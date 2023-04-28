@@ -60,5 +60,20 @@ namespace ohjelmistotuotanto
             }
             return customers;
         }
+
+        private void servicesBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void billsBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void areasBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

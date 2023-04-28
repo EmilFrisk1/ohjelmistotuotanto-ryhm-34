@@ -74,6 +74,7 @@
             prevBtn.SizeMode = PictureBoxSizeMode.StretchImage;
             prevBtn.TabIndex = 18;
             prevBtn.TabStop = false;
+            prevBtn.Click += prevBtn_Click;
             // 
             // DisplaySearchResultsMenuControl
             // 

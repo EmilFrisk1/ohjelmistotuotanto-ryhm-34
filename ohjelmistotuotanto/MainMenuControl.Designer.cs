@@ -76,6 +76,7 @@
             servicesBtn.TabIndex = 2;
             servicesBtn.Text = "Palvelut";
             servicesBtn.UseVisualStyleBackColor = false;
+            servicesBtn.Click += servicesBtn_Click;
             // 
             // billsBtn
             // 
@@ -88,6 +89,7 @@
             billsBtn.TabIndex = 3;
             billsBtn.Text = "Laskut";
             billsBtn.UseVisualStyleBackColor = false;
+            billsBtn.Click += billsBtn_Click;
             // 
             // customersBtn
             // 
@@ -113,6 +115,7 @@
             areasBtn.TabIndex = 5;
             areasBtn.Text = "Alueet";
             areasBtn.UseVisualStyleBackColor = false;
+            areasBtn.Click += areasBtn_Click;
             // 
             // button1
             // 

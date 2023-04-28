@@ -484,6 +484,7 @@ namespace ohjelmistotuotanto
         {
             this.Hide();
             MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
+            VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
             HideErrors(statusStrip, dateErrorLabel, serviceErrorLabel);
             menuDefaultState();
         }

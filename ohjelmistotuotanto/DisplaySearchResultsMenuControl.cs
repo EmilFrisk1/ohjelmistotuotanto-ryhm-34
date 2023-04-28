@@ -25,6 +25,11 @@ namespace ohjelmistotuotanto
             EventUtility.DisplayReservationSearchResults += DisplaySearchResults;
         }
 
+        private void prevBtn_Click(object sender, EventArgs e)
+        {
+            VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
+        }
+
         public void DisplaySearchResults<T>(List<T> results)
         {
             searchResultsContainer.DataSource = results;
