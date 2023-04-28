@@ -43,7 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.addCustomertxtBox = new System.Windows.Forms.TextBox();
+            this.textBox = new System.Windows.Forms.TextBox();
             this.addCustomerBtn = new System.Windows.Forms.Button();
             this.prevBtn = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
@@ -78,7 +78,7 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.addCustomertxtBox);
+            this.panel1.Controls.Add(this.textBox);
             this.panel1.Controls.Add(this.addCustomerBtn);
             this.panel1.ForeColor = System.Drawing.Color.Silver;
             this.panel1.Location = new System.Drawing.Point(173, 130);
@@ -214,16 +214,15 @@
             this.label2.Text = "Etunimi";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // addCustomertxtBox
+            // textBox
             // 
-            this.addCustomertxtBox.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.addCustomertxtBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.addCustomertxtBox.ForeColor = System.Drawing.Color.Silver;
-            this.addCustomertxtBox.Location = new System.Drawing.Point(205, 108);
-            this.addCustomertxtBox.Name = "addCustomertxtBox";
-            this.addCustomertxtBox.Size = new System.Drawing.Size(205, 29);
-            this.addCustomertxtBox.TabIndex = 15;
-            this.addCustomertxtBox.TextChanged += new System.EventHandler(this.addCustomertxtBox_TextChanged);
+            this.textBox.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.textBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox.ForeColor = System.Drawing.Color.Silver;
+            this.textBox.Location = new System.Drawing.Point(205, 108);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(205, 29);
+            this.textBox.TabIndex = 15;
             // 
             // addCustomerBtn
             // 
@@ -236,6 +235,7 @@
             this.addCustomerBtn.TabIndex = 14;
             this.addCustomerBtn.Text = "lisää";
             this.addCustomerBtn.UseVisualStyleBackColor = false;
+            this.addCustomerBtn.Click += new System.EventHandler(this.addCustomerBtn_Click);
             // 
             // prevBtn
             // 
@@ -272,7 +272,7 @@
         private Label label1;
         private Panel panel1;
         private Button addCustomerBtn;
-        private TextBox addCustomertxtBox;
+        private TextBox textBox;
         private Label label2;
         private Label label5;
         private TextBox textBox3;
