@@ -14,18 +14,17 @@ namespace ohjelmistotuotanto
     {
         //public static Form formVaraukset; // luodaan varaukset form
 
-        private MainMenuControl mainMenuControl;
-        private ReservationMenuControl reservationMenuControl;
-        private AddReservationMenuControl addReservationMenuControl;
-        private RemoveReservationMenuControl removeReservationMenuControl;
-        private SearchReservationMenuControl searchReservationMenuControl;
-        private ServicesMenuControl servicesMenuControl;
-        private CustomersMenuControl customersMenuControl;
-        private CustomersAddControl customersAddControl;//TODO- Pitäisi olla customersSearchControl nimellä 
-        
-        private DisplaySearchResultsMenuControl displaySearchResultsMenuControl;
-        private CustomersSearchControl customersSearchControl;
-        private CustomersDeleteControl customersDeleteControl;
+        public MainMenuControl mainMenuControl;
+        public ReservationMenuControl reservationMenuControl;
+        public AddReservationMenuControl addReservationMenuControl;
+        public RemoveReservationMenuControl removeReservationMenuControl;
+        public SearchReservationMenuControl searchReservationMenuControl;
+        public ServicesMenuControl servicesMenuControl;
+        public CustomersMenuControl customersMenuControl;
+        public CustomersAddControl customersAddControl;
+        public DisplaySearchResultsMenuControl displaySearchResultsMenuControl;
+        public CustomersSearchControl customersSearchControl;
+        public CustomersDeleteControl customersDeleteControl;
 
         static PictureBox prevButton;
 
@@ -81,14 +80,6 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(customersSearchControl);
             SubscribeToMenuSwitchEvents(customersDeleteControl);
 
-
-            // Add app status strip to all menu's that need it
-            mainMenuControl.statusStrip = appStatusStrip;
-            addReservationMenuControl.statusStrip = appStatusStrip;
-
-            // add appContainer reference to all menu's that need it
-            addReservationMenuControl.appContainer = appContainer;
-
             // Make the controls fill the whole panel (fullscreen)
             mainMenuControl.Dock = DockStyle.Fill;
             reservationMenuControl.Dock = DockStyle.Fill;
@@ -115,6 +106,16 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(customersSearchControl);
             appContainer.Controls.Add(customersDeleteControl);
             appContainer.Controls.Add(displaySearchResultsMenuControl);
+
+            // Add app status strip to all menu's that need it
+            mainMenuControl.statusStrip = appStatusStrip;
+            addReservationMenuControl.statusStrip = appStatusStrip;
+
+            // add appContainer reference to all menu's that need it
+            addReservationMenuControl.appContainer = appContainer;
+
+            // Add reference of needed menus for menuhistory purpose
+            displaySearchResultsMenuControl.searchReservationMenuControl = searchReservationMenuControl;
 
             // Show the initial User Control
             SwitchMenuControl(Constants.mainMenu);
@@ -269,7 +270,49 @@ namespace ohjelmistotuotanto
         }
 
         private void mainMenuToolStrip_Click(object sender, EventArgs e)
-        { // TODO - hide the menu where this was clicked from (probably need to implement menuhistory)
+        {
+            // Hide the menu we made the click from
+            string currentMenu = menuhistory[menuhistory.Count - 1];
+
+            switch (currentMenu)
+            {
+                case Constants.mainMenu:
+                    break;
+                case Constants.rrvtMenu:
+                    reservationMenuControl.Visible = false;
+                    break;
+                case Constants.removeRrvtMenu:
+                    removeReservationMenuControl.Visible = false;
+                    break;
+                case Constants.addRrvtMenu:
+                    addReservationMenuControl.Visible = false;
+                    break;
+                case Constants.searchRrvtMenu:
+                    searchReservationMenuControl.Visible = false;
+                    break;
+                case Constants.srvcMenu:
+                    servicesMenuControl.Visible = false;
+                    break;
+                case Constants.customersMenu:
+                    customersMenuControl.Visible = false;
+                    break;
+                case Constants.customersAdd:
+                    customersAddControl.Visible = false;
+                    break;
+                case Constants.searchResults:
+                    displaySearchResultsMenuControl.Visible = false;
+                    break;
+                case Constants.displayResultsMenu:
+                    displaySearchResultsMenuControl.Visible = false;
+                    break;
+                case Constants.customersSearch:
+                    customersSearchControl.Visible = false;
+                    break;
+                case Constants.customersDelete:
+                    customersDeleteControl.Visible = false;
+                    break;
+            }
+
             SwitchMenuControl(Constants.mainMenu);
         }
 
