@@ -26,6 +26,7 @@ namespace ohjelmistotuotanto
         public CustomersSearchControl customersSearchControl;
         public CustomersDeleteControl customersDeleteControl;
         public CustomersUpdateControl customersUpdateControl;
+        public BillingMenuControl billingMenuControl;
 
         static PictureBox prevButton;
 
@@ -55,6 +56,7 @@ namespace ohjelmistotuotanto
             customersSearchControl = new CustomersSearchControl();
             customersDeleteControl = new CustomersDeleteControl();
             customersUpdateControl = new CustomersUpdateControl();
+            billingMenuControl = new BillingMenuControl();
 
             // hide controls
             mainMenuControl.Hide();
@@ -69,6 +71,7 @@ namespace ohjelmistotuotanto
             customersSearchControl.Hide();
             customersDeleteControl.Hide();
             customersUpdateControl.Hide();
+            billingMenuControl.Hide();
 
             // Subscribe to the MenuSwitchRequested event for each User Control
             SubscribeToMenuSwitchEvents(mainMenuControl);
@@ -83,6 +86,7 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(customersSearchControl);
             SubscribeToMenuSwitchEvents(customersDeleteControl);
             SubscribeToMenuSwitchEvents(customersUpdateControl);
+            SubscribeToMenuSwitchEvents(billingMenuControl);
             // Make the controls fill the whole panel (fullscreen)
             mainMenuControl.Dock = DockStyle.Fill;
             reservationMenuControl.Dock = DockStyle.Fill;
@@ -96,6 +100,7 @@ namespace ohjelmistotuotanto
             customersSearchControl.Dock = DockStyle.Fill;
             customersDeleteControl.Dock = DockStyle.Fill;
             customersUpdateControl.Dock = DockStyle.Fill;
+            billingMenuControl.Dock = DockStyle.Fill;
 
             // add controls to app container
             appContainer.Controls.Add(mainMenuControl);
@@ -111,6 +116,7 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(customersDeleteControl);
             appContainer.Controls.Add(displaySearchResultsMenuControl);
             appContainer.Controls.Add(customersUpdateControl);
+            appContainer.Controls.Add(billingMenuControl);
 
             // Add app status strip to all menu's that need it
             mainMenuControl.statusStrip = appStatusStrip;
@@ -222,6 +228,12 @@ namespace ohjelmistotuotanto
                 customersUpdateControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.customersUpdate);
+            }
+            else if (menu == Constants.billingMenu)
+            {
+                billingMenuControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.billingMenu);
             }
 
         }
