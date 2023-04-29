@@ -25,6 +25,7 @@ namespace ohjelmistotuotanto
         public DisplaySearchResultsMenuControl displaySearchResultsMenuControl;
         public CustomersSearchControl customersSearchControl;
         public CustomersDeleteControl customersDeleteControl;
+        public CustomersUpdateControl customersUpdateControl;
 
         static PictureBox prevButton;
 
@@ -53,6 +54,7 @@ namespace ohjelmistotuotanto
             displaySearchResultsMenuControl = new DisplaySearchResultsMenuControl();
             customersSearchControl = new CustomersSearchControl();
             customersDeleteControl = new CustomersDeleteControl();
+            customersUpdateControl = new CustomersUpdateControl();
 
             // hide controls
             mainMenuControl.Hide();
@@ -66,6 +68,7 @@ namespace ohjelmistotuotanto
             displaySearchResultsMenuControl.Hide();
             customersSearchControl.Hide();
             customersDeleteControl.Hide();
+            customersUpdateControl.Hide();
 
             // Subscribe to the MenuSwitchRequested event for each User Control
             SubscribeToMenuSwitchEvents(mainMenuControl);
@@ -79,7 +82,7 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(displaySearchResultsMenuControl);
             SubscribeToMenuSwitchEvents(customersSearchControl);
             SubscribeToMenuSwitchEvents(customersDeleteControl);
-
+            SubscribeToMenuSwitchEvents(customersUpdateControl);
             // Make the controls fill the whole panel (fullscreen)
             mainMenuControl.Dock = DockStyle.Fill;
             reservationMenuControl.Dock = DockStyle.Fill;
@@ -92,6 +95,7 @@ namespace ohjelmistotuotanto
             displaySearchResultsMenuControl.Dock = DockStyle.Fill;
             customersSearchControl.Dock = DockStyle.Fill;
             customersDeleteControl.Dock = DockStyle.Fill;
+            customersUpdateControl.Dock = DockStyle.Fill;
 
             // add controls to app container
             appContainer.Controls.Add(mainMenuControl);
@@ -106,6 +110,7 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(customersSearchControl);
             appContainer.Controls.Add(customersDeleteControl);
             appContainer.Controls.Add(displaySearchResultsMenuControl);
+            appContainer.Controls.Add(customersUpdateControl);
 
             // Add app status strip to all menu's that need it
             mainMenuControl.statusStrip = appStatusStrip;
@@ -128,6 +133,7 @@ namespace ohjelmistotuotanto
             CheckReservations();
 
             SetupUserControllers();
+
         }
 
         private void button1_Click(object sender, EventArgs e) 
@@ -211,6 +217,13 @@ namespace ohjelmistotuotanto
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.customersDelete);
             }
+            else if (menu == Constants.customersUpdate)
+            {
+                customersUpdateControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.customersUpdate);
+            }
+
         }
 
 
@@ -257,6 +270,10 @@ namespace ohjelmistotuotanto
             else if (userControl is CustomersDeleteControl customersDeleteControl)
             {
                 customersDeleteControl.MenuSwitchRequested += SwitchMenuControl;
+            }
+            else if (userControl is CustomersUpdateControl customersUpdate)
+            {
+                customersUpdateControl.MenuSwitchRequested += SwitchMenuControl;
             }
         }
 
@@ -311,6 +328,9 @@ namespace ohjelmistotuotanto
                 case Constants.customersDelete:
                     customersDeleteControl.Visible = false;
                     break;
+                case Constants.customersUpdate:
+                    customersUpdateControl.Visible = false;
+                    break;
             }
 
             SwitchMenuControl(Constants.mainMenu);
@@ -333,6 +353,7 @@ namespace ohjelmistotuotanto
                     _dbManager.CreateBill(reservationId, endDate.ToString("yyyy-MM-dd"));
                 }
             }
+
         }
     }
 }

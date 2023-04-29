@@ -20,5 +20,6 @@ namespace ohjelmistotuotanto
         public const string displayResultsMenu = "displayResultsMenu";
         public const string customersSearch = "customersSearch";
         public const string customersDelete = "customersDelete";
+        public const string customersUpdate = "customersUpdate";
     }
 }
