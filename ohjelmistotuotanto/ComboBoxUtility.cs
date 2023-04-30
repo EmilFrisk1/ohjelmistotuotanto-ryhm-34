@@ -1,6 +1,7 @@
 ﻿using ohjelmistotuotanto;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,4 +75,20 @@ public static class ComboBoxUtility
         }
     }
 
+    public static void setUpCottagesCbx(Task<DataTable> cottages, List<Cottage> Cottages, ComboBox cottageCbx)
+    {
+        if (cottages.Result?.Rows != null && cottages.Result.Rows.Count > 0)
+        {
+            foreach (DataRow row in cottages.Result.Rows)
+            {
+                var id = (int)row[0];
+                var name = (string)row[1];
+
+                Cottages.Add(new Cottage { Id = id, Name = name });
+            }
+            cottageCbx.DataSource = Cottages;
+            cottageCbx.DisplayMember = "Name";
+            cottageCbx.ValueMember = "Id";
+        }
+    }
 }

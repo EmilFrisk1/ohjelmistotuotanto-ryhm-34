@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.DirectoryServices;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace ohjelmistotuotanto
     {
         public delegate void MenuSwitchRequestHandler(string menu); // Function pointer 
         public event MenuSwitchRequestHandler MenuSwitchRequested;
+        private List<Reservation> reservationsList = new List<Reservation>();
 
         public List<Area> Areas { get; set; }
         public SearchReservationMenuControl()
@@ -76,17 +78,19 @@ namespace ohjelmistotuotanto
             }
 
             var queryString = BuildSearchReservationsQuery();
-            var response = await VillageNewbies._dbManager.SearchReservations(queryString);
-            if (response.Count == 0)
+            // Get reservations
+            var reservations = await VillageNewbies._dbManager.SearchDataAsync(queryString);
+            if (reservations == null || reservations.Rows.Count <= 0)
             {
                 MessageBox.Show("Yhtään tulosta ei löytynt");
             }
             else
             {
-                // Transport the matches to the search resulst menu
+                ConvertDatatableToList(queryString, reservations);
                 this.Hide();
-                MenuSwitchRequested?.Invoke(Constants.displayResultsMenu); 
-                EventUtility.RaiseDisplayReservationSearchResults(response);
+                MenuSwitchRequested?.Invoke(Constants.displayResultsMenu);
+                // Transport the matches to the search resulst menu
+                EventUtility.RaiseDisplayReservationSearchResults(reservationsList);
             }
         }
 
@@ -114,6 +118,17 @@ namespace ohjelmistotuotanto
             return queryBuilder.ToString();
         }
 
-
+        private void ConvertDatatableToList(string queryString, DataTable reservations)
+        {
+            foreach (DataRow row in reservations.Rows)
+            {
+                var id = (int)row["id"];
+                var cottageId = (int)row["cottage_id"];
+                var startDate = (DateTime)row["start_date"];
+                var endDate = (DateTime)row["end_date"];
+                var customerId = (int)row["customer_id"];
+                reservationsList.Add(new Reservation() { Id = id, MökkiId = cottageId, AloitusPvm = startDate, LoppuPvm = endDate, AsiakasId = customerId });
+            }
+        }
     }
 }

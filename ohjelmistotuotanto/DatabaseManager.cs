@@ -7,6 +7,7 @@ using System.Data.Common;
 using System.ComponentModel;
 using ohjelmistotuotanto;
 using System.Globalization;
+using Google.Protobuf.WellKnownTypes;
 
 public class DatabaseManager
 {
@@ -181,6 +182,34 @@ public class DatabaseManager
         return reservationId;
     }
 
+    public async Task<int> CheckAvailabilityAndUpdateAsync(int reservationId, int cottageId, string startDate, string endDate)
+    {
+        int response = -1;
+
+        reservationId = await ExecuteWithRetry(async (connection) =>
+        {
+            using (MySqlCommand cmd = new MySqlCommand("check_availability_and_update", connection))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@p_reservation_id", reservationId);
+                cmd.Parameters.AddWithValue("@p_cottage_id", cottageId);
+                cmd.Parameters.AddWithValue("@p_start_date", startDate);
+                cmd.Parameters.AddWithValue("@p_end_date", endDate);
+
+                cmd.Parameters.Add(new MySqlParameter("@p_reservation_id_out", MySqlDbType.Int32));
+                cmd.Parameters["@p_reservation_id_out"].Direction = ParameterDirection.Output;
+
+                await cmd.ExecuteNonQueryAsync();
+
+                response = (int)cmd.Parameters["@p_reservation_id_out"].Value;
+                return response;
+            }
+        });
+
+        return response;
+    }
+
     public async Task<List<ReservationDetails>> GetReservationWithDetails()
     {
         List<ReservationDetails> reservationDetailsList = new List<ReservationDetails>();
@@ -235,9 +264,9 @@ public class DatabaseManager
     }
 
 
-    public async Task<List<Reservation>> SearchReservations(string query)
+    public async Task<DataTable> SearchDataAsync(string query)
     {
-        List<Reservation> reservationsList = new List<Reservation>();
+        DataTable dataTable = new DataTable();
 
         await ExecuteWithRetry(async (connection) =>
         {
@@ -245,23 +274,13 @@ public class DatabaseManager
             {
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
-                    while (await reader.ReadAsync())
-                    {
-                        reservationsList.Add(new Reservation
-                        {
-                            Id = reader.GetInt32(0),
-                            MökkiId = reader.GetInt32(0),
-                            AloitusPvm = reader.GetDateTime("start_date"),
-                            LoppuPvm = reader.GetDateTime("end_date"),
-                            AsiakasId = reader.GetInt32(0),
-                        });
-                    }
+                     dataTable.Load(reader);
                 }
-                return reservationsList;
             }
+            return dataTable;
         });
 
-        return reservationsList;
+        return dataTable;
     }
 
 
@@ -340,12 +359,13 @@ public class DatabaseManager
                 // add 30 days to the last day of the reservation for due date
                 string dueDate = DateTime.ParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture).AddDays(30).ToString("yyyy-MM-dd");
 
+
                 Dictionary<string, object> billColumnValues = new Dictionary<string, object>
                                 {
                                     { "sum", totalCost },
                                     { "due_date", dueDate },
                                     { "status", "PENDING" },
-                                    { "reservation_id", reservationId }
+                                    { "reservation_id", reservationId },
                                 };
 
                 int billInsRes = await VillageNewbies._dbManager.InsertDataAsync("bill", billColumnValues);

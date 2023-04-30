@@ -254,7 +254,7 @@ namespace ohjelmistotuotanto
 
             // Get cottages and display then on a combobox | each entry linked with id
             var cottages = VillageNewbies._dbManager.SelectDataAsync("cottage", new List<string>() { "id", "cottage_name" });
-            setUpCottagesCbx(cottages);
+            ComboBoxUtility.setUpCottagesCbx(cottages, Cottages, cottageCbx);
 
             // Get services and display then on a combobox | each entry linked with id
             var services = VillageNewbies._dbManager.SelectDataAsync("service", new List<string>() { "id", "name" });

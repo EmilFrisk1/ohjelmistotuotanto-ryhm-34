@@ -13,6 +13,7 @@ namespace ohjelmistotuotanto
         public const string removeRrvtMenu = "removeRrvtMenu";
         public const string addRrvtMenu = "addRrvtMenu";
         public const string searchRrvtMenu = "searchRrvtMenu";
+        public const string updateRrvtMenu = "updateRrvtMenu";
         public const string srvcMenu = "serviceMenu";
         public const string customersMenu = "customersMenu";
         public const string customersAdd = "customersAdd";

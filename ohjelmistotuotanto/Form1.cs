@@ -19,6 +19,7 @@ namespace ohjelmistotuotanto
         public AddReservationMenuControl addReservationMenuControl;
         public RemoveReservationMenuControl removeReservationMenuControl;
         public SearchReservationMenuControl searchReservationMenuControl;
+        public UpdateReservationMenu updateReservationMenuControl;
         public ServicesMenuControl servicesMenuControl;
         public CustomersMenuControl customersMenuControl;
         public CustomersAddControl customersAddControl;
@@ -46,6 +47,7 @@ namespace ohjelmistotuotanto
             reservationMenuControl = new ReservationMenuControl();
             addReservationMenuControl = new AddReservationMenuControl();
             removeReservationMenuControl = new RemoveReservationMenuControl();
+            updateReservationMenuControl = new UpdateReservationMenu();
             servicesMenuControl = new ServicesMenuControl();
             customersMenuControl = new CustomersMenuControl();
             customersAddControl = new CustomersAddControl();
@@ -59,6 +61,7 @@ namespace ohjelmistotuotanto
             reservationMenuControl.Hide();
             removeReservationMenuControl.Hide();
             searchReservationMenuControl.Hide();
+            updateReservationMenuControl.Hide();
             servicesMenuControl.Hide();
             customersMenuControl.Hide();
             customersAddControl.Hide();
@@ -73,6 +76,7 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(addReservationMenuControl);
             SubscribeToMenuSwitchEvents(removeReservationMenuControl);
             SubscribeToMenuSwitchEvents(searchReservationMenuControl);
+            SubscribeToMenuSwitchEvents(updateReservationMenuControl);
             SubscribeToMenuSwitchEvents(servicesMenuControl);
             SubscribeToMenuSwitchEvents(customersMenuControl);
             SubscribeToMenuSwitchEvents(customersAddControl);
@@ -89,6 +93,7 @@ namespace ohjelmistotuotanto
             addReservationMenuControl.Dock = DockStyle.Fill;
             removeReservationMenuControl.Dock = DockStyle.Fill;
             searchReservationMenuControl.Dock = DockStyle.Fill;
+            updateReservationMenuControl.Dock = DockStyle.Fill;
             displaySearchResultsMenuControl.Dock = DockStyle.Fill;
             customersSearchControl.Dock = DockStyle.Fill;
             customersDeleteControl.Dock = DockStyle.Fill;
@@ -101,6 +106,7 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(customersAddControl);
             appContainer.Controls.Add(addReservationMenuControl);
             appContainer.Controls.Add(removeReservationMenuControl);
+            appContainer.Controls.Add(updateReservationMenuControl);
             appContainer.Controls.Add(searchReservationMenuControl);
             appContainer.Controls.Add(searchReservationMenuControl);
             appContainer.Controls.Add(customersSearchControl);
@@ -171,6 +177,11 @@ namespace ohjelmistotuotanto
                 servicesMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.srvcMenu);
+            } else if (menu == Constants.updateRrvtMenu)
+            {
+                updateReservationMenuControl.Visible = true;
+                appContainer.AutoScrollMinSize = new Size(0, 1200);
+                menuhistory.Add(Constants.updateRrvtMenu);
             }
             else if (menu == Constants.customersMenu)
             {
@@ -235,6 +246,9 @@ namespace ohjelmistotuotanto
             } else if (userControl is SearchReservationMenuControl searchReservationMenuControl) 
             {
                 searchReservationMenuControl.MenuSwitchRequested += SwitchMenuControl;
+            } else if (userControl is UpdateReservationMenu updateReservationMenu)
+            {
+                updateReservationMenuControl.MenuSwitchRequested += SwitchMenuControl;
             }
             else if (userControl is CustomersMenuControl customersMenuControl)
             {
@@ -316,7 +330,7 @@ namespace ohjelmistotuotanto
             SwitchMenuControl(Constants.mainMenu);
         }
 
-        // Updates reservations if they are within 7 days to be uncancelable and form a bill.
+        // Updates reservations if they are within 7 days to be uncancelable and forms a bill.
         private async void CheckReservations()
         {
             // Get all reservations that has not been billed yet

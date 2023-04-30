@@ -46,7 +46,8 @@ namespace ohjelmistotuotanto
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.updateRrvtMenu);
         }
 
         private void ReservationMenuControl_Load(object sender, EventArgs e)
