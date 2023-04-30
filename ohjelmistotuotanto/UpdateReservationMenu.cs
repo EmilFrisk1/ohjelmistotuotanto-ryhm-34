@@ -236,34 +236,42 @@ namespace ohjelmistotuotanto
 
         private async void UpdateReservation()
         {
-            // Prepare database update values
-            DataGridViewRow selectedRow = reservationContainer.CurrentRow;
-            int reservationId = (int)selectedRow.Cells["Id"].Value;
-            int cottageId = (int)cottageCbx.SelectedValue;
-            string startDate = startDatePicker.Value.ToString("yyyy-MM-dd");
-            string endDate = endDatePicker.Value.ToString("yyyy-MM-dd");
-
-            // Make the update
-
-            if (datesChanged)
+            try
             {
-                var res = await VillageNewbies._dbManager.CheckAvailabilityAndUpdateAsync(reservationId, cottageId, startDate, endDate);
-                if (res <= 0)
-                {
-                    MessageBox.Show("jokin meni pieleen");
-                }
-            }
+                // Prepare database update values
+                DataGridViewRow selectedRow = reservationContainer.CurrentRow;
+                int reservationId = (int)selectedRow.Cells["Id"].Value;
+                int cottageId = (int)cottageCbx.SelectedValue;
+                string startDate = startDatePicker.Value.ToString("yyyy-MM-dd");
+                string endDate = endDatePicker.Value.ToString("yyyy-MM-dd");
 
-            if (cottageChanged)
+                // Make the update
+
+                if (datesChanged)
+                {
+                    var res = await VillageNewbies._dbManager.CheckAvailabilityAndUpdateAsync(reservationId, cottageId, startDate, endDate);
+                    if (res <= 0)
+                    {
+                        throw new Exception("Error occurred while inserting data into the database.");
+                    }
+                }
+
+                if (cottageChanged)
+                {
+
+                    // Update the reservation to indicate its not cancelable anymore
+                    Dictionary<string, object> reservationColumnValues = new Dictionary<string, object> { { "cottage_id", cottageId } };
+                    var res = await VillageNewbies._dbManager.AlterDataAsync("reservation", reservationColumnValues, $"id = {reservationId}");
+                    if (res <= 0)
+                    {
+                        throw new Exception("Error occurred while inserting data into the database.");
+                    }
+                }
+
+                MessageBox.Show("Varaus päivitetty onnistuneesti!");
+            } catch (Exception ex)
             {
-
-                // Update the reservation to indicate its not cancelable anymore
-                Dictionary<string, object> reservationColumnValues = new Dictionary<string, object> { { "cottage_id", cottageId } };
-                var res = await VillageNewbies._dbManager.AlterDataAsync("reservation", reservationColumnValues, $"id = {reservationId}");
-                if (res <= 0)
-                {
-                    MessageBox.Show("jokin meni pieleen");
-                }
+                MessageBox.Show("Jokin meni pieleen: " + ex.Message);
             }
         }
     }
