@@ -63,7 +63,8 @@ namespace ohjelmistotuotanto
 
         private void servicesBtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.srvcMenu);
         }
 
         private void billsBtn_Click(object sender, EventArgs e)

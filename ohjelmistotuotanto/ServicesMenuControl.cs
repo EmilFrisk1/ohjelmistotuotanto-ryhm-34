@@ -28,5 +28,33 @@ namespace ohjelmistotuotanto
         {
 
         }
+
+        private void prevBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
+            MenuSwitchRequested?.Invoke(Constants.mainMenu);
+        }
+
+        private void searchBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.srvcAddMenu);
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void updateBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

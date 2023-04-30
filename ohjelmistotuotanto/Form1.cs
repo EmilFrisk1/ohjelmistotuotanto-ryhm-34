@@ -28,6 +28,7 @@ namespace ohjelmistotuotanto
         public CustomersDeleteControl customersDeleteControl;
         public CustomersUpdateControl customersUpdateControl;
         public BillingMenuControl billingMenuControl;
+        public ServicesAddMenu servicesAddMenuControl;
 
         static PictureBox prevButton;
 
@@ -51,6 +52,7 @@ namespace ohjelmistotuotanto
             removeReservationMenuControl = new RemoveReservationMenuControl();
             updateReservationMenuControl = new UpdateReservationMenu();
             servicesMenuControl = new ServicesMenuControl();
+            servicesAddMenuControl = new ServicesAddMenu();
             customersMenuControl = new CustomersMenuControl();
             customersAddControl = new CustomersAddControl();
             searchReservationMenuControl = new SearchReservationMenuControl();
@@ -67,6 +69,7 @@ namespace ohjelmistotuotanto
             searchReservationMenuControl.Hide();
             updateReservationMenuControl.Hide();
             servicesMenuControl.Hide();
+            servicesAddMenuControl.Hide();  
             customersMenuControl.Hide();
             customersAddControl.Hide();
             addReservationMenuControl.Hide();
@@ -84,6 +87,7 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(searchReservationMenuControl);
             SubscribeToMenuSwitchEvents(updateReservationMenuControl);
             SubscribeToMenuSwitchEvents(servicesMenuControl);
+            SubscribeToMenuSwitchEvents(servicesAddMenuControl);
             SubscribeToMenuSwitchEvents(customersMenuControl);
             SubscribeToMenuSwitchEvents(customersAddControl);
             SubscribeToMenuSwitchEvents(displaySearchResultsMenuControl);
@@ -91,10 +95,12 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(customersDeleteControl);
             SubscribeToMenuSwitchEvents(customersUpdateControl);
             SubscribeToMenuSwitchEvents(billingMenuControl);
+
             // Make the controls fill the whole panel (fullscreen)
             mainMenuControl.Dock = DockStyle.Fill;
             reservationMenuControl.Dock = DockStyle.Fill;
             servicesMenuControl.Dock = DockStyle.Fill;
+            servicesAddMenuControl.Dock = DockStyle.Fill;
             customersMenuControl.Dock = DockStyle.Fill;
             customersAddControl.Dock = DockStyle.Fill;
             addReservationMenuControl.Dock = DockStyle.Fill;
@@ -111,6 +117,7 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(mainMenuControl);
             appContainer.Controls.Add(reservationMenuControl);
             appContainer.Controls.Add(servicesMenuControl);
+            appContainer.Controls.Add(servicesAddMenuControl);
             appContainer.Controls.Add(customersMenuControl);
             appContainer.Controls.Add(customersAddControl);
             appContainer.Controls.Add(addReservationMenuControl);
@@ -127,6 +134,7 @@ namespace ohjelmistotuotanto
             // Add app status strip to all menu's that need it
             mainMenuControl.statusStrip = appStatusStrip;
             addReservationMenuControl.statusStrip = appStatusStrip;
+            servicesAddMenuControl.statusStrip = appStatusStrip;
 
             // add appContainer reference to all menu's that need it
             addReservationMenuControl.appContainer = appContainer;
@@ -189,7 +197,13 @@ namespace ohjelmistotuotanto
                 servicesMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.srvcMenu);
-            } else if (menu == Constants.updateRrvtMenu)
+            } 
+            else if (menu == Constants.srvcAddMenu) {
+                servicesAddMenuControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.srvcAddMenu);
+            }
+            else if (menu == Constants.updateRrvtMenu)
             {
                 updateReservationMenuControl.Visible = true;
                 appContainer.AutoScrollMinSize = new Size(0, 1200);
@@ -260,9 +274,12 @@ namespace ohjelmistotuotanto
             {
                 reservationMenuControl.MenuSwitchRequested += SwitchMenuControl;
             }
-            else if (userControl is ReservationMenuControl servicesMenuControl)
+            else if (userControl is ServicesMenuControl servicesMenuControl)
             {
                 servicesMenuControl.MenuSwitchRequested += SwitchMenuControl;
+            } else if (userControl is ServicesAddMenu servicesAddMenuControl)
+            {
+                servicesAddMenuControl.MenuSwitchRequested += SwitchMenuControl;
             }
             else if (userControl is AddReservationMenuControl addReservationMenuControl)
             {
