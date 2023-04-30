@@ -47,21 +47,14 @@ namespace ohjelmistotuotanto
             MenuSwitchRequested?.Invoke(Constants.mainMenu);
         }
 
-        private async void addCustomerBtn_Click(object sender, EventArgs e)
-        {
-            if(!ValidateFields())
-                return;
-
-            AddService();
-        }
-
         private bool ValidateFields()
         {
             if (string.IsNullOrEmpty(nameTxtBox.Text) || string.IsNullOrEmpty(priceTxtBox.Text))
             {
                 statusStrip.Show();
                 return false;
-            } else
+            }
+            else
             {
                 if (statusStrip.Visible)
                 {
@@ -99,6 +92,14 @@ namespace ohjelmistotuotanto
             {
                 MessageBox.Show("Jokin meni pieleen: " + ex.Message);
             }
+        }
+
+        private void addServiceBtn_Click(object sender, EventArgs e)
+        {
+            if (!ValidateFields())
+                return;
+
+            AddService();
         }
     }
 }

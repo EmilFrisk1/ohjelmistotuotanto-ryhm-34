@@ -75,11 +75,28 @@ public static class ComboBoxUtility
         }
     }
 
-    public static void setUpCottagesCbx(Task<DataTable> cottages, List<Cottage> Cottages, ComboBox cottageCbx)
+    public static void setUpServicesCbx(DataTable services, List<Service> Services, ComboBox servicesCbx)
     {
-        if (cottages.Result?.Rows != null && cottages.Result.Rows.Count > 0)
+        if (services.Rows != null && services.Rows.Count > 0)
         {
-            foreach (DataRow row in cottages.Result.Rows)
+            foreach (DataRow row in services.Rows)
+            {
+                var id = (int)row[0];
+                var name = (string)row[1];
+
+                Services.Add(new Service { Id = id, Name = name });
+            }
+            servicesCbx.DataSource = Services;
+            servicesCbx.DisplayMember = "Name";
+            servicesCbx.ValueMember = "Id";
+        }
+    }
+
+    public static void SetUpCottagesCbx(DataTable cottages, List<Cottage> Cottages, ComboBox cottageCbx)
+    {
+        if (cottages.Rows != null && cottages.Rows.Count > 0)
+        {
+            foreach (DataRow row in cottages.Rows)
             {
                 var id = (int)row[0];
                 var name = (string)row[1];
@@ -89,6 +106,23 @@ public static class ComboBoxUtility
             cottageCbx.DataSource = Cottages;
             cottageCbx.DisplayMember = "Name";
             cottageCbx.ValueMember = "Id";
+        }
+    }
+
+    public static void SetUpCustomersCbx(DataTable customers, List<Customer> Customers, ComboBox customerCbx)
+    {
+        if (customers.Rows != null && customers.Rows.Count > 0)
+        {
+            foreach (DataRow row in customers.Rows)
+            {
+                var id = (int)row[0];
+                var email = (string)row[1];
+
+                Customers.Add(new Customer { Id = id, Email = email });
+            }
+            customerCbx.DataSource = Customers;
+            customerCbx.DisplayMember = "Email";
+            customerCbx.ValueMember = "Id";
         }
     }
 }

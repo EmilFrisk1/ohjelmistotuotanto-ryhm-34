@@ -38,23 +38,6 @@ namespace ohjelmistotuotanto
             InitializeComponent();
         }
 
-        private void setUpCustomersCbx(Task<DataTable> customers)
-        {
-            if (customers.Result?.Rows != null && customers.Result.Rows.Count > 0)
-            {
-                foreach (DataRow row in customers.Result.Rows)
-                {
-                    var id = (int)row[0];
-                    var email = (string)row[1];
-
-                    Customers.Add(new Customer { Id = id, Email = email });
-                }
-                customerCbx.DataSource = Customers;
-                customerCbx.DisplayMember = "Email";
-                customerCbx.ValueMember = "Id";
-            }
-        }
-
         private void setUpCottagesCbx(Task<DataTable> cottages)
         {
             if (cottages.Result?.Rows != null && cottages.Result.Rows.Count > 0)
@@ -69,23 +52,6 @@ namespace ohjelmistotuotanto
                 cottageCbx.DataSource = Cottages;
                 cottageCbx.DisplayMember = "Name";
                 cottageCbx.ValueMember = "Id";
-            }
-        }
-
-        private void setUpServicesCbx(Task<DataTable> services)
-        {
-            if (services.Result?.Rows != null && services.Result.Rows.Count > 0)
-            {
-                foreach (DataRow row in services.Result.Rows)
-                {
-                    var id = (int)row[0];
-                    var name = (string)row[1];
-
-                    Services.Add(new Service { Id = id, Name = name });
-                }
-                servicesCbx.DataSource = Services;
-                servicesCbx.DisplayMember = "Name";
-                servicesCbx.ValueMember = "Id";
             }
         }
 
@@ -230,7 +196,7 @@ namespace ohjelmistotuotanto
             }
         }
 
-        private void AddReservationMenuControl_Load_1(object sender, EventArgs e)
+        private async void AddReservationMenuControl_Load_1(object sender, EventArgs e)
         {
             // Initialize all needed lists
             Cottages = new List<Cottage>() { new Cottage { Id = -1, Name = string.Empty } };
@@ -249,16 +215,16 @@ namespace ohjelmistotuotanto
             whereDatePicker.MinDate = DateTime.Today;
 
             // Get customers and display then on a combobox | each entry linked with id
-            var customers = VillageNewbies._dbManager.SelectDataAsync("customer", new List<string>() { "id", "email" });
-            setUpCustomersCbx(customers);
+            var customers = await VillageNewbies._dbManager.SelectDataAsync("customer", new List<string>() { "id", "email" });
+            ComboBoxUtility.SetUpCustomersCbx(customers, Customers, customerCbx);
 
             // Get cottages and display then on a combobox | each entry linked with id
-            var cottages = VillageNewbies._dbManager.SelectDataAsync("cottage", new List<string>() { "id", "cottage_name" });
-            ComboBoxUtility.setUpCottagesCbx(cottages, Cottages, cottageCbx);
+            var cottages = await VillageNewbies._dbManager.SelectDataAsync("cottage", new List<string>() { "id", "cottage_name" });
+            ComboBoxUtility.SetUpCottagesCbx(cottages, Cottages, cottageCbx);
 
             // Get services and display then on a combobox | each entry linked with id
-            var services = VillageNewbies._dbManager.SelectDataAsync("service", new List<string>() { "id", "name" });
-            setUpServicesCbx(services);
+            var services = await VillageNewbies._dbManager.SelectDataAsync("service", new List<string>() { "id", "name" });
+            ComboBoxUtility.setUpServicesCbx(services, Services, servicesCbx);
         }
 
         private async void addReservationBtn_Click_1(object sender, EventArgs e)

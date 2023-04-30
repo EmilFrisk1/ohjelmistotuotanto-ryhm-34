@@ -27,7 +27,7 @@ namespace ohjelmistotuotanto
             InitializeComponent();
         }
 
-        private void UpdateReservationMenu_Load(object sender, EventArgs e)
+        private async void UpdateReservationMenu_Load(object sender, EventArgs e)
         {
             isFirstLoad = false;
 
@@ -42,8 +42,8 @@ namespace ohjelmistotuotanto
             endDatePicker.MinDate = DateTime.Today;
 
             // Get cottages and display then on a combobox | each entry linked with id
-            var cottages = VillageNewbies._dbManager.SelectDataAsync("cottage", new List<string>() { "id", "cottage_name" });
-            ComboBoxUtility.setUpCottagesCbx(cottages, Cottages, cottageCbx);
+            var cottages = await VillageNewbies._dbManager.SelectDataAsync("cottage", new List<string>() { "id", "cottage_name" });
+            ComboBoxUtility.SetUpCottagesCbx(cottages, Cottages, cottageCbx);
 
             GetReservations();
         }

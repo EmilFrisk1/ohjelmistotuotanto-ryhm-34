@@ -36,7 +36,7 @@
             priceTxtBox = new TextBox();
             label2 = new Label();
             nameTxtBox = new TextBox();
-            addCustomerBtn = new Button();
+            addServiceBtn = new Button();
             label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)prevBtn).BeginInit();
             panel1.SuspendLayout();
@@ -63,7 +63,7 @@
             panel1.Controls.Add(priceTxtBox);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(nameTxtBox);
-            panel1.Controls.Add(addCustomerBtn);
+            panel1.Controls.Add(addServiceBtn);
             panel1.ForeColor = Color.Silver;
             panel1.Location = new Point(187, 140);
             panel1.Name = "panel1";
@@ -124,18 +124,18 @@
             nameTxtBox.Size = new Size(205, 29);
             nameTxtBox.TabIndex = 15;
             // 
-            // addCustomerBtn
+            // addServiceBtn
             // 
-            addCustomerBtn.BackColor = Color.DarkSlateGray;
-            addCustomerBtn.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            addCustomerBtn.ForeColor = Color.WhiteSmoke;
-            addCustomerBtn.Location = new Point(51, 210);
-            addCustomerBtn.Name = "addCustomerBtn";
-            addCustomerBtn.Size = new Size(359, 34);
-            addCustomerBtn.TabIndex = 14;
-            addCustomerBtn.Text = "lisää";
-            addCustomerBtn.UseVisualStyleBackColor = false;
-            addCustomerBtn.Click += addCustomerBtn_Click;
+            addServiceBtn.BackColor = Color.DarkSlateGray;
+            addServiceBtn.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            addServiceBtn.ForeColor = Color.WhiteSmoke;
+            addServiceBtn.Location = new Point(51, 210);
+            addServiceBtn.Name = "addServiceBtn";
+            addServiceBtn.Size = new Size(359, 34);
+            addServiceBtn.TabIndex = 14;
+            addServiceBtn.Text = "lisää";
+            addServiceBtn.UseVisualStyleBackColor = false;
+            addServiceBtn.Click += addServiceBtn_Click;
             // 
             // label1
             // 
@@ -184,7 +184,7 @@
         private TextBox textBox1;
         private Label label2;
         private TextBox nameTxtBox;
-        private Button addCustomerBtn;
+        private Button addServiceBtn;
         private Label label1;
         private TextBox priceTxtBox;
     }
