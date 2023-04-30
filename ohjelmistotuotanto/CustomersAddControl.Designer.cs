@@ -32,11 +32,11 @@
             this.ahLabel1 = new System.Windows.Forms.Label();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.reservationContainer = new System.Windows.Forms.DataGridView();
-            this.deleteBtn = new System.Windows.Forms.Button();
+            this.searchGrid = new System.Windows.Forms.DataGridView();
+            this.searchBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reservationContainer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // ahLabel1
@@ -66,33 +66,34 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
-            // reservationContainer
+            // searchGrid
             // 
-            this.reservationContainer.AllowUserToAddRows = false;
-            this.reservationContainer.AllowUserToDeleteRows = false;
-            this.reservationContainer.AllowUserToResizeColumns = false;
-            this.reservationContainer.AllowUserToResizeRows = false;
-            this.reservationContainer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.reservationContainer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.reservationContainer.Location = new System.Drawing.Point(117, 149);
-            this.reservationContainer.MultiSelect = false;
-            this.reservationContainer.Name = "reservationContainer";
-            this.reservationContainer.RowTemplate.Height = 25;
-            this.reservationContainer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.reservationContainer.Size = new System.Drawing.Size(567, 285);
-            this.reservationContainer.TabIndex = 10;
+            this.searchGrid.AllowUserToAddRows = false;
+            this.searchGrid.AllowUserToDeleteRows = false;
+            this.searchGrid.AllowUserToResizeColumns = false;
+            this.searchGrid.AllowUserToResizeRows = false;
+            this.searchGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.searchGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.searchGrid.Location = new System.Drawing.Point(117, 149);
+            this.searchGrid.MultiSelect = false;
+            this.searchGrid.Name = "searchGrid";
+            this.searchGrid.RowTemplate.Height = 25;
+            this.searchGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.searchGrid.Size = new System.Drawing.Size(567, 285);
+            this.searchGrid.TabIndex = 10;
             // 
-            // deleteBtn
+            // searchBtn
             // 
-            this.deleteBtn.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.deleteBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.deleteBtn.ForeColor = System.Drawing.Color.Silver;
-            this.deleteBtn.Location = new System.Drawing.Point(117, 462);
-            this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(567, 62);
-            this.deleteBtn.TabIndex = 13;
-            this.deleteBtn.Text = "Hae";
-            this.deleteBtn.UseVisualStyleBackColor = false;
+            this.searchBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.searchBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.searchBtn.ForeColor = System.Drawing.Color.Silver;
+            this.searchBtn.Location = new System.Drawing.Point(117, 462);
+            this.searchBtn.Name = "searchBtn";
+            this.searchBtn.Size = new System.Drawing.Size(567, 62);
+            this.searchBtn.TabIndex = 13;
+            this.searchBtn.Text = "Hae";
+            this.searchBtn.UseVisualStyleBackColor = false;
+            this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
             // 
             // label1
             // 
@@ -112,14 +113,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.deleteBtn);
-            this.Controls.Add(this.reservationContainer);
+            this.Controls.Add(this.searchBtn);
+            this.Controls.Add(this.searchGrid);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.ahLabel1);
             this.Name = "CustomersAddControl";
             this.Size = new System.Drawing.Size(804, 736);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.reservationContainer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,8 +131,8 @@
         private Label ahLabel1;
         private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
         private PictureBox pictureBox1;
-        private DataGridView reservationContainer;
-        private Button deleteBtn;
+        private DataGridView searchGrid;
+        private Button searchBtn;
         private Label label1;
     }
 }

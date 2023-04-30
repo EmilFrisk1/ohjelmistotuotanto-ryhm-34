@@ -118,6 +118,7 @@
             this.aBtn4.TabIndex = 9;
             this.aBtn4.Text = "Päivitä";
             this.aBtn4.UseVisualStyleBackColor = false;
+            this.aBtn4.Click += new System.EventHandler(this.aBtn4_Click);
             // 
             // CustomersMenuControl
             // 

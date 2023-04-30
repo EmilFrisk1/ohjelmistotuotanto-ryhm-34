@@ -68,7 +68,8 @@ namespace ohjelmistotuotanto
 
         private void billsBtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.billingMenu);
         }
 
         private void areasBtn_Click(object sender, EventArgs e)
