@@ -18,6 +18,7 @@ namespace ohjelmistotuotanto
         private bool isFirstLoad = true;
         private static int counter = 0;
         public List<Service> Services { get; set; }
+    
         public ServicesRemoveMenu()
         {
             InitializeComponent();
@@ -93,7 +94,7 @@ namespace ohjelmistotuotanto
 
         private void ServicesRemoveMenu_VisibleChanged(object sender, EventArgs e)
         {
-          
+
             counter++;
             if (isFirstLoad || counter <= 2)
                 return;
@@ -102,7 +103,7 @@ namespace ohjelmistotuotanto
             {
                 GetServices();
             }
-            
+
         }
     }
 }

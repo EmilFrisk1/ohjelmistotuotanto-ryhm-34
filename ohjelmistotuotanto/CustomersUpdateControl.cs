@@ -23,7 +23,7 @@ namespace ohjelmistotuotanto
         {
             InitializeComponent();
         }
-        
+
         void menuDefaultState()
         {
             customerTxtBox.Text = "";
@@ -61,7 +61,7 @@ namespace ohjelmistotuotanto
                     var address = (string)row[4];
                     var postalnumber = (int)row[5];
                     var phonenumber = (string)row[6];
-                    
+
                     if (ClientDatamodels == null)
                     {
                         ClientDatamodels = new List<ClientDatamodel>();
@@ -81,16 +81,17 @@ namespace ohjelmistotuotanto
                     {
                         Customers = new List<Customer>();
                     }
-                    Customers.Add(new Customer{
+                    Customers.Add(new Customer
+                    {
                         Id = id,
                         Email = email
-                        
+
                     });
                 }
                 customerCbx.DataSource = ClientDatamodels;
                 customerCbx.DisplayMember = "Email";
                 customerCbx.ValueMember = "Id";
-                
+
             }
         }
     }

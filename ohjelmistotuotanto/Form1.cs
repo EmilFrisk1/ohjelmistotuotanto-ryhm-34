@@ -22,6 +22,7 @@ namespace ohjelmistotuotanto
         public UpdateReservationMenu updateReservationMenuControl;
         public ServicesMenuControl servicesMenuControl;
         public ServicesRemoveMenu servicesRemoveMenuControl;
+        public ServicesUpdateMenu servicesUpdateMenuControl;
         public CustomersMenuControl customersMenuControl;
         public CustomersAddControl customersAddControl;
         public DisplaySearchResultsMenuControl displaySearchResultsMenuControl;
@@ -55,6 +56,7 @@ namespace ohjelmistotuotanto
             servicesMenuControl = new ServicesMenuControl();
             servicesAddMenuControl = new ServicesAddMenu();
             servicesRemoveMenuControl = new ServicesRemoveMenu();
+            servicesUpdateMenuControl = new ServicesUpdateMenu();
             customersMenuControl = new CustomersMenuControl();
             customersAddControl = new CustomersAddControl();
             searchReservationMenuControl = new SearchReservationMenuControl();
@@ -73,6 +75,7 @@ namespace ohjelmistotuotanto
             servicesMenuControl.Hide();
             servicesAddMenuControl.Hide();
             servicesRemoveMenuControl.Hide();
+            servicesUpdateMenuControl.Hide();
             customersMenuControl.Hide();
             customersAddControl.Hide();
             addReservationMenuControl.Hide();
@@ -92,6 +95,7 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(servicesMenuControl);
             SubscribeToMenuSwitchEvents(servicesAddMenuControl);
             SubscribeToMenuSwitchEvents(servicesRemoveMenuControl);
+            SubscribeToMenuSwitchEvents(servicesUpdateMenuControl);
             SubscribeToMenuSwitchEvents(customersMenuControl);
             SubscribeToMenuSwitchEvents(customersAddControl);
             SubscribeToMenuSwitchEvents(displaySearchResultsMenuControl);
@@ -106,6 +110,7 @@ namespace ohjelmistotuotanto
             servicesMenuControl.Dock = DockStyle.Fill;
             servicesAddMenuControl.Dock = DockStyle.Fill;
             servicesRemoveMenuControl.Dock = DockStyle.Fill;
+            servicesUpdateMenuControl.Dock = DockStyle.Fill;
             customersMenuControl.Dock = DockStyle.Fill;
             customersAddControl.Dock = DockStyle.Fill;
             addReservationMenuControl.Dock = DockStyle.Fill;
@@ -124,6 +129,7 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(servicesMenuControl);
             appContainer.Controls.Add(servicesAddMenuControl);
             appContainer.Controls.Add(servicesRemoveMenuControl);
+            appContainer.Controls.Add(servicesUpdateMenuControl);
             appContainer.Controls.Add(customersMenuControl);
             appContainer.Controls.Add(customersAddControl);
             appContainer.Controls.Add(addReservationMenuControl);
@@ -216,6 +222,11 @@ namespace ohjelmistotuotanto
                 servicesRemoveMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.srvcRemoveMenu);
+            } else if (menu == Constants.srvcUpdateMenu)
+            {
+                servicesUpdateMenuControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.srvcUpdateMenu);
             }
             else if (menu == Constants.updateRrvtMenu)
             {
@@ -299,6 +310,9 @@ namespace ohjelmistotuotanto
             } else if (userControl is ServicesRemoveMenu servicesRemoveMenu)
             {
                 servicesRemoveMenu.MenuSwitchRequested += SwitchMenuControl;
+            } else if (userControl is ServicesUpdateMenu servicesUpdateMenuControl)
+            {
+                servicesUpdateMenuControl.MenuSwitchRequested += SwitchMenuControl;
             }
             else if (userControl is AddReservationMenuControl addReservationMenuControl)
             {
