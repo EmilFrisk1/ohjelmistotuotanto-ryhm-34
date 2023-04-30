@@ -17,6 +17,7 @@ namespace ohjelmistotuotanto
         public delegate void MenuSwitchRequestHandler(string menu); // Function pointer 
         public event MenuSwitchRequestHandler MenuSwitchRequested;
         public StatusStrip statusStrip;
+
         public ServicesAddMenu()
         {
             InitializeComponent();
@@ -44,7 +45,8 @@ namespace ohjelmistotuotanto
         {
             this.Hide();
             VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
-            MenuSwitchRequested?.Invoke(Constants.mainMenu);
+            MenuSwitchRequested?.Invoke(Constants.srvcMenu);
+            MenuDefaultState();
         }
 
         private bool ValidateFields()
@@ -65,7 +67,7 @@ namespace ohjelmistotuotanto
             }
         }
 
-        private async void AddService()
+        private async Task<bool> AddService()
         {
             try
             {
@@ -86,20 +88,31 @@ namespace ohjelmistotuotanto
                 else
                 {
                     MessageBox.Show("Palvelu loisätty onnistuneesti");
+                    return true;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Jokin meni pieleen: " + ex.Message);
+                return false;
             }
         }
 
-        private void addServiceBtn_Click(object sender, EventArgs e)
+        private async void addServiceBtn_Click(object sender, EventArgs e)
         {
             if (!ValidateFields())
                 return;
 
-            AddService();
+            if (!await AddService())
+                return;
+
+            MenuDefaultState();
+        }
+
+        private void MenuDefaultState()
+        {
+            nameTxtBox.Text = string.Empty;
+            priceTxtBox.Text = string.Empty;
         }
     }
 }

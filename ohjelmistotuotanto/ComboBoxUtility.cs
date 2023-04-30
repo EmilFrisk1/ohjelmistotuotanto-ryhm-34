@@ -79,6 +79,8 @@ public static class ComboBoxUtility
     {
         if (services.Rows != null && services.Rows.Count > 0)
         {
+            servicesCbx.DataSource = null;
+            Services.RemoveRange(1, Services.Count - 1);
             foreach (DataRow row in services.Rows)
             {
                 var id = (int)row[0];

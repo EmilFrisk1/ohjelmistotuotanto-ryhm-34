@@ -49,7 +49,8 @@ namespace ohjelmistotuotanto
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.srvcRemoveMenu);
         }
 
         private void updateBtn_Click(object sender, EventArgs e)

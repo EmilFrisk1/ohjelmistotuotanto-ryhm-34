@@ -31,12 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ServicesRemoveMenu));
             panel4 = new Panel();
             serviceErrorLabel = new Label();
-            addServiceBtn = new Button();
             label2 = new Label();
             servicesCbx = new ComboBox();
             label10 = new Label();
             prevBtn = new PictureBox();
             label3 = new Label();
+            removeBtn = new Button();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)prevBtn).BeginInit();
             SuspendLayout();
@@ -46,7 +46,6 @@
             panel4.BackColor = Color.Transparent;
             panel4.BorderStyle = BorderStyle.Fixed3D;
             panel4.Controls.Add(serviceErrorLabel);
-            panel4.Controls.Add(addServiceBtn);
             panel4.Controls.Add(label2);
             panel4.Controls.Add(servicesCbx);
             panel4.Controls.Add(label10);
@@ -62,24 +61,12 @@
             serviceErrorLabel.BackColor = Color.Transparent;
             serviceErrorLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             serviceErrorLabel.ForeColor = Color.Cyan;
-            serviceErrorLabel.Location = new Point(65, 133);
+            serviceErrorLabel.Location = new Point(103, 135);
             serviceErrorLabel.Name = "serviceErrorLabel";
             serviceErrorLabel.Size = new Size(252, 37);
             serviceErrorLabel.TabIndex = 23;
             serviceErrorLabel.Text = "Valitse jokin palvelu";
             serviceErrorLabel.Visible = false;
-            // 
-            // addServiceBtn
-            // 
-            addServiceBtn.BackColor = Color.DarkSlateGray;
-            addServiceBtn.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            addServiceBtn.ForeColor = Color.WhiteSmoke;
-            addServiceBtn.Location = new Point(323, 133);
-            addServiceBtn.Name = "addServiceBtn";
-            addServiceBtn.Size = new Size(88, 34);
-            addServiceBtn.TabIndex = 13;
-            addServiceBtn.Text = "lisää";
-            addServiceBtn.UseVisualStyleBackColor = false;
             // 
             // label2
             // 
@@ -126,6 +113,7 @@
             prevBtn.SizeMode = PictureBoxSizeMode.StretchImage;
             prevBtn.TabIndex = 24;
             prevBtn.TabStop = false;
+            prevBtn.Click += prevBtn_Click;
             // 
             // label3
             // 
@@ -133,23 +121,38 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Script MT Bold", 48F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.Silver;
-            label3.Location = new Point(234, 27);
+            label3.Location = new Point(208, 32);
             label3.Name = "label3";
-            label3.Size = new Size(373, 77);
+            label3.Size = new Size(407, 77);
             label3.TabIndex = 23;
-            label3.Text = "Lisää varaus";
+            label3.Text = "Poista palvelu";
+            // 
+            // removeBtn
+            // 
+            removeBtn.BackColor = Color.DarkSlateGray;
+            removeBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+            removeBtn.ForeColor = Color.Silver;
+            removeBtn.Location = new Point(178, 384);
+            removeBtn.Name = "removeBtn";
+            removeBtn.Size = new Size(451, 62);
+            removeBtn.TabIndex = 25;
+            removeBtn.Text = "Poista";
+            removeBtn.UseVisualStyleBackColor = false;
+            removeBtn.Click += removeBtn_Click;
             // 
             // ServicesRemoveMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.test3;
+            Controls.Add(removeBtn);
             Controls.Add(prevBtn);
             Controls.Add(label3);
             Controls.Add(panel4);
             Name = "ServicesRemoveMenu";
             Size = new Size(804, 736);
             Load += ServicesRemoveMenu_Load;
+            VisibleChanged += ServicesRemoveMenu_VisibleChanged;
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)prevBtn).EndInit();
@@ -161,11 +164,11 @@
 
         private Panel panel4;
         private Label serviceErrorLabel;
-        private Button addServiceBtn;
         private Label label2;
         private ComboBox servicesCbx;
         private Label label10;
         private PictureBox prevBtn;
         private Label label3;
+        private Button removeBtn;
     }
 }
