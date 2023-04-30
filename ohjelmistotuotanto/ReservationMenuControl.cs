@@ -19,40 +19,44 @@ namespace ohjelmistotuotanto
             InitializeComponent();
         }
 
-        private void searchBtn_Click(object sender, EventArgs e)
+        private void updateBtn_Click_1(object sender, EventArgs e)
         {
             this.Hide();
-            MenuSwitchRequested?.Invoke(Constants.searchRrvtMenu);
+            MenuSwitchRequested?.Invoke(Constants.updateRrvtMenu);
         }
 
-        private void prevBtn_Click(object sender, EventArgs e)
+        private void ReservationMenuControl_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.removeRrvtMenu);
+        }
+
+        private void addBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.addRrvtMenu);
+        }
+
+        private void prevBtn_Click_1(object sender, EventArgs e)
         {
             this.Hide();
             VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
             MenuSwitchRequested?.Invoke(Constants.mainMenu);
         }
 
-        private void addBtn_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            MenuSwitchRequested?.Invoke(Constants.addRrvtMenu);
-        }
-
-        private void deleteBtn_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            MenuSwitchRequested?.Invoke(Constants.removeRrvtMenu);
-        }
-
-        private void updateBtn_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            MenuSwitchRequested?.Invoke(Constants.updateRrvtMenu);
-        }
-
-        private void ReservationMenuControl_Load(object sender, EventArgs e)
+        private void searchBtn_Click_1(object sender, EventArgs e)
         {
 
+            private void searchBtn_Click(object sender, EventArgs e)
+            {
+                this.Hide();
+                MenuSwitchRequested?.Invoke(Constants.searchRrvtMenu);
+            }
         }
     }
 }
