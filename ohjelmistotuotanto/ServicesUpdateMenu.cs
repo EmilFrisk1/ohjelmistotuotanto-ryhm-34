@@ -42,6 +42,7 @@ namespace ohjelmistotuotanto
         private void prevBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
+            MenuDefaultState();
             VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
             MenuSwitchRequested?.Invoke(Constants.srvcMenu);
         }
@@ -88,7 +89,7 @@ namespace ohjelmistotuotanto
         }
 
         private void priceTxtBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
+        {// Allow numbers, spaces and one dot
             if (Regex.IsMatch(e.KeyChar.ToString(), @"^[0-9 ]*\.?[0-9 ]*$") || e.KeyChar == (char)8)
             {
                 if (e.KeyChar == '.' && ((TextBox)sender).Text.Contains("."))
