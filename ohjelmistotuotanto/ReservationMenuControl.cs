@@ -51,12 +51,8 @@ namespace ohjelmistotuotanto
 
         private void searchBtn_Click_1(object sender, EventArgs e)
         {
-
-            private void searchBtn_Click(object sender, EventArgs e)
-            {
-                this.Hide();
-                MenuSwitchRequested?.Invoke(Constants.searchRrvtMenu);
-            }
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.searchRrvtMenu);
         }
     }
 }
