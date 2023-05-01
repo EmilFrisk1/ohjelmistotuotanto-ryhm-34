@@ -80,16 +80,27 @@ namespace ohjelmistotuotanto
 
         private async Task<bool> RemoveService()
         {
-            var response = await VillageNewbies._dbManager.DeleteDataAsync("service", $"id = {(int)servicesCbx.SelectedValue}");
-            if (response == null || response <= 0)
+            try
             {
-                MessageBox.Show("Jokin meni pieleen");
+                var response = await VillageNewbies._dbManager.DeleteDataAsync("service", $"id = {(int)servicesCbx.SelectedValue}");
+                if (response == null || response <= 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    MessageBox.Show("Palvelu poistettu onnistuneesti");
+                    return true;
+                }
+            }  catch(InvalidOperationException ex)
+            {
+                MessageBox.Show("Tämä palvelu onjo käytössä varauksessa, sitä ei voi poistaa.");
                 return false;
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Palvelu poistettu onnistuneesti");
-                return true;
+                MessageBox.Show(ex.Message);
+                return false;
             }
         }
 

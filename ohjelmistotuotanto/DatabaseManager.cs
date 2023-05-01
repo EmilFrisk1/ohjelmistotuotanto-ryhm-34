@@ -8,6 +8,8 @@ using System.ComponentModel;
 using ohjelmistotuotanto;
 using System.Globalization;
 using Google.Protobuf.WellKnownTypes;
+using System.Data.SqlClient;
+
 
 public class DatabaseManager
 {
@@ -64,7 +66,7 @@ public class DatabaseManager
                 if (currentAttempt == maxAttempts)
                 {
                     MessageBox.Show($"Error connecting to the database after {maxAttempts} attempts: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    break;
+                    throw new InvalidOperationException("Error connecting to the database", ex);
                 }
                 else
                 {
