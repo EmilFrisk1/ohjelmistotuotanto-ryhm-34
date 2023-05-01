@@ -112,6 +112,10 @@ namespace ohjelmistotuotanto
             nameTxtBox.Text = string.Empty;
             priceTxtBox.Text = string.Empty;
             servicesCbx.SelectedIndex = 0;
+            if (serviceErrorLabel.Visible)
+                serviceErrorLabel.Visible = false;
+            if(priceErrLabel.Visible)
+                priceErrLabel.Visible = false;  
         }
 
         private bool Validate()

@@ -277,12 +277,42 @@ public class DatabaseManager
                      dataTable.Load(reader);
                 }
             }
+
             return dataTable;
         });
 
         return dataTable;
     }
 
+    public async Task<List<ServicesReport>> SearchServicesAsync(string query)
+    {
+        List<ServicesReport> services = new List<ServicesReport>();
+
+        await ExecuteWithRetry(async (connection) =>
+        {
+            using (MySqlCommand cmd = new MySqlCommand(query, connection))
+            {
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        ServicesReport report = new ServicesReport();
+                        report.AlueNimi = reader.GetString("area_name");
+                        report.Määrä = reader.GetInt32("quantity");
+                        report.VarausId = reader.GetInt32("reservation_id");
+                        report.PalvelunNimi = reader.GetString("service_name");
+                        report.Hinta = reader.GetDecimal("price");
+                        report.AloitusPvm = reader.GetDateTime("start_date");
+                        services.Add(report);
+                    }
+                }
+            }
+
+            return services;
+        });
+
+        return services;
+    }
 
     public async Task<int> DeleteReservationAsync(int reservationId)
     {

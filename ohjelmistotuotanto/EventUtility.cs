@@ -12,12 +12,21 @@ namespace ohjelmistotuotanto
     {
         public delegate void SearchResultsReceived<T>(List<T> results); // Function pointer 
         public static event SearchResultsReceived<Reservation> DisplayReservationSearchResults;
+        public static event SearchResultsReceived<ServicesReport> DisplayServicesSearchResults;
 
         public static void RaiseDisplayReservationSearchResults(List<Reservation> results)
         {
             if (DisplayReservationSearchResults != null)
             {
                 DisplayReservationSearchResults(results);
+            }
+        }
+
+        public static void RaiseDisplayServicesSearchResults(List<ServicesReport> results)
+        {
+            if (DisplayServicesSearchResults != null)
+            {
+                DisplayServicesSearchResults(results);
             }
         }
     }

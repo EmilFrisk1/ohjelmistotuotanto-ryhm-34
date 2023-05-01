@@ -113,6 +113,9 @@ namespace ohjelmistotuotanto
         {
             nameTxtBox.Text = string.Empty;
             priceTxtBox.Text = string.Empty;
+
+            if (statusStrip.Visible)
+                statusStrip.Visible = false;
         }
     }
 }

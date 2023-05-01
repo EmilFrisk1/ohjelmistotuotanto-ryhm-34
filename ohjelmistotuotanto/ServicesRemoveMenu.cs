@@ -38,6 +38,14 @@ namespace ohjelmistotuotanto
             this.Hide();
             VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
             MenuSwitchRequested?.Invoke(Constants.srvcMenu);
+            MenuDefaultState();
+        }
+
+        private void MenuDefaultState()
+        {
+            servicesCbx.SelectedIndex = 0;
+            if (serviceErrorLabel.Visible)
+                serviceErrorLabel.Visible = false;
         }
 
         private async void removeBtn_Click(object sender, EventArgs e)

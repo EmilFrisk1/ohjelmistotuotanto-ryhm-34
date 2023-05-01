@@ -2,6 +2,7 @@ using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Drawing.Configuration;
 using System.Globalization;
@@ -23,6 +24,7 @@ namespace ohjelmistotuotanto
         public ServicesMenuControl servicesMenuControl;
         public ServicesRemoveMenu servicesRemoveMenuControl;
         public ServicesUpdateMenu servicesUpdateMenuControl;
+        public ServicesSearchMenu servicesSearchMenuControl;
         public CustomersMenuControl customersMenuControl;
         public CustomersAddControl customersAddControl;
         public DisplaySearchResultsMenuControl displaySearchResultsMenuControl;
@@ -57,6 +59,7 @@ namespace ohjelmistotuotanto
             servicesAddMenuControl = new ServicesAddMenu();
             servicesRemoveMenuControl = new ServicesRemoveMenu();
             servicesUpdateMenuControl = new ServicesUpdateMenu();
+            servicesSearchMenuControl = new ServicesSearchMenu();
             customersMenuControl = new CustomersMenuControl();
             customersAddControl = new CustomersAddControl();
             searchReservationMenuControl = new SearchReservationMenuControl();
@@ -76,6 +79,7 @@ namespace ohjelmistotuotanto
             servicesAddMenuControl.Hide();
             servicesRemoveMenuControl.Hide();
             servicesUpdateMenuControl.Hide();
+            servicesSearchMenuControl.Hide();
             customersMenuControl.Hide();
             customersAddControl.Hide();
             addReservationMenuControl.Hide();
@@ -96,6 +100,7 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(servicesAddMenuControl);
             SubscribeToMenuSwitchEvents(servicesRemoveMenuControl);
             SubscribeToMenuSwitchEvents(servicesUpdateMenuControl);
+            SubscribeToMenuSwitchEvents(servicesSearchMenuControl);
             SubscribeToMenuSwitchEvents(customersMenuControl);
             SubscribeToMenuSwitchEvents(customersAddControl);
             SubscribeToMenuSwitchEvents(displaySearchResultsMenuControl);
@@ -111,6 +116,7 @@ namespace ohjelmistotuotanto
             servicesAddMenuControl.Dock = DockStyle.Fill;
             servicesRemoveMenuControl.Dock = DockStyle.Fill;
             servicesUpdateMenuControl.Dock = DockStyle.Fill;
+            servicesSearchMenuControl.Dock = DockStyle.Fill;    
             customersMenuControl.Dock = DockStyle.Fill;
             customersAddControl.Dock = DockStyle.Fill;
             addReservationMenuControl.Dock = DockStyle.Fill;
@@ -130,6 +136,7 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(servicesAddMenuControl);
             appContainer.Controls.Add(servicesRemoveMenuControl);
             appContainer.Controls.Add(servicesUpdateMenuControl);
+            appContainer.Controls.Add(servicesSearchMenuControl);
             appContainer.Controls.Add(customersMenuControl);
             appContainer.Controls.Add(customersAddControl);
             appContainer.Controls.Add(addReservationMenuControl);
@@ -153,6 +160,7 @@ namespace ohjelmistotuotanto
 
             // Add reference of needed menus for menuhistory purpose
             displaySearchResultsMenuControl.searchReservationMenuControl = searchReservationMenuControl;
+            displaySearchResultsMenuControl.servicesSearchMenuControl = servicesSearchMenuControl;
 
             // Show the initial User Control
             SwitchMenuControl(Constants.mainMenu);
@@ -227,6 +235,11 @@ namespace ohjelmistotuotanto
                 servicesUpdateMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.srvcUpdateMenu);
+            } else if (menu == Constants.srvcSearchMenu)
+            {
+                servicesSearchMenuControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.srvcSearchMenu);
             }
             else if (menu == Constants.updateRrvtMenu)
             {
@@ -313,6 +326,9 @@ namespace ohjelmistotuotanto
             } else if (userControl is ServicesUpdateMenu servicesUpdateMenuControl)
             {
                 servicesUpdateMenuControl.MenuSwitchRequested += SwitchMenuControl;
+            } else if (userControl is ServicesSearchMenu servicesSearchMenu)
+            {
+                servicesSearchMenu.MenuSwitchRequested += SwitchMenuControl;
             }
             else if (userControl is AddReservationMenuControl addReservationMenuControl)
             {

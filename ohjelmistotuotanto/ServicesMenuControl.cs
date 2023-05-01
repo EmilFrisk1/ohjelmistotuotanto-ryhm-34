@@ -38,7 +38,9 @@ namespace ohjelmistotuotanto
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
+            MenuSwitchRequested?.Invoke(Constants.srvcSearchMenu);
         }
 
         private void addBtn_Click(object sender, EventArgs e)

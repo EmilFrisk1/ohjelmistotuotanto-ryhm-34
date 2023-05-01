@@ -127,4 +127,21 @@ public static class ComboBoxUtility
             customerCbx.ValueMember = "Id";
         }
     }
+
+    public static void SetUpAreasCbx(DataTable areas, List<Area> Areas, ComboBox areaCbx)
+    {
+        if (areas.Rows != null && areas.Rows.Count > 0)
+        {
+            foreach (DataRow row in areas.Rows)
+            {
+                var id = (int)row[0];
+                var email = (string)row[1];
+
+                Areas.Add(new Area { Id = id, Name = email });
+            }
+            areaCbx.DataSource = Areas;
+            areaCbx.DisplayMember = "Name";
+            areaCbx.ValueMember = "Id";
+        }
+    }
 }

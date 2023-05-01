@@ -15,6 +15,7 @@ namespace ohjelmistotuotanto
         public delegate void MenuSwitchRequestHandler(string menu); // Function pointer 
         public event MenuSwitchRequestHandler MenuSwitchRequested;
         public SearchReservationMenuControl searchReservationMenuControl;
+        public ServicesSearchMenu servicesSearchMenuControl;
 
         public DisplaySearchResultsMenuControl()
         {
@@ -25,6 +26,7 @@ namespace ohjelmistotuotanto
         {
             // initialize event listeners
             EventUtility.DisplayReservationSearchResults += DisplaySearchResults;
+            EventUtility.DisplayServicesSearchResults += DisplaySearchResults;
         }
 
         private void prevBtn_Click(object sender, EventArgs e)
@@ -39,8 +41,12 @@ namespace ohjelmistotuotanto
                 case Constants.searchRrvtMenu:
                     searchReservationMenuControl.Show();
                     break;
-                //case // TODO - SearchServicesMenu
-                //    break;
+                case Constants.srvcSearchMenu:
+                    servicesSearchMenuControl.Show();
+                    break;
+                default:
+                    MessageBox.Show("Jokin meni pieleen menuhistoriassa");
+                    break;
             }
         }
 
