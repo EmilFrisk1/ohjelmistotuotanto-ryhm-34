@@ -443,6 +443,7 @@ namespace ohjelmistotuotanto
                     var reservationId = (int)row["id"];
                     var endDate = (DateTime)row["end_date"];
                     _dbManager.CreateBill(reservationId, endDate.ToString("yyyy-MM-dd"));
+                    // TODO - CREATE PDF BILL
                 }
             }
 

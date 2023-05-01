@@ -398,6 +398,7 @@ public class DatabaseManager
                                     { "due_date", dueDate },
                                     { "status", "PENDING" },
                                     { "reservation_id", reservationId },
+                                    { "issue_date", DateTime.Now.ToString("yyyy-MM-dd")}
                                 };
 
                 int billInsRes = await VillageNewbies._dbManager.InsertDataAsync("bill", billColumnValues);
