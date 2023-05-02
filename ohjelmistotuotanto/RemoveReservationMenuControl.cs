@@ -72,19 +72,56 @@ namespace ohjelmistotuotanto
 
         private async void RemoveReservation()
         {
-            DataGridViewRow selectedRow = reservationContainer.SelectedRows[0];
-            int reservationId = (int)selectedRow.Cells["Id"].Value;
-
-            // remove reservation
-
-            var response = await VillageNewbies._dbManager.DeleteDataAsync("reservation", $"id = {reservationId}");
-            if (response != null || response <= 0)
+            try
             {
-                MessageBox.Show("Varaus poistettu onnistuneesti");
-                GetReservations();
+                DataGridViewRow selectedRow = reservationContainer.SelectedRows[0];
+                int reservationId = (int)selectedRow.Cells["Id"].Value;
+
+                // check if the reservation has any services linked to it and remove them first
+                if (await CheckReservationServices(reservationId))
+                {
+                    var res = await VillageNewbies._dbManager.DeleteDataAsync("reservation_service", $"reservation_id = {reservationId}");
+                    if (res == null || res <= 0)
+                    {
+                        throw new Exception("Palvelun poisto epäonnistui");
+                    }
+                }
+
+                // remove reservation
+                var response = await VillageNewbies._dbManager.DeleteDataAsync("reservation", $"id = {reservationId}");
+                if (response == null || response <= 0)
+                {
+                    throw new Exception("Varauksen poisto epäonnistui");
+                } else
+                {
+                    MessageBox.Show("Varaus poistettu onnistuneesti");
+                    GetReservations();
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
+        private async Task<bool> CheckReservationServices(int reservationId)
+        {
+            try
+            {
+                var reservationServices = await VillageNewbies._dbManager.SelectDataAsync("reservation_service", null, $"reservation_id = {reservationId}");
+                if (reservationServices == null || reservationServices.Rows.Count <= 0)
+                {
+                    return false;
+                } else
+                {
+                    return true;
+                }
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Jokin meni pieleen: " + ex.Message);
+                return false;
+            }
+        }
+             
         private void RemoveReservationMenuControl_VisibleChanged(object sender, EventArgs e)
         {
             counter++;
