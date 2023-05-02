@@ -316,6 +316,49 @@ public class DatabaseManager
         return services;
     }
 
+    public async Task<List<InvoiceDataModel>> GetBillDetails(string query)
+    {
+        List<InvoiceDataModel> invoices = new List<InvoiceDataModel>();
+
+        await ExecuteWithRetry(async (connection) =>
+        {
+            using (MySqlCommand cmd = new MySqlCommand(query, connection))
+            {
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    while (await reader.ReadAsync())
+                    {
+                        InvoiceDataModel invoice = new InvoiceDataModel();
+
+                        int price = reader.GetInt32("sum");
+                        double alv = (price * 0.24);
+                        double finalPrice = alv + price;
+
+                        invoice.StartDate = reader.GetDateTime("start_date").ToString().Substring(0, 10); // Converts the date into dd/mm/yyyy format
+                        invoice.EndDate = reader.GetDateTime("end_date").ToString().Substring(0, 10);
+                        invoice.BillId = reader.GetInt32("bill_id").ToString();
+                        invoice.IssueDate = reader.GetDateTime("issue_date").ToString().Substring(0, 10);
+                        invoice.DueDate = reader.GetDateTime("due_date").ToString().Substring(0, 10);
+                        invoice.CusCity = reader.GetString("c_city");
+                        invoice.CusPostalCode = reader.GetInt32("c_postal_code").ToString();
+                        invoice.CusAddress = reader.GetString("c_address");
+                        invoice.CusName = reader.GetString("c_full_name");
+                        invoice.CottageDescription = reader.GetString("description");
+                        invoice.FinalPrice = finalPrice.ToString();
+                        invoice.Alv = alv.ToString();
+                        invoice.Sum = price.ToString();
+
+                        invoices.Add(invoice);
+                    }
+                }
+            }
+
+            return invoices;
+        });
+
+        return invoices;
+    }
+
     public async Task<int> DeleteReservationAsync(int reservationId)
     {
         int affectedRows = -1;
@@ -370,10 +413,11 @@ public class DatabaseManager
 
         return affectedRows;
     }
-    public async void CreateBill(int reservationId, string endDate)
+    public async Task<int> CreateBill(int reservationId, string endDate)
     {
         try
         {
+            int billId = -1;
             // Update the reservation to indicate its not cancelable anymore
             Dictionary<string, object> reservationColumnValues = new Dictionary<string, object>
                         {
@@ -391,27 +435,51 @@ public class DatabaseManager
                 // add 30 days to the last day of the reservation for due date
                 string dueDate = DateTime.ParseExact(endDate, "yyyy-MM-dd", CultureInfo.InvariantCulture).AddDays(30).ToString("yyyy-MM-dd");
 
+                billId = await VillageNewbies._dbManager.InsertBill(totalCost, dueDate, DateTime.Now.ToString("yyyy-MM-dd"), reservationId);
 
-                Dictionary<string, object> billColumnValues = new Dictionary<string, object>
-                                {
-                                    { "sum", totalCost },
-                                    { "due_date", dueDate },
-                                    { "status", "PENDING" },
-                                    { "reservation_id", reservationId },
-                                    { "issue_date", DateTime.Now.ToString("yyyy-MM-dd")}
-                                };
-
-                int billInsRes = await VillageNewbies._dbManager.InsertDataAsync("bill", billColumnValues);
-                if (billInsRes <= 0)
+                if (billId <= 0)
                 {
                     throw new Exception("Error occurred while inserting data into the database.");
+                } else
+                {
+                    return billId;
                 }
             }
         }
         catch (Exception ex)
         {
             MessageBox.Show("Jokin meni pieleen laskun teossa. \n" + ex.Message);
+            return -1;
         }
     }
 
+
+    public async Task<int> InsertBill(int sum, string dueDate, string issueDate, int reservationId)
+    {
+        int billId = -1;
+
+        reservationId = await ExecuteWithRetry(async (connection) =>
+        {
+            using (MySqlCommand cmd = new MySqlCommand("insert_bill_row", connection))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@p_sum", sum);
+                cmd.Parameters.AddWithValue("@p_due_date", dueDate);
+                cmd.Parameters.AddWithValue("@p_status", "PENDING");
+                cmd.Parameters.AddWithValue("@p_reservation_id", reservationId);
+                cmd.Parameters.AddWithValue("@p_issue_date", issueDate);
+
+                cmd.Parameters.Add(new MySqlParameter("@p_id_value", MySqlDbType.Int32));
+                cmd.Parameters["@p_id_value"].Direction = ParameterDirection.Output;
+
+                await cmd.ExecuteNonQueryAsync();
+
+                billId = (int)cmd.Parameters["@p_id_value"].Value;
+                return billId;
+            }
+        });
+
+        return billId;
+    }
 }

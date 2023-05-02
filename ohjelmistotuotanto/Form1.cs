@@ -7,6 +7,15 @@ using System.Drawing;
 using System.Drawing.Configuration;
 using System.Globalization;
 using System.Windows.Forms;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using Microsoft.VisualBasic.ApplicationServices;
+using iText.Layout;
+using iText.Layout.Element;
+using iText.Layout.Properties;
+using System.Xml;
+using iText.Zugferd;
+using System.IO;
 
 
 namespace ohjelmistotuotanto
@@ -14,7 +23,6 @@ namespace ohjelmistotuotanto
     public partial class VillageNewbies : Form // asdasdasdasdadasd
     {
         //public static Form formVaraukset; // luodaan varaukset form
-
         public MainMenuControl mainMenuControl;
         public ReservationMenuControl reservationMenuControl;
         public AddReservationMenuControl addReservationMenuControl;
@@ -41,6 +49,7 @@ namespace ohjelmistotuotanto
         public static List<string> menuhistory = new List<string>() { Constants.mainMenu };
 
         public static DatabaseManager _dbManager;
+
 
         public VillageNewbies()
         {
@@ -116,7 +125,7 @@ namespace ohjelmistotuotanto
             servicesAddMenuControl.Dock = DockStyle.Fill;
             servicesRemoveMenuControl.Dock = DockStyle.Fill;
             servicesUpdateMenuControl.Dock = DockStyle.Fill;
-            servicesSearchMenuControl.Dock = DockStyle.Fill;    
+            servicesSearchMenuControl.Dock = DockStyle.Fill;
             customersMenuControl.Dock = DockStyle.Fill;
             customersAddControl.Dock = DockStyle.Fill;
             addReservationMenuControl.Dock = DockStyle.Fill;
@@ -174,9 +183,10 @@ namespace ohjelmistotuotanto
 
             SetupUserControllers();
 
+            InvoiceUtility.GetInvoicesDir();
         }
 
-        private void button1_Click(object sender, EventArgs e) 
+        private void button1_Click(object sender, EventArgs e)
         {
             // _dbManager.InsertArea("Kuopio");
         }
@@ -230,12 +240,14 @@ namespace ohjelmistotuotanto
                 servicesRemoveMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.srvcRemoveMenu);
-            } else if (menu == Constants.srvcUpdateMenu)
+            }
+            else if (menu == Constants.srvcUpdateMenu)
             {
                 servicesUpdateMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.srvcUpdateMenu);
-            } else if (menu == Constants.srvcSearchMenu)
+            }
+            else if (menu == Constants.srvcSearchMenu)
             {
                 servicesSearchMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
@@ -317,27 +329,33 @@ namespace ohjelmistotuotanto
             else if (userControl is ServicesMenuControl servicesMenuControl)
             {
                 servicesMenuControl.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is ServicesAddMenu servicesAddMenuControl)
+            }
+            else if (userControl is ServicesAddMenu servicesAddMenuControl)
             {
                 servicesAddMenuControl.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is ServicesRemoveMenu servicesRemoveMenu)
+            }
+            else if (userControl is ServicesRemoveMenu servicesRemoveMenu)
             {
                 servicesRemoveMenu.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is ServicesUpdateMenu servicesUpdateMenuControl)
+            }
+            else if (userControl is ServicesUpdateMenu servicesUpdateMenuControl)
             {
                 servicesUpdateMenuControl.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is ServicesSearchMenu servicesSearchMenu)
+            }
+            else if (userControl is ServicesSearchMenu servicesSearchMenu)
             {
                 servicesSearchMenu.MenuSwitchRequested += SwitchMenuControl;
             }
             else if (userControl is AddReservationMenuControl addReservationMenuControl)
             {
                 addReservationMenuControl.MenuSwitchRequested += SwitchMenuControl;
-                
-            } else if (userControl is SearchReservationMenuControl searchReservationMenuControl) 
+
+            }
+            else if (userControl is SearchReservationMenuControl searchReservationMenuControl)
             {
                 searchReservationMenuControl.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is UpdateReservationMenu updateReservationMenu)
+            }
+            else if (userControl is UpdateReservationMenu updateReservationMenu)
             {
                 updateReservationMenuControl.MenuSwitchRequested += SwitchMenuControl;
             }
@@ -348,10 +366,12 @@ namespace ohjelmistotuotanto
             else if (userControl is CustomersAddControl customersAddControl)
             {
                 customersAddControl.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is RemoveReservationMenuControl removeReservationMenuControl)
+            }
+            else if (userControl is RemoveReservationMenuControl removeReservationMenuControl)
             {
                 removeReservationMenuControl.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is DisplaySearchResultsMenuControl displaySearchResultsMenuControl)
+            }
+            else if (userControl is DisplaySearchResultsMenuControl displaySearchResultsMenuControl)
             {
                 displaySearchResultsMenuControl.MenuSwitchRequested += SwitchMenuControl;
             }
@@ -442,11 +462,19 @@ namespace ohjelmistotuotanto
                 { // Reservation cannot be cancelled anymore create bill 
                     var reservationId = (int)row["id"];
                     var endDate = (DateTime)row["end_date"];
-                    _dbManager.CreateBill(reservationId, endDate.ToString("yyyy-MM-dd"));
-                    // TODO - CREATE PDF BILL
+                    int billId = await _dbManager.CreateBill(reservationId, endDate.ToString("yyyy-MM-dd"));
+                    InvoiceUtility.InvoiceProcedure(billId.ToString());
                 }
             }
+        }
 
+        public static string GetDaysDifference(string startDateString, string endDateString)
+        {
+            DateTime startDate = DateTime.ParseExact(startDateString, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            DateTime endDate = DateTime.ParseExact(endDateString, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            TimeSpan timeSpan = endDate - startDate;
+            int daysDifference = timeSpan.Days;
+            return daysDifference.ToString();
         }
     }
 }

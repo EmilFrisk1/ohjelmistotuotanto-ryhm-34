@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Invoice>
+  <invoice_header>
+    <invoiceId> 4</invoiceId>
+    <invoiceType>Lasku</invoiceType>
+    <invoiceDate>02/05/2023</invoiceDate>
+    <dueDate>03/06/2023</dueDate>
+    <invCustomerName>Jane Smith</invCustomerName>
+    <invAddress1>2 Oak St, Anytown</invAddress1>
+    <invZipcode>67890</invZipcode>
+    <invCity>city 2</invCity>
+  </invoice_header>
+  <invoice_rows>
+    <rowId>1</rowId>
+    <itemDescription>Modern cottage with a pool</itemDescription>
+    <dayCount>2</dayCount>
+    <price>700050</price>
+    <currency>€</currency>
+  </invoice_rows>
+  <invoice_total>
+    <invoicedAmount>700050</invoicedAmount>
+    <ALV>168012</ALV>
+    <totalAmount>868062</totalAmount>
+    <currency>€</currency>
+  </invoice_total>
+  <invoice_payeeinfo>
+    <lol>who knows</lol>
+  </invoice_payeeinfo>
+</Invoice>

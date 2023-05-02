@@ -300,7 +300,8 @@ namespace ohjelmistotuotanto
                 // add a bill if reservation is not cancelable
                 if (!reservationCancelable)
                 {
-                    VillageNewbies._dbManager.CreateBill(reservationId, endDate);
+                    int billId = await VillageNewbies._dbManager.CreateBill(reservationId, endDate);
+                    InvoiceUtility.InvoiceProcedure(billId.ToString());
                 }
 
                 // Clear the menu to default state
