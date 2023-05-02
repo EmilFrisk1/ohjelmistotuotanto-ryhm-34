@@ -93,10 +93,9 @@ namespace ohjelmistotuotanto
                     {
                         Id = id,
                         Email = email
-
                     });
                 }
-                customerCbx.DataSource = ClientDatamodels;
+                customerCbx.DataSource = Customers;
                 customerCbx.DisplayMember = "Email";
                 customerCbx.ValueMember = "Id";
 
@@ -104,31 +103,60 @@ namespace ohjelmistotuotanto
         }
         private void FunctioForSelectedIndexChanged()
         {
-                var val = customerCbx.SelectedValue;
+            var val = customerCbx.SelectedValue;
 
-                if (val is ClientDatamodel clientdatamodel)
+            if (val is ClientDatamodel clientdatamodel)
+            {
+                if (clientdatamodel.Id == -1)
                 {
-                    if (clientdatamodel.Id == -1)
-                    {
-                        return;
-                    }
+                    return;
                 }
-                else if (val is int)
-                {
-                    int clientmodelid = (int)val;
-                    if (clientmodelid == -1)
-                        return;
+            }
+            else if (val is int)
+            {
+                int clientmodelid = (int)val;
+                if (clientmodelid == -1)
+                    return;
 
-                    // Valid choice
-                    // fill in place holders for the selection
-                    ClientDatamodel targetClientModels = ClientDatamodels.FirstOrDefault(clientdatamodel => clientdatamodel.Id == clientmodelid);
-                    textBox.Text = targetClientModels.FirstName;
-                    textBox1.Text = targetClientModels.LastName;
-                    textBox2.Text = targetClientModels.Email;
-                    textBox3.Text = targetClientModels.PhoneNumber;
-                    textBox4.Text = targetClientModels.Address;
-                    textBox5.Text = targetClientModels.PostalNumber.ToString();
+                // Valid choice
+                // fill in place holders for the selection
+                ClientDatamodel targetClientModels = ClientDatamodels.FirstOrDefault(clientdatamodel => clientdatamodel.Id == clientmodelid);
+                textBox.Text = targetClientModels.FirstName;
+                textBox1.Text = targetClientModels.LastName;
+                textBox2.Text = targetClientModels.Email;
+                textBox3.Text = targetClientModels.PhoneNumber;
+                textBox4.Text = targetClientModels.Address;
+                textBox5.Text = targetClientModels.PostalNumber.ToString();
+            }
+        }
+
+        private void customerCbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var val = customerCbx.SelectedValue;
+
+            if (val is ClientDatamodel clientdatamodel)
+            {
+                if (clientdatamodel.Id == -1)
+                {
+                    return;
                 }
+            }
+            else if (val is int)
+            {
+                int clientmodelid = (int)val;
+                if (clientmodelid == -1)
+                    return;
+
+                // Valid choice
+                // fill in place holders for the selection
+                ClientDatamodel targetClientModels = ClientDatamodels.FirstOrDefault(clientdatamodel => clientdatamodel.Id == clientmodelid);
+                textBox.Text = targetClientModels.FirstName;
+                textBox1.Text = targetClientModels.LastName;
+                textBox2.Text = targetClientModels.Email;
+                textBox3.Text = targetClientModels.PhoneNumber;
+                textBox4.Text = targetClientModels.Address;
+                textBox5.Text = targetClientModels.PostalNumber.ToString();
+            }
         }
     }
 }

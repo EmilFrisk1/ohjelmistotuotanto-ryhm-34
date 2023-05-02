@@ -95,6 +95,7 @@
             customerCbx.Name = "customerCbx";
             customerCbx.Size = new Size(315, 29);
             customerCbx.TabIndex = 1;
+            customerCbx.SelectedIndexChanged += customerCbx_SelectedIndexChanged;
             // 
             // label5
             // 
