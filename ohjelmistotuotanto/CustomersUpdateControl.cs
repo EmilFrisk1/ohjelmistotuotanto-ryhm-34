@@ -18,6 +18,7 @@ namespace ohjelmistotuotanto
         public event MenuSwitchRequestHandler MenuSwitchRequested;
         public List<ClientDatamodel> ClientDatamodels { get; set; }
         public List<Customer> Customers { get; set; }
+        private bool isFirstLoad = true;
 
         public CustomersUpdateControl()
         {
@@ -44,6 +45,13 @@ namespace ohjelmistotuotanto
 
         private async void CustomersUpdateControl_Load(object sender, EventArgs e)
         {
+            isFirstLoad = false;
+
+            // Initialize lists
+            Customers = new List<Customer>() { new Customer { Id = -1, Email = string.Empty } };
+            ClientDatamodels = new List<ClientDatamodel>();
+
+
             var customers = await VillageNewbies._dbManager.SelectDataAsync("customer");
             setUpCustomersCbx(customers);
             menuDefaultState();
@@ -93,6 +101,34 @@ namespace ohjelmistotuotanto
                 customerCbx.ValueMember = "Id";
 
             }
+        }
+        private void FunctioForSelectedIndexChanged()
+        {
+                var val = customerCbx.SelectedValue;
+
+                if (val is ClientDatamodel clientdatamodel)
+                {
+                    if (clientdatamodel.Id == -1)
+                    {
+                        return;
+                    }
+                }
+                else if (val is int)
+                {
+                    int clientmodelid = (int)val;
+                    if (clientmodelid == -1)
+                        return;
+
+                    // Valid choice
+                    // fill in place holders for the selection
+                    ClientDatamodel targetClientModels = ClientDatamodels.FirstOrDefault(clientdatamodel => clientdatamodel.Id == clientmodelid);
+                    textBox.Text = targetClientModels.FirstName;
+                    textBox1.Text = targetClientModels.LastName;
+                    textBox2.Text = targetClientModels.Email;
+                    textBox3.Text = targetClientModels.PhoneNumber;
+                    textBox4.Text = targetClientModels.Address;
+                    textBox5.Text = targetClientModels.PostalNumber.ToString();
+                }
         }
     }
 }
