@@ -304,7 +304,7 @@ namespace ohjelmistotuotanto
             else if (menu == Constants.customersUpdate)
             {
                 customersUpdateControl.Visible = true;
-                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                appContainer.AutoScrollMinSize = new Size(0, 820);
                 menuhistory.Add(Constants.customersUpdate);
             }
             else if (menu == Constants.billingMenu)

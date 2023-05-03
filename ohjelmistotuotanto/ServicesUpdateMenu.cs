@@ -71,7 +71,7 @@ namespace ohjelmistotuotanto
             {
                 if (!Validate())
                     return;
-
+                
                 if (!ConfirmChange())
                     return;
 

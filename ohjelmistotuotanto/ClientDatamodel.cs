@@ -15,5 +15,7 @@ namespace ohjelmistotuotanto
            public string Address { get; set; }
            public int PostalNumber { get; set; }
            public string PhoneNumber { get; set; }
+        public string City { get; set; }
+
     }
 }
