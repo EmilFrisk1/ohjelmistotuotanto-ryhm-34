@@ -30,15 +30,7 @@ namespace ohjelmistotuotanto
 
         private void priceTxtBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Only allow numbers and backspace
-            if (Regex.IsMatch(e.KeyChar.ToString(), @"^[0-9]+$") || e.KeyChar == (char)8)
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            TextBoxUtility.AllowOnlyNumbers(sender, e);
         }
 
         private void prevBtn_Click(object sender, EventArgs e)

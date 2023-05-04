@@ -41,6 +41,40 @@ public static class ComboBoxUtility
         }
     }
 
+    public static void FilterCottages(ComboBox comboBox, List<CottageDataModel> cottages, string searchText)
+    {
+        if (string.IsNullOrEmpty(searchText)) // default list
+        {
+            comboBox.DataSource = null;
+            comboBox.DataSource = cottages;
+            comboBox.DisplayMember = "CottageName";
+            comboBox.ValueMember = "Id";
+        }
+        else
+        { // filtered list
+            List<CottageDataModel> filteredCottages = new List<CottageDataModel>();
+
+            foreach (CottageDataModel cottage in cottages)
+            {
+                bool contains = cottage.CottageName.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;
+
+                if (contains)
+                { // match 
+                    if (!(filteredCottages.Contains(cottage)))
+                    {
+                        filteredCottages.Add(cottage);
+                    }
+                }
+            }
+
+            comboBox.DataSource = null;
+            comboBox.DataSource = filteredCottages;
+            comboBox.DisplayMember = "CottageName";
+            comboBox.ValueMember = "Id";
+        }
+    }
+
+
 
     public static void FilterCustomers(ComboBox comboBox, List<Customer> customers, string searchText)
     {
@@ -98,6 +132,7 @@ public static class ComboBoxUtility
     {
         if (cottages.Rows != null && cottages.Rows.Count > 0)
         {
+            cottageCbx.DataSource = null;
             foreach (DataRow row in cottages.Rows)
             {
                 var id = (int)row[0];
@@ -107,6 +142,30 @@ public static class ComboBoxUtility
             }
             cottageCbx.DataSource = Cottages;
             cottageCbx.DisplayMember = "Name";
+            cottageCbx.ValueMember = "Id";
+        }
+    }
+
+    public static void SetUpCottagesCbx(DataTable cottages, List<CottageDataModel> Cottages, ComboBox cottageCbx)
+    {
+        if (cottages.Rows != null && cottages.Rows.Count > 0)
+        {
+            cottageCbx.DataSource = null;
+            foreach (DataRow row in cottages.Rows)
+            {
+                var id = (int)row[0];
+                var areaId = (int)row[1];
+                var price = (decimal)row[2];
+                var description = (string)row[3];
+                var equipment = (string)row[4];
+                var squares = (int)row[5];
+                var address = (string)row[6];
+                var cottageName = (string)row[7];
+
+                Cottages.Add(new CottageDataModel { Id = id, AreaId = areaId, Price = price, Description = description, Equipment = equipment, Squares = squares, Address = address, CottageName = cottageName });
+            }
+            cottageCbx.DataSource = Cottages;
+            cottageCbx.DisplayMember = "CottageName";
             cottageCbx.ValueMember = "Id";
         }
     }

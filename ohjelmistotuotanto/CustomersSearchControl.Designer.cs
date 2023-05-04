@@ -289,6 +289,20 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.test3;
+            Controls.Add(prevBtn);
+            Controls.Add(panel1);
+            Controls.Add(label1);
+            Name = "CustomersSearchControl";
+            Size = new Size(804, 736);
+            Load += CustomersSearchControl_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)prevBtn).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
