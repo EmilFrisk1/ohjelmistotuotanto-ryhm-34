@@ -115,6 +115,8 @@ public static class ComboBoxUtility
     {
         if (customers.Rows != null && customers.Rows.Count > 0)
         {
+            customerCbx.DataSource = null;
+            Customers.RemoveRange(1, Customers.Count - 1);
             foreach (DataRow row in customers.Rows)
             {
                 var id = (int)row[0];
@@ -132,6 +134,8 @@ public static class ComboBoxUtility
     {
         if (areas.Rows != null && areas.Rows.Count > 0)
         {
+            areaCbx.DataSource = null;
+            Areas.RemoveRange(1, Areas.Count - 1);
             foreach (DataRow row in areas.Rows)
             {
                 var id = (int)row[0];

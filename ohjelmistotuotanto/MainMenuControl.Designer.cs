@@ -29,147 +29,142 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenuControl));
-            label1 = new Label();
-            reservationsBtn = new Button();
-            servicesBtn = new Button();
-            billsBtn = new Button();
-            customersBtn = new Button();
-            areasBtn = new Button();
-            button1 = new Button();
-            testContainer = new DataGridView();
-            cottagesBtn = new Button();
-            ((System.ComponentModel.ISupportInitialize)testContainer).BeginInit();
-            SuspendLayout();
+            this.label1 = new System.Windows.Forms.Label();
+            this.reservationsBtn = new System.Windows.Forms.Button();
+            this.servicesBtn = new System.Windows.Forms.Button();
+            this.billsBtn = new System.Windows.Forms.Button();
+            this.customersBtn = new System.Windows.Forms.Button();
+            this.areasBtn = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.testContainer = new System.Windows.Forms.DataGridView();
+            this.cottagesBtn = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.testContainer)).BeginInit();
+            this.SuspendLayout();
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Script MT Bold", 48F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.Silver;
-            label1.Location = new Point(176, 17);
-            label1.Name = "label1";
-            label1.Size = new Size(451, 77);
-            label1.TabIndex = 0;
-            label1.Text = "Village Newbies";
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Script MT Bold", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.Silver;
+            this.label1.Location = new System.Drawing.Point(176, 17);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(451, 77);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Village Newbies";
             // 
             // reservationsBtn
             // 
-            reservationsBtn.BackColor = Color.DarkSlateGray;
-            reservationsBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            reservationsBtn.ForeColor = Color.Silver;
-            reservationsBtn.Location = new Point(176, 136);
-            reservationsBtn.Name = "reservationsBtn";
-            reservationsBtn.Size = new Size(451, 62);
-            reservationsBtn.TabIndex = 1;
-            reservationsBtn.Text = "Varaukset";
-            reservationsBtn.UseVisualStyleBackColor = false;
-            reservationsBtn.Click += reservationsBtn_Click_1;
+            this.reservationsBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.reservationsBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationsBtn.ForeColor = System.Drawing.Color.Silver;
+            this.reservationsBtn.Location = new System.Drawing.Point(176, 136);
+            this.reservationsBtn.Name = "reservationsBtn";
+            this.reservationsBtn.Size = new System.Drawing.Size(451, 62);
+            this.reservationsBtn.TabIndex = 1;
+            this.reservationsBtn.Text = "Varaukset";
+            this.reservationsBtn.UseVisualStyleBackColor = false;
             // 
             // servicesBtn
             // 
-            servicesBtn.BackColor = Color.DarkSlateGray;
-            servicesBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            servicesBtn.ForeColor = Color.Silver;
-            servicesBtn.Location = new Point(176, 238);
-            servicesBtn.Name = "servicesBtn";
-            servicesBtn.Size = new Size(451, 62);
-            servicesBtn.TabIndex = 2;
-            servicesBtn.Text = "Palvelut";
-            servicesBtn.UseVisualStyleBackColor = false;
-            servicesBtn.Click += servicesBtn_Click;
+            this.servicesBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.servicesBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.servicesBtn.ForeColor = System.Drawing.Color.Silver;
+            this.servicesBtn.Location = new System.Drawing.Point(176, 238);
+            this.servicesBtn.Name = "servicesBtn";
+            this.servicesBtn.Size = new System.Drawing.Size(451, 62);
+            this.servicesBtn.TabIndex = 2;
+            this.servicesBtn.Text = "Palvelut";
+            this.servicesBtn.UseVisualStyleBackColor = false;
             // 
             // billsBtn
             // 
-            billsBtn.BackColor = Color.DarkSlateGray;
-            billsBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            billsBtn.ForeColor = Color.Silver;
-            billsBtn.Location = new Point(177, 340);
-            billsBtn.Name = "billsBtn";
-            billsBtn.Size = new Size(451, 62);
-            billsBtn.TabIndex = 3;
-            billsBtn.Text = "Laskut";
-            billsBtn.UseVisualStyleBackColor = false;
-            billsBtn.Click += billsBtn_Click;
+            this.billsBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.billsBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.billsBtn.ForeColor = System.Drawing.Color.Silver;
+            this.billsBtn.Location = new System.Drawing.Point(177, 340);
+            this.billsBtn.Name = "billsBtn";
+            this.billsBtn.Size = new System.Drawing.Size(451, 62);
+            this.billsBtn.TabIndex = 3;
+            this.billsBtn.Text = "Laskut";
+            this.billsBtn.UseVisualStyleBackColor = false;
             // 
             // customersBtn
             // 
-            customersBtn.BackColor = Color.DarkSlateGray;
-            customersBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            customersBtn.ForeColor = Color.Silver;
-            customersBtn.Location = new Point(176, 442);
-            customersBtn.Name = "customersBtn";
-            customersBtn.Size = new Size(451, 62);
-            customersBtn.TabIndex = 4;
-            customersBtn.Text = "Asiakkaat";
-            customersBtn.UseVisualStyleBackColor = false;
-            customersBtn.Click += customersBtn_Click;
+            this.customersBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.customersBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.customersBtn.ForeColor = System.Drawing.Color.Silver;
+            this.customersBtn.Location = new System.Drawing.Point(176, 442);
+            this.customersBtn.Name = "customersBtn";
+            this.customersBtn.Size = new System.Drawing.Size(451, 62);
+            this.customersBtn.TabIndex = 4;
+            this.customersBtn.Text = "Asiakkaat";
+            this.customersBtn.UseVisualStyleBackColor = false;
+            this.customersBtn.Click += new System.EventHandler(this.customersBtn_Click);
             // 
             // areasBtn
             // 
-            areasBtn.BackColor = Color.DarkSlateGray;
-            areasBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            areasBtn.ForeColor = Color.Silver;
-            areasBtn.Location = new Point(176, 544);
-            areasBtn.Name = "areasBtn";
-            areasBtn.Size = new Size(451, 62);
-            areasBtn.TabIndex = 5;
-            areasBtn.Text = "Alueet";
-            areasBtn.UseVisualStyleBackColor = false;
-            areasBtn.Click += areasBtn_Click;
+            this.areasBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.areasBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.areasBtn.ForeColor = System.Drawing.Color.Silver;
+            this.areasBtn.Location = new System.Drawing.Point(176, 544);
+            this.areasBtn.Name = "areasBtn";
+            this.areasBtn.Size = new System.Drawing.Size(451, 62);
+            this.areasBtn.TabIndex = 5;
+            this.areasBtn.Text = "Alueet";
+            this.areasBtn.UseVisualStyleBackColor = false;
+            this.areasBtn.Click += new System.EventHandler(this.areasBtn_Click);
             // 
             // button1
             // 
-            button1.Location = new Point(667, 184);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 6;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            this.button1.Location = new System.Drawing.Point(667, 184);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // testContainer
             // 
-            testContainer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            testContainer.Location = new Point(549, 286);
-            testContainer.Name = "testContainer";
-            testContainer.RowTemplate.Height = 25;
-            testContainer.Size = new Size(240, 150);
-            testContainer.TabIndex = 7;
+            this.testContainer.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.testContainer.Location = new System.Drawing.Point(549, 286);
+            this.testContainer.Name = "testContainer";
+            this.testContainer.RowTemplate.Height = 25;
+            this.testContainer.Size = new System.Drawing.Size(240, 150);
+            this.testContainer.TabIndex = 7;
             // 
             // cottagesBtn
             // 
-            cottagesBtn.BackColor = Color.DarkSlateGray;
-            cottagesBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            cottagesBtn.ForeColor = Color.Silver;
-            cottagesBtn.Location = new Point(176, 646);
-            cottagesBtn.Name = "cottagesBtn";
-            cottagesBtn.Size = new Size(451, 62);
-            cottagesBtn.TabIndex = 8;
-            cottagesBtn.Text = "Mökit";
-            cottagesBtn.UseVisualStyleBackColor = false;
-            cottagesBtn.Click += cottagesBtn_Click;
+            this.cottagesBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.cottagesBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cottagesBtn.ForeColor = System.Drawing.Color.Silver;
+            this.cottagesBtn.Location = new System.Drawing.Point(176, 646);
+            this.cottagesBtn.Name = "cottagesBtn";
+            this.cottagesBtn.Size = new System.Drawing.Size(451, 62);
+            this.cottagesBtn.TabIndex = 8;
+            this.cottagesBtn.Text = "Mökit";
+            this.cottagesBtn.UseVisualStyleBackColor = false;
             // 
             // MainMenuControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            Controls.Add(cottagesBtn);
-            Controls.Add(testContainer);
-            Controls.Add(button1);
-            Controls.Add(areasBtn);
-            Controls.Add(customersBtn);
-            Controls.Add(billsBtn);
-            Controls.Add(servicesBtn);
-            Controls.Add(reservationsBtn);
-            Controls.Add(label1);
-            Name = "MainMenuControl";
-            Size = new Size(804, 736);
-            Load += MainMenuControl_Load;
-            ((System.ComponentModel.ISupportInitialize)testContainer).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Controls.Add(this.cottagesBtn);
+            this.Controls.Add(this.testContainer);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.areasBtn);
+            this.Controls.Add(this.customersBtn);
+            this.Controls.Add(this.billsBtn);
+            this.Controls.Add(this.servicesBtn);
+            this.Controls.Add(this.reservationsBtn);
+            this.Controls.Add(this.label1);
+            this.Name = "MainMenuControl";
+            this.Size = new System.Drawing.Size(804, 736);
+            ((System.ComponentModel.ISupportInitialize)(this.testContainer)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

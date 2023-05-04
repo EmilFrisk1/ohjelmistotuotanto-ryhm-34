@@ -96,6 +96,7 @@
             this.deleteBtn.TabIndex = 17;
             this.deleteBtn.Text = "Poista";
             this.deleteBtn.UseVisualStyleBackColor = false;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // addBtn
             // 

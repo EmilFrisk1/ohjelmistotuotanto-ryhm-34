@@ -156,9 +156,9 @@
             this.label3.ForeColor = System.Drawing.Color.Silver;
             this.label3.Location = new System.Drawing.Point(161, 20);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(502, 77);
+            this.label3.Size = new System.Drawing.Size(431, 77);
             this.label3.TabIndex = 19;
-            this.label3.Text = "Päivitä asiakkaita";
+            this.label3.Text = "Päivitä asiakas";
             // 
             // prevBtn
             // 

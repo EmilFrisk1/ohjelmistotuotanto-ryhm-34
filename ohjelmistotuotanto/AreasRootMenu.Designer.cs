@@ -49,6 +49,7 @@
             this.updateBtn.TabIndex = 33;
             this.updateBtn.Text = "Päivitä";
             this.updateBtn.UseVisualStyleBackColor = false;
+            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click_1);
             // 
             // prevBtn
             // 
@@ -59,6 +60,7 @@
             this.prevBtn.Size = new System.Drawing.Size(124, 62);
             this.prevBtn.TabIndex = 32;
             this.prevBtn.TabStop = false;
+            this.prevBtn.Click += new System.EventHandler(this.prevBtn_Click);
             // 
             // label1
             // 
@@ -96,6 +98,7 @@
             this.deleteBtn.TabIndex = 29;
             this.deleteBtn.Text = "Poista";
             this.deleteBtn.UseVisualStyleBackColor = false;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click_1);
             // 
             // addBtn
             // 

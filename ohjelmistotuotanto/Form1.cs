@@ -45,6 +45,9 @@ namespace ohjelmistotuotanto
         public AreasRootMenu areasRootMenuControl;
         public AreaSearchControl areaSearchControl;
         public AreaAddControl areaAddControl;
+        public AreaRemoveControl areaRemoveControl;
+        public AreaUpdateControl areaUpdateControl;
+        
 
         static PictureBox prevButton;
 
@@ -85,6 +88,8 @@ namespace ohjelmistotuotanto
             areasRootMenuControl = new AreasRootMenu();
             areaSearchControl = new AreaSearchControl();
             areaAddControl = new AreaAddControl();
+            areaRemoveControl = new AreaRemoveControl();
+            areaUpdateControl = new AreaUpdateControl();
 
             // hide controls
             mainMenuControl.Hide();
@@ -109,6 +114,8 @@ namespace ohjelmistotuotanto
             areasRootMenuControl.Hide();
             areaSearchControl.Hide();
             areaAddControl.Hide();
+            areaRemoveControl.Hide();
+            areaUpdateControl.Hide();
 
             // Subscribe to the MenuSwitchRequested event for each User Control
             SubscribeToMenuSwitchEvents(mainMenuControl);
@@ -133,6 +140,8 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(areasRootMenuControl);
             SubscribeToMenuSwitchEvents(areaSearchControl);
             SubscribeToMenuSwitchEvents(areaAddControl);
+            SubscribeToMenuSwitchEvents(areaRemoveControl);
+            SubscribeToMenuSwitchEvents(areaUpdateControl);
 
             // Make the controls fill the whole panel (fullscreen)
             mainMenuControl.Dock = DockStyle.Fill;
@@ -157,6 +166,8 @@ namespace ohjelmistotuotanto
             areasRootMenuControl.Dock = DockStyle.Fill;
             areaSearchControl.Dock = DockStyle.Fill;
             areaAddControl.Dock = DockStyle.Fill;
+            areaRemoveControl.Dock = DockStyle.Fill;
+            areaUpdateControl.Dock = DockStyle.Fill;
 
             // add controls to app container
             appContainer.Controls.Add(mainMenuControl);
@@ -182,6 +193,8 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(areasRootMenuControl);
             appContainer.Controls.Add(areaSearchControl);
             appContainer.Controls.Add(areaAddControl);
+            appContainer.Controls.Add(areaRemoveControl);
+            appContainer.Controls.Add(areaUpdateControl);
 
             // Add app status strip to all menu's that need it
             mainMenuControl.statusStrip = appStatusStrip;
@@ -360,6 +373,18 @@ namespace ohjelmistotuotanto
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.areasAdd);
             }
+            else if (menu == Constants.areasRemove)
+            {
+                areaRemoveControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.areasRemove);
+            }
+            else if (menu == Constants.areasUpdate)
+            {
+                areaUpdateControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.areasUpdate);
+            }
         }
 
         private void SubscribeToMenuSwitchEvents(UserControl userControl)
@@ -447,6 +472,14 @@ namespace ohjelmistotuotanto
             {
                 areaAddControl.MenuSwitchRequested += SwitchMenuControl;
             }
+            else if (userControl is AreaRemoveControl areaRemoveControl)
+            {
+                areaRemoveControl.MenuSwitchRequested += SwitchMenuControl;
+            }
+            else if (userControl is AreaUpdateControl areaUpdateControl)
+            {
+                areaUpdateControl.MenuSwitchRequested += SwitchMenuControl;
+            }
         }
 
         // Makes sure we don't use vertical scrollbars when we don't need them
@@ -511,6 +544,12 @@ namespace ohjelmistotuotanto
                     break;
                 case Constants.areasAdd:
                     areaAddControl.Visible = false;
+                    break;
+                case Constants.areasRemove:
+                    areaRemoveControl.Visible = false;
+                    break;
+                case Constants.areasUpdate:
+                    areaUpdateControl.Visible = false;
                     break;
             }
 
