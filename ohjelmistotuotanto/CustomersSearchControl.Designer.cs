@@ -29,242 +29,241 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomersSearchControl));
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox = new System.Windows.Forms.TextBox();
-            this.addCustomerBtn = new System.Windows.Forms.Button();
-            this.prevBtn = new System.Windows.Forms.PictureBox();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.prevBtn)).BeginInit();
-            this.SuspendLayout();
+            label1 = new Label();
+            panel1 = new Panel();
+            label8 = new Label();
+            label7 = new Label();
+            postalCodeTxtBox = new TextBox();
+            label6 = new Label();
+            addressTxtBox = new TextBox();
+            label5 = new Label();
+            phoneNumberTxtBox = new TextBox();
+            label4 = new Label();
+            emailTxtBox = new TextBox();
+            label3 = new Label();
+            lastNameTxtBox = new TextBox();
+            label2 = new Label();
+            firstNameTxtBox = new TextBox();
+            addCustomerBtn = new Button();
+            prevBtn = new PictureBox();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)prevBtn).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Script MT Bold", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.Silver;
-            this.label1.Location = new System.Drawing.Point(205, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(394, 77);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Lisää asiakas";
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Script MT Bold", 48F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Silver;
+            label1.Location = new Point(205, 17);
+            label1.Name = "label1";
+            label1.Size = new Size(394, 77);
+            label1.TabIndex = 3;
+            label1.Text = "Lisää asiakas";
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.textBox5);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.textBox4);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.textBox3);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.textBox);
-            this.panel1.Controls.Add(this.addCustomerBtn);
-            this.panel1.ForeColor = System.Drawing.Color.Silver;
-            this.panel1.Location = new System.Drawing.Point(173, 130);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(458, 444);
-            this.panel1.TabIndex = 4;
+            panel1.BackColor = Color.Transparent;
+            panel1.BorderStyle = BorderStyle.Fixed3D;
+            panel1.Controls.Add(label8);
+            panel1.Controls.Add(label7);
+            panel1.Controls.Add(postalCodeTxtBox);
+            panel1.Controls.Add(label6);
+            panel1.Controls.Add(addressTxtBox);
+            panel1.Controls.Add(label5);
+            panel1.Controls.Add(phoneNumberTxtBox);
+            panel1.Controls.Add(label4);
+            panel1.Controls.Add(emailTxtBox);
+            panel1.Controls.Add(label3);
+            panel1.Controls.Add(lastNameTxtBox);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(firstNameTxtBox);
+            panel1.Controls.Add(addCustomerBtn);
+            panel1.ForeColor = Color.Silver;
+            panel1.Location = new Point(173, 130);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(458, 444);
+            panel1.TabIndex = 4;
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label8.Location = new System.Drawing.Point(117, 30);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(224, 50);
-            this.label8.TabIndex = 27;
-            this.label8.Text = "Uusi asiakas";
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI Semibold", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.ForeColor = Color.WhiteSmoke;
+            label8.Location = new Point(117, 30);
+            label8.Name = "label8";
+            label8.Size = new Size(224, 50);
+            label8.TabIndex = 27;
+            label8.Text = "Uusi asiakas";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI Semibold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label7.Location = new System.Drawing.Point(53, 333);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(111, 23);
-            this.label7.TabIndex = 26;
-            this.label7.Text = "Posti numero";
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Semibold", 12.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.ForeColor = Color.WhiteSmoke;
+            label7.Location = new Point(53, 333);
+            label7.Name = "label7";
+            label7.Size = new Size(106, 23);
+            label7.TabIndex = 26;
+            label7.Text = "Postinumero";
             // 
-            // textBox5
+            // postalCodeTxtBox
             // 
-            this.textBox5.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.textBox5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox5.ForeColor = System.Drawing.Color.Silver;
-            this.textBox5.Location = new System.Drawing.Point(205, 333);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(205, 29);
-            this.textBox5.TabIndex = 25;
+            postalCodeTxtBox.BackColor = Color.DarkSlateGray;
+            postalCodeTxtBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            postalCodeTxtBox.ForeColor = Color.Silver;
+            postalCodeTxtBox.Location = new Point(205, 333);
+            postalCodeTxtBox.Name = "postalCodeTxtBox";
+            postalCodeTxtBox.Size = new Size(205, 29);
+            postalCodeTxtBox.TabIndex = 25;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label6.Location = new System.Drawing.Point(51, 288);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(59, 23);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "Osoite";
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI Semibold", 12.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ForeColor = Color.WhiteSmoke;
+            label6.Location = new Point(51, 288);
+            label6.Name = "label6";
+            label6.Size = new Size(59, 23);
+            label6.TabIndex = 24;
+            label6.Text = "Osoite";
             // 
-            // textBox4
+            // addressTxtBox
             // 
-            this.textBox4.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.textBox4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox4.ForeColor = System.Drawing.Color.Silver;
-            this.textBox4.Location = new System.Drawing.Point(205, 288);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(205, 29);
-            this.textBox4.TabIndex = 23;
+            addressTxtBox.BackColor = Color.DarkSlateGray;
+            addressTxtBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            addressTxtBox.ForeColor = Color.Silver;
+            addressTxtBox.Location = new Point(205, 288);
+            addressTxtBox.Name = "addressTxtBox";
+            addressTxtBox.Size = new Size(205, 29);
+            addressTxtBox.TabIndex = 23;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label5.Location = new System.Drawing.Point(53, 243);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(132, 23);
-            this.label5.TabIndex = 22;
-            this.label5.Text = "Puhelin numero";
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 12.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.ForeColor = Color.WhiteSmoke;
+            label5.Location = new Point(53, 243);
+            label5.Name = "label5";
+            label5.Size = new Size(134, 23);
+            label5.TabIndex = 22;
+            label5.Text = "Puhelin-numero";
             // 
-            // textBox3
+            // phoneNumberTxtBox
             // 
-            this.textBox3.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox3.ForeColor = System.Drawing.Color.Silver;
-            this.textBox3.Location = new System.Drawing.Point(205, 243);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(205, 29);
-            this.textBox3.TabIndex = 21;
+            phoneNumberTxtBox.BackColor = Color.DarkSlateGray;
+            phoneNumberTxtBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            phoneNumberTxtBox.ForeColor = Color.Silver;
+            phoneNumberTxtBox.Location = new Point(205, 243);
+            phoneNumberTxtBox.Name = "phoneNumberTxtBox";
+            phoneNumberTxtBox.Size = new Size(205, 29);
+            phoneNumberTxtBox.TabIndex = 21;
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label4.Location = new System.Drawing.Point(53, 198);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(94, 23);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Sähköposti";
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Semibold", 12.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.WhiteSmoke;
+            label4.Location = new Point(53, 198);
+            label4.Name = "label4";
+            label4.Size = new Size(94, 23);
+            label4.TabIndex = 20;
+            label4.Text = "Sähköposti";
             // 
-            // textBox2
+            // emailTxtBox
             // 
-            this.textBox2.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox2.ForeColor = System.Drawing.Color.Silver;
-            this.textBox2.Location = new System.Drawing.Point(205, 198);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(205, 29);
-            this.textBox2.TabIndex = 19;
+            emailTxtBox.BackColor = Color.DarkSlateGray;
+            emailTxtBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            emailTxtBox.ForeColor = Color.Silver;
+            emailTxtBox.Location = new Point(205, 198);
+            emailTxtBox.Name = "emailTxtBox";
+            emailTxtBox.Size = new Size(205, 29);
+            emailTxtBox.TabIndex = 19;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label3.Location = new System.Drawing.Point(53, 153);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 23);
-            this.label3.TabIndex = 18;
-            this.label3.Text = "Sukunimi";
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 12.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.WhiteSmoke;
+            label3.Location = new Point(53, 153);
+            label3.Name = "label3";
+            label3.Size = new Size(81, 23);
+            label3.TabIndex = 18;
+            label3.Text = "Sukunimi";
             // 
-            // textBox1
+            // lastNameTxtBox
             // 
-            this.textBox1.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.ForeColor = System.Drawing.Color.Silver;
-            this.textBox1.Location = new System.Drawing.Point(205, 153);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(205, 29);
-            this.textBox1.TabIndex = 17;
+            lastNameTxtBox.BackColor = Color.DarkSlateGray;
+            lastNameTxtBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            lastNameTxtBox.ForeColor = Color.Silver;
+            lastNameTxtBox.Location = new Point(205, 153);
+            lastNameTxtBox.Name = "lastNameTxtBox";
+            lastNameTxtBox.Size = new Size(205, 29);
+            lastNameTxtBox.TabIndex = 17;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label2.Location = new System.Drawing.Point(53, 108);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 23);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "Etunimi";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 12.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.ForeColor = Color.WhiteSmoke;
+            label2.Location = new Point(53, 108);
+            label2.Name = "label2";
+            label2.Size = new Size(68, 23);
+            label2.TabIndex = 16;
+            label2.Text = "Etunimi";
+            label2.Click += label2_Click;
             // 
-            // textBox
+            // firstNameTxtBox
             // 
-            this.textBox.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.textBox.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox.ForeColor = System.Drawing.Color.Silver;
-            this.textBox.Location = new System.Drawing.Point(205, 108);
-            this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(205, 29);
-            this.textBox.TabIndex = 15;
+            firstNameTxtBox.BackColor = Color.DarkSlateGray;
+            firstNameTxtBox.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            firstNameTxtBox.ForeColor = Color.Silver;
+            firstNameTxtBox.Location = new Point(205, 108);
+            firstNameTxtBox.Name = "firstNameTxtBox";
+            firstNameTxtBox.Size = new Size(205, 29);
+            firstNameTxtBox.TabIndex = 15;
             // 
             // addCustomerBtn
             // 
-            this.addCustomerBtn.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.addCustomerBtn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.addCustomerBtn.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.addCustomerBtn.Location = new System.Drawing.Point(51, 373);
-            this.addCustomerBtn.Name = "addCustomerBtn";
-            this.addCustomerBtn.Size = new System.Drawing.Size(359, 34);
-            this.addCustomerBtn.TabIndex = 14;
-            this.addCustomerBtn.Text = "lisää";
-            this.addCustomerBtn.UseVisualStyleBackColor = false;
-            this.addCustomerBtn.Click += new System.EventHandler(this.addCustomerBtn_Click);
+            addCustomerBtn.BackColor = Color.DarkSlateGray;
+            addCustomerBtn.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
+            addCustomerBtn.ForeColor = Color.WhiteSmoke;
+            addCustomerBtn.Location = new Point(51, 373);
+            addCustomerBtn.Name = "addCustomerBtn";
+            addCustomerBtn.Size = new Size(359, 34);
+            addCustomerBtn.TabIndex = 14;
+            addCustomerBtn.Text = "lisää";
+            addCustomerBtn.UseVisualStyleBackColor = false;
+            addCustomerBtn.Click += addCustomerBtn_Click;
             // 
             // prevBtn
             // 
-            this.prevBtn.BackColor = System.Drawing.Color.Transparent;
-            this.prevBtn.Image = ((System.Drawing.Image)(resources.GetObject("prevBtn.Image")));
-            this.prevBtn.Location = new System.Drawing.Point(33, 32);
-            this.prevBtn.Name = "prevBtn";
-            this.prevBtn.Size = new System.Drawing.Size(124, 62);
-            this.prevBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.prevBtn.TabIndex = 18;
-            this.prevBtn.TabStop = false;
-            this.prevBtn.Click += new System.EventHandler(this.prevBtn_Click);
+            prevBtn.BackColor = Color.Transparent;
+            prevBtn.Image = (Image)resources.GetObject("prevBtn.Image");
+            prevBtn.Location = new Point(33, 32);
+            prevBtn.Name = "prevBtn";
+            prevBtn.Size = new Size(124, 62);
+            prevBtn.SizeMode = PictureBoxSizeMode.StretchImage;
+            prevBtn.TabIndex = 18;
+            prevBtn.TabStop = false;
+            prevBtn.Click += prevBtn_Click;
             // 
             // CustomersSearchControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::ohjelmistotuotanto.Properties.Resources.test3;
-            this.Controls.Add(this.prevBtn);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
-            this.Name = "CustomersSearchControl";
-            this.Size = new System.Drawing.Size(804, 736);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.prevBtn)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.test3;
+            Controls.Add(prevBtn);
+            Controls.Add(panel1);
+            Controls.Add(label1);
+            Name = "CustomersSearchControl";
+            Size = new Size(804, 736);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)prevBtn).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -272,18 +271,18 @@
         private Label label1;
         private Panel panel1;
         private Button addCustomerBtn;
-        private TextBox textBox;
+        private TextBox firstNameTxtBox;
         private Label label2;
         private Label label5;
-        private TextBox textBox3;
+        private TextBox phoneNumberTxtBox;
         private Label label4;
-        private TextBox textBox2;
+        private TextBox emailTxtBox;
         private Label label3;
-        private TextBox textBox1;
+        private TextBox lastNameTxtBox;
         private Label label7;
-        private TextBox textBox5;
+        private TextBox postalCodeTxtBox;
         private Label label6;
-        private TextBox textBox4;
+        private TextBox addressTxtBox;
         private Label label8;
         private PictureBox prevBtn;
     }

@@ -163,6 +163,7 @@ namespace ohjelmistotuotanto
             mainMenuControl.statusStrip = appStatusStrip;
             addReservationMenuControl.statusStrip = appStatusStrip;
             servicesAddMenuControl.statusStrip = appStatusStrip;
+            customersSearchControl.statusStrip = appStatusStrip;
 
             // add appContainer reference to all menu's that need it
             addReservationMenuControl.appContainer = appContainer;

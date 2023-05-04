@@ -15,18 +15,19 @@ namespace ohjelmistotuotanto
     {
         public delegate void MenuSwitchRequestHandler(string newControl); // Function pointer 
         public event MenuSwitchRequestHandler MenuSwitchRequested;
+        public StatusStrip statusStrip;
         public CustomersSearchControl()
         {
             InitializeComponent();
         }
         void menuDefaultState()
         {
-            textBox.Text = "";
-            textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
-            textBox5.Text = "";
+            firstNameTxtBox.Text = "";
+            lastNameTxtBox.Text = "";
+            emailTxtBox.Text = "";
+            phoneNumberTxtBox.Text = "";
+            addressTxtBox.Text = "";
+            postalCodeTxtBox.Text = "";
         }
         private void addCustomertxtBox_TextChanged(object sender, EventArgs e)
         {
@@ -47,14 +48,17 @@ namespace ohjelmistotuotanto
 
         private async void addCustomerBtn_Click(object sender, EventArgs e)
         {
+            if (!ValidateFields())
+                return;
+
             Dictionary<string, object> customerColumnValues = new Dictionary<string, object>
                                 {
-                                    { "email",textBox2.Text},
-                                    { "firstname", textBox.Text},
-                                    { "lastname", textBox1.Text},
-                                    { "phone", textBox3.Text},
-                                    { "postal_code", textBox5.Text},
-                                    { "address", textBox4.Text},
+                                    { "email",emailTxtBox.Text},
+                                    { "firstname", firstNameTxtBox.Text},
+                                    { "lastname", lastNameTxtBox.Text},
+                                    { "phone", phoneNumberTxtBox.Text},
+                                    { "postal_code", postalCodeTxtBox.Text},
+                                    { "address", addressTxtBox.Text},
                                 };
 
             int billInsRes = await VillageNewbies._dbManager.InsertDataAsync("customer", customerColumnValues);
@@ -67,6 +71,26 @@ namespace ohjelmistotuotanto
                 MessageBox.Show("Asiakas lisätty onnistuneesti!");
             }
             menuDefaultState();
+        }
+
+        private bool ValidateFields()
+        {
+            if (string.IsNullOrEmpty(firstNameTxtBox.Text) || string.IsNullOrEmpty(lastNameTxtBox.Text) ||
+                string.IsNullOrEmpty(emailTxtBox.Text) || string.IsNullOrEmpty(phoneNumberTxtBox.Text) ||
+                string.IsNullOrEmpty(addressTxtBox.Text) || string.IsNullOrEmpty(postalCodeTxtBox.Text))
+            {
+                statusStrip.Show();
+                return false;
+            }
+            else
+            {
+                if (statusStrip.Visible)
+                {
+                    statusStrip.Hide();
+                    return true;
+                }
+                return true;
+            }
         }
     }
 }
