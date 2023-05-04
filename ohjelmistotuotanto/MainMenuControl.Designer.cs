@@ -37,6 +37,7 @@
             areasBtn = new Button();
             button1 = new Button();
             testContainer = new DataGridView();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)testContainer).BeginInit();
             SuspendLayout();
             // 
@@ -136,11 +137,24 @@
             testContainer.Size = new Size(240, 150);
             testContainer.TabIndex = 7;
             // 
+            // button2
+            // 
+            button2.BackColor = Color.DarkSlateGray;
+            button2.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+            button2.ForeColor = Color.Silver;
+            button2.Location = new Point(176, 646);
+            button2.Name = "button2";
+            button2.Size = new Size(451, 62);
+            button2.TabIndex = 8;
+            button2.Text = "Alueet";
+            button2.UseVisualStyleBackColor = false;
+            // 
             // MainMenuControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            Controls.Add(button2);
             Controls.Add(testContainer);
             Controls.Add(button1);
             Controls.Add(areasBtn);
@@ -167,5 +181,6 @@
         private Button areasBtn;
         private Button button1;
         private DataGridView testContainer;
+        private Button button2;
     }
 }

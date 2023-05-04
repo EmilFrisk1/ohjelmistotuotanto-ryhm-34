@@ -104,9 +104,9 @@
             label7.ForeColor = Color.WhiteSmoke;
             label7.Location = new Point(53, 333);
             label7.Name = "label7";
-            label7.Size = new Size(106, 23);
+            label7.Size = new Size(118, 23);
             label7.TabIndex = 26;
-            label7.Text = "Postinumero";
+            label7.Text = "Postinumero *";
             // 
             // postalCodeTxtBox
             // 
@@ -125,9 +125,9 @@
             label6.ForeColor = Color.WhiteSmoke;
             label6.Location = new Point(51, 288);
             label6.Name = "label6";
-            label6.Size = new Size(59, 23);
+            label6.Size = new Size(71, 23);
             label6.TabIndex = 24;
-            label6.Text = "Osoite";
+            label6.Text = "Osoite *";
             // 
             // addressTxtBox
             // 
@@ -146,9 +146,9 @@
             label5.ForeColor = Color.WhiteSmoke;
             label5.Location = new Point(53, 243);
             label5.Name = "label5";
-            label5.Size = new Size(134, 23);
+            label5.Size = new Size(146, 23);
             label5.TabIndex = 22;
-            label5.Text = "Puhelin-numero";
+            label5.Text = "Puhelin-numero *";
             // 
             // phoneNumberTxtBox
             // 
@@ -167,9 +167,9 @@
             label4.ForeColor = Color.WhiteSmoke;
             label4.Location = new Point(53, 198);
             label4.Name = "label4";
-            label4.Size = new Size(94, 23);
+            label4.Size = new Size(106, 23);
             label4.TabIndex = 20;
-            label4.Text = "Sähköposti";
+            label4.Text = "Sähköposti *";
             // 
             // emailTxtBox
             // 
@@ -188,9 +188,9 @@
             label3.ForeColor = Color.WhiteSmoke;
             label3.Location = new Point(53, 153);
             label3.Name = "label3";
-            label3.Size = new Size(81, 23);
+            label3.Size = new Size(93, 23);
             label3.TabIndex = 18;
-            label3.Text = "Sukunimi";
+            label3.Text = "Sukunimi *";
             // 
             // lastNameTxtBox
             // 
@@ -209,9 +209,9 @@
             label2.ForeColor = Color.WhiteSmoke;
             label2.Location = new Point(53, 108);
             label2.Name = "label2";
-            label2.Size = new Size(68, 23);
+            label2.Size = new Size(80, 23);
             label2.TabIndex = 16;
-            label2.Text = "Etunimi";
+            label2.Text = "Etunimi *";
             label2.Click += label2_Click;
             // 
             // firstNameTxtBox

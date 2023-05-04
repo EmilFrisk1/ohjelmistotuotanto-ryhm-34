@@ -25,5 +25,10 @@ namespace ohjelmistotuotanto
             VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
             MenuSwitchRequested?.Invoke(Constants.customersMenu);
         }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
