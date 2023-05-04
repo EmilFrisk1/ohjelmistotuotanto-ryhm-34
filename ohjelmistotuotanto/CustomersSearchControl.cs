@@ -92,5 +92,10 @@ namespace ohjelmistotuotanto
                 return true;
             }
         }
+
+        private void CustomersSearchControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

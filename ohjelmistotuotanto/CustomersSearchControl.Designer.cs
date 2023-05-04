@@ -259,6 +259,7 @@
             Controls.Add(label1);
             Name = "CustomersSearchControl";
             Size = new Size(804, 736);
+            Load += CustomersSearchControl_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)prevBtn).EndInit();

@@ -90,21 +90,7 @@ namespace ohjelmistotuotanto
 
         private void priceTxtBox_KeyPress(object sender, KeyPressEventArgs e)
         {// Allow numbers, spaces and one dot
-            if (Regex.IsMatch(e.KeyChar.ToString(), @"^[0-9 ]*\.?[0-9 ]*$") || e.KeyChar == (char)8)
-            {
-                if (e.KeyChar == '.' && ((TextBox)sender).Text.Contains("."))
-                {
-                    e.Handled = true;
-                }
-                else
-                {
-                    e.Handled = false;
-                }
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            TextBoxUtility.AllowOnlyNumbers(sender, e);
         }
 
         private void MenuDefaultState()

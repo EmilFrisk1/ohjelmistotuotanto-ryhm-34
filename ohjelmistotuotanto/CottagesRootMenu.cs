@@ -33,17 +33,20 @@ namespace ohjelmistotuotanto
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.cottagesAddMenu);
         }
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.cottagesRemoveMenu);
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.cottagesUpdateMenu);
         }
     }
 }
