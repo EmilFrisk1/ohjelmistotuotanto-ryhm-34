@@ -108,6 +108,7 @@
             this.addBtn.TabIndex = 28;
             this.addBtn.Text = "Lisää";
             this.addBtn.UseVisualStyleBackColor = false;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click_1);
             // 
             // AreasRootMenu
             // 

@@ -44,6 +44,7 @@ namespace ohjelmistotuotanto
         public CottagesRootMenu cottagesRootMenuControl;
         public AreasRootMenu areasRootMenuControl;
         public AreaSearchControl areaSearchControl;
+        public AreaAddControl areaAddControl;
 
         static PictureBox prevButton;
 
@@ -83,6 +84,7 @@ namespace ohjelmistotuotanto
             cottagesRootMenuControl = new CottagesRootMenu();
             areasRootMenuControl = new AreasRootMenu();
             areaSearchControl = new AreaSearchControl();
+            areaAddControl = new AreaAddControl();
 
             // hide controls
             mainMenuControl.Hide();
@@ -106,6 +108,7 @@ namespace ohjelmistotuotanto
             cottagesRootMenuControl.Hide();
             areasRootMenuControl.Hide();
             areaSearchControl.Hide();
+            areaAddControl.Hide();
 
             // Subscribe to the MenuSwitchRequested event for each User Control
             SubscribeToMenuSwitchEvents(mainMenuControl);
@@ -129,6 +132,7 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(cottagesRootMenuControl);
             SubscribeToMenuSwitchEvents(areasRootMenuControl);
             SubscribeToMenuSwitchEvents(areaSearchControl);
+            SubscribeToMenuSwitchEvents(areaAddControl);
 
             // Make the controls fill the whole panel (fullscreen)
             mainMenuControl.Dock = DockStyle.Fill;
@@ -152,6 +156,7 @@ namespace ohjelmistotuotanto
             cottagesRootMenuControl.Dock = DockStyle.Fill;
             areasRootMenuControl.Dock = DockStyle.Fill;
             areaSearchControl.Dock = DockStyle.Fill;
+            areaAddControl.Dock = DockStyle.Fill;
 
             // add controls to app container
             appContainer.Controls.Add(mainMenuControl);
@@ -176,13 +181,14 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(cottagesRootMenuControl);
             appContainer.Controls.Add(areasRootMenuControl);
             appContainer.Controls.Add(areaSearchControl);
+            appContainer.Controls.Add(areaAddControl);
 
             // Add app status strip to all menu's that need it
             mainMenuControl.statusStrip = appStatusStrip;
             addReservationMenuControl.statusStrip = appStatusStrip;
             servicesAddMenuControl.statusStrip = appStatusStrip;
             customersSearchControl.statusStrip = appStatusStrip;
-
+            areaAddControl.statusStrip = appStatusStrip;
             // add appContainer reference to all menu's that need it
             addReservationMenuControl.appContainer = appContainer;
 
@@ -348,6 +354,12 @@ namespace ohjelmistotuotanto
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.areasSearch);
             }
+            else if (menu == Constants.areasAdd)
+            {
+                areaAddControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.areasAdd);
+            }
         }
 
         private void SubscribeToMenuSwitchEvents(UserControl userControl)
@@ -431,6 +443,10 @@ namespace ohjelmistotuotanto
             {
                 areaSearchControl.MenuSwitchRequested += SwitchMenuControl;
             }
+            else if (userControl is AreaAddControl areaAddControl)
+            {
+                areaAddControl.MenuSwitchRequested += SwitchMenuControl;
+            }
         }
 
         // Makes sure we don't use vertical scrollbars when we don't need them
@@ -492,6 +508,9 @@ namespace ohjelmistotuotanto
                     break;
                 case Constants.areasSearch:
                     areaSearchControl.Visible = false;
+                    break;
+                case Constants.areasAdd:
+                    areaAddControl.Visible = false;
                     break;
             }
 
