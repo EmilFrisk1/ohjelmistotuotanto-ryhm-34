@@ -50,5 +50,17 @@ namespace ohjelmistotuotanto
         {
 
         }
+
+        private void searchBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.areasSearch);
+        }
+
+        private void addBtn_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.areasAdd);
+        }
     }
 }

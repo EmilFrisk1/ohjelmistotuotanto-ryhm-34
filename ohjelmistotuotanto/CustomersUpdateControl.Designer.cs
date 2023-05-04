@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomersUpdateControl));
             this.panel2 = new System.Windows.Forms.Panel();
+            this.customerErrorLabel = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.customerCbx = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.customerTxtBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.customerErrorLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.prevBtn = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -75,6 +75,19 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(451, 224);
             this.panel2.TabIndex = 18;
+            // 
+            // customerErrorLabel
+            // 
+            this.customerErrorLabel.AutoSize = true;
+            this.customerErrorLabel.BackColor = System.Drawing.Color.Transparent;
+            this.customerErrorLabel.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.customerErrorLabel.ForeColor = System.Drawing.Color.Cyan;
+            this.customerErrorLabel.Location = new System.Drawing.Point(105, 168);
+            this.customerErrorLabel.Name = "customerErrorLabel";
+            this.customerErrorLabel.Size = new System.Drawing.Size(250, 37);
+            this.customerErrorLabel.TabIndex = 24;
+            this.customerErrorLabel.Text = "Valitse jokin asiakas";
+            this.customerErrorLabel.Visible = false;
             // 
             // label4
             // 
@@ -122,7 +135,6 @@
             this.customerTxtBox.Name = "customerTxtBox";
             this.customerTxtBox.Size = new System.Drawing.Size(315, 29);
             this.customerTxtBox.TabIndex = 3;
-            this.customerTxtBox.Text = " ";
             this.customerTxtBox.TextChanged += new System.EventHandler(this.customerTxtBox_TextChanged_1);
             // 
             // label6
@@ -135,19 +147,6 @@
             this.label6.Size = new System.Drawing.Size(61, 37);
             this.label6.TabIndex = 4;
             this.label6.Text = "hae";
-            // 
-            // customerErrorLabel
-            // 
-            this.customerErrorLabel.AutoSize = true;
-            this.customerErrorLabel.BackColor = System.Drawing.Color.Transparent;
-            this.customerErrorLabel.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.customerErrorLabel.ForeColor = System.Drawing.Color.Cyan;
-            this.customerErrorLabel.Location = new System.Drawing.Point(105, 168);
-            this.customerErrorLabel.Name = "customerErrorLabel";
-            this.customerErrorLabel.Size = new System.Drawing.Size(250, 37);
-            this.customerErrorLabel.TabIndex = 24;
-            this.customerErrorLabel.Text = "Valitse jokin asiakas";
-            this.customerErrorLabel.Visible = false;
             // 
             // label3
             // 
@@ -382,6 +381,7 @@
             this.Name = "CustomersUpdateControl";
             this.Size = new System.Drawing.Size(804, 820);
             this.Load += new System.EventHandler(this.CustomersUpdateControl_Load);
+            this.VisibleChanged += new System.EventHandler(this.CustomersUpdateControl_VisibleChanged);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.prevBtn)).EndInit();

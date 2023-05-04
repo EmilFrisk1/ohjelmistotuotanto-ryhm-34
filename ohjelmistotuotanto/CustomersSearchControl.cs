@@ -28,6 +28,7 @@ namespace ohjelmistotuotanto
             phoneNumberTxtBox.Text = "";
             addressTxtBox.Text = "";
             postalCodeTxtBox.Text = "";
+            cityTxtBox.Text = "";
         }
         private void addCustomertxtBox_TextChanged(object sender, EventArgs e)
         {
@@ -59,6 +60,7 @@ namespace ohjelmistotuotanto
                                     { "phone", phoneNumberTxtBox.Text},
                                     { "postal_code", postalCodeTxtBox.Text},
                                     { "address", addressTxtBox.Text},
+                                    { "city", cityTxtBox.Text},
                                 };
 
             int billInsRes = await VillageNewbies._dbManager.InsertDataAsync("customer", customerColumnValues);
@@ -77,7 +79,7 @@ namespace ohjelmistotuotanto
         {
             if (string.IsNullOrEmpty(firstNameTxtBox.Text) || string.IsNullOrEmpty(lastNameTxtBox.Text) ||
                 string.IsNullOrEmpty(emailTxtBox.Text) || string.IsNullOrEmpty(phoneNumberTxtBox.Text) ||
-                string.IsNullOrEmpty(addressTxtBox.Text) || string.IsNullOrEmpty(postalCodeTxtBox.Text))
+                string.IsNullOrEmpty(addressTxtBox.Text) || string.IsNullOrEmpty(postalCodeTxtBox.Text) || string.IsNullOrEmpty(cityTxtBox.Text))
             {
                 statusStrip.Show();
                 return false;
