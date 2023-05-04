@@ -75,7 +75,14 @@ namespace ohjelmistotuotanto
 
         private void areasBtn_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.areasMenu);
+        }
 
+        private void cottagesBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.cottagesMenu);
         }
     }
 }

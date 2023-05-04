@@ -41,6 +41,8 @@ namespace ohjelmistotuotanto
         public CustomersUpdateControl customersUpdateControl;
         public BillingMenuControl billingMenuControl;
         public ServicesAddMenu servicesAddMenuControl;
+        public CottagesRootMenu cottagesRootMenuControl;
+        public AreasRootMenu areasRootMenuControl;
 
         static PictureBox prevButton;
 
@@ -77,6 +79,8 @@ namespace ohjelmistotuotanto
             customersDeleteControl = new CustomersDeleteControl();
             customersUpdateControl = new CustomersUpdateControl();
             billingMenuControl = new BillingMenuControl();
+            cottagesRootMenuControl = new CottagesRootMenu();
+            areasRootMenuControl = new AreasRootMenu();
 
             // hide controls
             mainMenuControl.Hide();
@@ -97,6 +101,8 @@ namespace ohjelmistotuotanto
             customersDeleteControl.Hide();
             customersUpdateControl.Hide();
             billingMenuControl.Hide();
+            cottagesRootMenuControl.Hide();
+            areasRootMenuControl.Hide();
 
             // Subscribe to the MenuSwitchRequested event for each User Control
             SubscribeToMenuSwitchEvents(mainMenuControl);
@@ -117,6 +123,8 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(customersDeleteControl);
             SubscribeToMenuSwitchEvents(customersUpdateControl);
             SubscribeToMenuSwitchEvents(billingMenuControl);
+            SubscribeToMenuSwitchEvents(cottagesRootMenuControl);
+            SubscribeToMenuSwitchEvents(areasRootMenuControl);
 
             // Make the controls fill the whole panel (fullscreen)
             mainMenuControl.Dock = DockStyle.Fill;
@@ -137,6 +145,8 @@ namespace ohjelmistotuotanto
             customersDeleteControl.Dock = DockStyle.Fill;
             customersUpdateControl.Dock = DockStyle.Fill;
             billingMenuControl.Dock = DockStyle.Fill;
+            cottagesRootMenuControl.Dock = DockStyle.Fill;
+            areasRootMenuControl.Dock = DockStyle.Fill;
 
             // add controls to app container
             appContainer.Controls.Add(mainMenuControl);
@@ -158,6 +168,8 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(displaySearchResultsMenuControl);
             appContainer.Controls.Add(customersUpdateControl);
             appContainer.Controls.Add(billingMenuControl);
+            appContainer.Controls.Add(cottagesRootMenuControl);
+            appContainer.Controls.Add(areasRootMenuControl);
 
             // Add app status strip to all menu's that need it
             mainMenuControl.statusStrip = appStatusStrip;
@@ -313,8 +325,17 @@ namespace ohjelmistotuotanto
                 billingMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.billingMenu);
+            } else if (menu == Constants.cottagesMenu)
+            {
+                cottagesRootMenuControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.cottagesMenu);
+            } else if (menu == Constants.areasMenu)
+            {
+                areasRootMenuControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.areasMenu);
             }
-
         }
 
         private void SubscribeToMenuSwitchEvents(UserControl userControl)
@@ -387,6 +408,12 @@ namespace ohjelmistotuotanto
             else if (userControl is CustomersUpdateControl customersUpdate)
             {
                 customersUpdateControl.MenuSwitchRequested += SwitchMenuControl;
+            } else if (userControl is CottagesRootMenu cottagesRootMenu)
+            {
+                cottagesRootMenu.MenuSwitchRequested += SwitchMenuControl;
+            } else if (userControl is AreasRootMenu areasRootMenuControl)
+            {
+                areasRootMenuControl.MenuSwitchRequested += SwitchMenuControl;
             }
         }
 

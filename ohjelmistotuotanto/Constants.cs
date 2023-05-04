@@ -27,5 +27,7 @@ namespace ohjelmistotuotanto
         public const string customersDelete = "customersDelete";
         public const string customersUpdate = "customersUpdate";
         public const string billingMenu = "billingMenu";
+        public const string cottagesMenu = "cottagesMenu";
+        public const string areasMenu = "areasMenu";
     }
 }
