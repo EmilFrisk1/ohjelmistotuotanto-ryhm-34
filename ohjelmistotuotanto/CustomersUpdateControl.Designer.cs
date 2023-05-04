@@ -381,6 +381,7 @@
             this.Name = "CustomersUpdateControl";
             this.Size = new System.Drawing.Size(804, 820);
             this.Load += new System.EventHandler(this.CustomersUpdateControl_Load);
+            this.VisibleChanged += new System.EventHandler(this.CustomersUpdateControl_VisibleChanged);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.prevBtn)).EndInit();

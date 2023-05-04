@@ -19,6 +19,7 @@ namespace ohjelmistotuotanto
         public List<ClientDatamodel> ClientDatamodels { get; set; }
         public List<Customer> Customers { get; set; }
         private bool isFirstLoad = true;
+        private static int counter = 0;
         public static bool firstNameChanged = false;
         public static bool lastNameChanged = false;
         public static bool emailChanged = false;
@@ -261,6 +262,18 @@ namespace ohjelmistotuotanto
         private void customerTxtBox_TextChanged_1(object sender, EventArgs e)
         {
             ComboBoxUtility.FilterCustomers(customerCbx, Customers, customerTxtBox.Text);
+        }
+
+        private void CustomersUpdateControl_VisibleChanged(object sender, EventArgs e)
+        {
+            counter++;
+            if (isFirstLoad || counter <= 2)
+                return;
+
+            if (this.Visible)
+            {
+                GetCustomers();
+            }
         }
     }
 }
