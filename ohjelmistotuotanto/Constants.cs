@@ -31,6 +31,7 @@ namespace ohjelmistotuotanto
         public const string cottagesAddMenu = "cottagesAddMenu";
         public const string cottagesRemoveMenu = "cottagesRemoveMenu";
         public const string cottagesUpdateMenu = "cottagesUpdateMenu";
+        public const string cottagesSearchMenu = "cottagesSearchMenu";
         public const string areasMenu = "areasMenu";
         public const string areasSearch = "areasSearch";
         public const string areasAdd = "areasAdd";

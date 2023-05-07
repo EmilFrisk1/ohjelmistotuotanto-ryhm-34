@@ -28,7 +28,8 @@ namespace ohjelmistotuotanto
 
         private void searchBtn_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.cottagesSearchMenu);
         }
 
         private void addBtn_Click(object sender, EventArgs e)

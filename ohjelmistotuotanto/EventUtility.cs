@@ -13,6 +13,7 @@ namespace ohjelmistotuotanto
         public delegate void SearchResultsReceived<T>(List<T> results); // Function pointer 
         public static event SearchResultsReceived<Reservation> DisplayReservationSearchResults;
         public static event SearchResultsReceived<ServicesReport> DisplayServicesSearchResults;
+        public static event SearchResultsReceived<CottageDataModel> DisplayCottagesSearchResults;
 
         public static void RaiseDisplayReservationSearchResults(List<Reservation> results)
         {
@@ -27,6 +28,14 @@ namespace ohjelmistotuotanto
             if (DisplayServicesSearchResults != null)
             {
                 DisplayServicesSearchResults(results);
+            }
+        }
+
+        public static void RaiseDisplayCottagesSearchResults(List<CottageDataModel> results)
+        {
+            if (DisplayCottagesSearchResults != null)
+            {
+                DisplayCottagesSearchResults(results);
             }
         }
     }

@@ -45,6 +45,7 @@ namespace ohjelmistotuotanto
         public CottagesAddMenu cottagesAddMenuControl;
         public CottagesRemoveMenu cottagesRemoveMenuControl;
         public CottagesUpdateMenu cottagesUpdateMenuControl;
+        public CottagesSearchMenu cottagesSearchMenuControl;
         public AreasRootMenu areasRootMenuControl;
         public AreaSearchControl areaSearchControl;
         public AreaAddControl areaAddControl;
@@ -91,6 +92,7 @@ namespace ohjelmistotuotanto
             cottagesAddMenuControl = new CottagesAddMenu();
             cottagesRemoveMenuControl = new CottagesRemoveMenu();
             cottagesUpdateMenuControl = new CottagesUpdateMenu();
+            cottagesSearchMenuControl = new CottagesSearchMenu();
             areasRootMenuControl = new AreasRootMenu();
             areaSearchControl = new AreaSearchControl();
             areaAddControl = new AreaAddControl();
@@ -120,6 +122,7 @@ namespace ohjelmistotuotanto
             cottagesAddMenuControl.Hide();
             cottagesRemoveMenuControl.Hide();
             cottagesUpdateMenuControl.Hide();
+            cottagesSearchMenuControl.Hide();
             areasRootMenuControl.Hide();
             areaSearchControl.Hide();
             areaAddControl.Hide();
@@ -149,6 +152,7 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(cottagesAddMenuControl);
             SubscribeToMenuSwitchEvents(cottagesRemoveMenuControl);
             SubscribeToMenuSwitchEvents(cottagesUpdateMenuControl);
+            SubscribeToMenuSwitchEvents(cottagesSearchMenuControl);
             SubscribeToMenuSwitchEvents(areasRootMenuControl);
             SubscribeToMenuSwitchEvents(areaSearchControl);
             SubscribeToMenuSwitchEvents(areaAddControl);
@@ -178,6 +182,7 @@ namespace ohjelmistotuotanto
             cottagesAddMenuControl.Dock = DockStyle.Fill;
             cottagesRemoveMenuControl.Dock = DockStyle.Fill;
             cottagesUpdateMenuControl.Dock = DockStyle.Fill;
+            cottagesSearchMenuControl.Dock = DockStyle.Fill;
             areasRootMenuControl.Dock = DockStyle.Fill;
             areaSearchControl.Dock = DockStyle.Fill;
             areaAddControl.Dock = DockStyle.Fill;
@@ -208,6 +213,7 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(cottagesAddMenuControl);
             appContainer.Controls.Add(cottagesRemoveMenuControl);
             appContainer.Controls.Add(cottagesUpdateMenuControl);
+            appContainer.Controls.Add(cottagesSearchMenuControl);
             appContainer.Controls.Add(areasRootMenuControl);
             appContainer.Controls.Add(areaSearchControl);
             appContainer.Controls.Add(areaAddControl);
@@ -232,6 +238,7 @@ namespace ohjelmistotuotanto
             // Add reference of needed menus for menuhistory purpose
             displaySearchResultsMenuControl.searchReservationMenuControl = searchReservationMenuControl;
             displaySearchResultsMenuControl.servicesSearchMenuControl = servicesSearchMenuControl;
+            displaySearchResultsMenuControl.cottagesSearchMenuControl = cottagesSearchMenuControl;
 
             // Show the initial User Control
             SwitchMenuControl(Constants.mainMenu);
@@ -394,6 +401,11 @@ namespace ohjelmistotuotanto
                 cottagesUpdateMenuControl.Visible = true;
                 appContainer.AutoScrollMinSize = new Size(0, 1200);
                 menuhistory.Add(Constants.cottagesUpdateMenu);
+            } else if (menu == Constants.cottagesSearchMenu)
+            {
+                cottagesSearchMenuControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.cottagesSearchMenu);
             }
                 else if (menu == Constants.areasMenu) 
             {
@@ -509,6 +521,9 @@ namespace ohjelmistotuotanto
             } else if (userControl is CottagesUpdateMenu cottagesUpdateMenuControl)
             {
                 cottagesUpdateMenuControl.MenuSwitchRequested += SwitchMenuControl;
+            } else if (userControl is CottagesSearchMenu cottagesSearchMenu)
+            {
+                cottagesSearchMenu.MenuSwitchRequested += SwitchMenuControl;
             }
                 else if (userControl is AreasRootMenu areasRootMenuControl)
             {

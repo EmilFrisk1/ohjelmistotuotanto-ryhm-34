@@ -16,6 +16,7 @@ namespace ohjelmistotuotanto
         public event MenuSwitchRequestHandler MenuSwitchRequested;
         public SearchReservationMenuControl searchReservationMenuControl;
         public ServicesSearchMenu servicesSearchMenuControl;
+        public CottagesSearchMenu cottagesSearchMenuControl;
 
         public DisplaySearchResultsMenuControl()
         {
@@ -27,6 +28,12 @@ namespace ohjelmistotuotanto
             // initialize event listeners
             EventUtility.DisplayReservationSearchResults += DisplaySearchResults;
             EventUtility.DisplayServicesSearchResults += DisplaySearchResults;
+            EventUtility.DisplayCottagesSearchResults += DisplaySearchResults;
+        }
+
+        private void EventUtility_DisplayCottagesSearchResults(List<CottageDataModel> results)
+        {
+            throw new NotImplementedException();
         }
 
         private void prevBtn_Click(object sender, EventArgs e)
@@ -44,6 +51,9 @@ namespace ohjelmistotuotanto
                 case Constants.srvcSearchMenu:
                     servicesSearchMenuControl.Show();
                     break;
+                case Constants.cottagesSearchMenu:
+                    cottagesSearchMenuControl.Show();
+                    break;
                 default:
                     MessageBox.Show("Jokin meni pieleen menuhistoriassa");
                     break;
@@ -52,6 +62,8 @@ namespace ohjelmistotuotanto
 
         public void DisplaySearchResults<T>(List<T> results)
         {
+           // if (results.Count > 0) results.Clear();
+            searchResultsContainer.DataSource = null;
             searchResultsContainer.DataSource = results;
         }
     }
