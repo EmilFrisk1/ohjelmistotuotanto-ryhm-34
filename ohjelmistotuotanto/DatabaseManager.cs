@@ -100,6 +100,29 @@ public class DatabaseManager
         return affectedRows;
     }
 
+    public async Task<int> IsRemovable(string query)
+    {
+        int rowCount = 0;
+        await ExecuteWithRetry(async (connection) =>
+        {
+            using (MySqlCommand cmd = new MySqlCommand(query, connection))
+            {
+                using (DbDataReader reader = await cmd.ExecuteReaderAsync())
+                {
+                    // Advance the reader to the last row to get the total count
+                    while (await reader.ReadAsync())
+                    {
+                        rowCount++;
+                    }
+                }
+            }
+          return rowCount;
+        });
+
+        return rowCount;
+    }
+
+
 
     public async Task<int> AlterDataAsync(string tableName, Dictionary<string, object> columnValues, string condition)
     {

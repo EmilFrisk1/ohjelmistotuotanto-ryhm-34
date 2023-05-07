@@ -50,10 +50,13 @@ namespace ohjelmistotuotanto
 
         private async void searchReservationBtn_Click(object sender, EventArgs e)
         {
+            if (Services.Count > 0)
+                Services.Clear();
+
             if (!Validate())
                 return;
 
-            var queryString = BuildSearchServicesQuery();
+            var queryString = BuildSearchServicesQuery(); // TODO ' täs on jotain häikkää
 
             // get services
             Services = await VillageNewbies._dbManager.SearchServicesAsync(queryString);
@@ -94,7 +97,7 @@ namespace ohjelmistotuotanto
             {
                 DateTime startDate = datePickerStart.Value;
                 DateTime endDate = datePickerEnd.Value;
-                queryBuilder.Append($" AND r.start_date >= {startDate.ToString("yyyy-MM-dd")}");
+                queryBuilder.Append($" AND r.start_date >= '{startDate.ToString("yyyy-MM-dd")}'");
                 queryBuilder.Append($" AND end_date <= '{endDate.ToString("yyyy-MM-dd")}'");
             }
 

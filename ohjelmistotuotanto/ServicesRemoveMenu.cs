@@ -53,10 +53,55 @@ namespace ohjelmistotuotanto
             if (!Validate())
                 return;
 
+            // Check if the service is bound on a reservation that cannot be cancelled, if so it can't be removed
+            if (!await IsRemovable())
+            {
+                MessageBox.Show("Tämä palvelu on sidottuna varaukseen, sitä ei voi poistaa");
+                return;
+            }
+
             if (!await RemoveService())
                 return;
 
             GetServices();
+        }
+
+        private async Task<bool> IsRemovable()
+        {
+            try
+            {
+                var response = await VillageNewbies._dbManager.IsRemovable($"SELECT * FROM reservation_service r_s JOIN reservation r ON r_s.reservation_id = r.id WHERE service_id = {(int)servicesCbx.SelectedValue} AND r.reservation_status = 'ACTIVE' OR r.reservation_status = 'PENDING'");
+                if (response == null)
+                {
+                    return false;
+                    
+                } else if (response > 0)
+                {
+                    return false;
+                }
+                else
+                    return true;
+            } catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        private async Task<bool> CheckService()
+        {
+            try
+            {
+                var response = await VillageNewbies._dbManager.IsRemovable($"SELECT * FROM reservation_service r_s JOIN reservation r ON r_s.reservation_id = r.id WHERE service_id = {(int)servicesCbx.SelectedValue} AND r.reservation_status = 'PENDING'");
+                if (response <= 0)
+                {
+                    throw new Exception("Error occurred while inserting data into the database.");
+                }
+                else
+                    return true;
+            } catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         private bool Validate()

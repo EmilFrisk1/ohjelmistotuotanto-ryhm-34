@@ -49,6 +49,8 @@ namespace ohjelmistotuotanto
 
         private async void searchReservationBtn_Click(object sender, EventArgs e)
         {
+            
+
             // Validate input
             if (DateTime.Compare(datePickerStart.Value.Date, datePickerEnd.Value.Date) > 0)
             {
@@ -69,6 +71,9 @@ namespace ohjelmistotuotanto
             }
             else
             {
+                if (reservationsList.Count > 0)
+                    reservationsList.Clear();
+
                 ConvertDatatableToList(queryString, reservations);
                 this.Hide();
                 MenuSwitchRequested?.Invoke(Constants.displayResultsMenu);
