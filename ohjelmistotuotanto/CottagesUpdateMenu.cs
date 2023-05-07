@@ -83,18 +83,18 @@ namespace ohjelmistotuotanto
 
             MessageBox.Show("Mökki muokattu onnistuneesti!");
 
-            MenuDefaultState();
             GetCottages();
+            MenuDefaultState();
         }
 
         private void MenuDefaultState()
         {
             areaCbx.SelectedIndex = 0;
             cottageCbx.SelectedIndex = 0;
-            priceTxtBox.Text = string.Empty;
+            priceTxtBox.Text = "";
             descriptionTxtBox.Text = string.Empty;
             equipmentTxtBox.Text = string.Empty;
-            squaresTxtBox.Text = string.Empty;
+            squaresTxtBox.Text = "";
             addressTxtBox.Text = string.Empty;
             cottageNameTxtBox.Text = string.Empty;
         }
@@ -159,7 +159,7 @@ namespace ohjelmistotuotanto
                     columnValues.Add("equipment", equipmentTxtBox.Text);
 
                 if (squaresChanged)
-                    columnValues.Add("squares", squaresTxtBox.Text);
+                    columnValues.Add("squares", squaresTxtBox.Text.Replace(" ", ""));
 
                 if (addressChanged)
                     columnValues.Add("address", addressTxtBox.Text);
@@ -228,9 +228,19 @@ namespace ohjelmistotuotanto
 
         private void prevBtn_Click(object sender, EventArgs e)
         {
+            HideErrors();
             this.Hide();
             MenuSwitchRequested?.Invoke(Constants.cottagesMenu);
             VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
+            MenuDefaultState();
+        }
+
+        private void HideErrors()
+        {
+            if (cottageErrorLabel.Visible)
+                cottageErrorLabel.Visible = false;
+
+            if (statusStrip.Visible) statusStrip.Visible = false;
         }
 
         private void cottageTxtBox_TextChanged(object sender, EventArgs e)

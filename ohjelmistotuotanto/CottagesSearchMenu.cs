@@ -35,7 +35,7 @@ namespace ohjelmistotuotanto
         private async void searchBtn_Click(object sender, EventArgs e)
         {
             if (Cottages.Count > 0) { Cottages.Clear(); }
-            
+
             string query = BuildSearchQuery();
 
             // get services
@@ -46,7 +46,7 @@ namespace ohjelmistotuotanto
             this.Hide();
             MenuSwitchRequested?.Invoke(Constants.displayResultsMenu);
             EventUtility.RaiseDisplayCottagesSearchResults(Cottages);
-            
+
         }
 
         private void ConvertDatatableToList(DataTable cottages)
@@ -99,6 +99,13 @@ namespace ohjelmistotuotanto
         private void highPriceTxtBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBoxUtility.AllowOnlyNumbers(sender, e);
+        }
+
+        private void prevBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
+            MenuSwitchRequested?.Invoke(Constants.cottagesMenu);
         }
     }
 }

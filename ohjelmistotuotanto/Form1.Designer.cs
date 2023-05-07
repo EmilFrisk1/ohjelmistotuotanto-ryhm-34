@@ -35,7 +35,7 @@
             mainMenuToolStrip = new ToolStripLabel();
             appContainer = new Panel();
             appStatusStrip = new StatusStrip();
-            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            statusStripText = new ToolStripStatusLabel();
             toolStrip1.SuspendLayout();
             appContainer.SuspendLayout();
             appStatusStrip.SuspendLayout();
@@ -90,23 +90,23 @@
             // 
             // appStatusStrip
             // 
-            appStatusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
-            appStatusStrip.Location = new Point(0, 1006);
+            appStatusStrip.Items.AddRange(new ToolStripItem[] { statusStripText });
+            appStatusStrip.Location = new Point(0, 1367);
             appStatusStrip.Name = "appStatusStrip";
-            appStatusStrip.Size = new Size(804, 42);
+            appStatusStrip.Size = new Size(787, 42);
             appStatusStrip.TabIndex = 0;
             appStatusStrip.Text = "statusStrip1";
             appStatusStrip.Visible = false;
             // 
-            // toolStripStatusLabel1
+            // statusStripText
             // 
-            toolStripStatusLabel1.BackColor = Color.Crimson;
-            toolStripStatusLabel1.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            toolStripStatusLabel1.ForeColor = Color.Cyan;
-            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new Size(789, 37);
-            toolStripStatusLabel1.Spring = true;
-            toolStripStatusLabel1.Text = "Täytä kaikki pakolliset kentät (*)";
+            statusStripText.BackColor = Color.Crimson;
+            statusStripText.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            statusStripText.ForeColor = Color.Cyan;
+            statusStripText.Name = "statusStripText";
+            statusStripText.Size = new Size(772, 37);
+            statusStripText.Spring = true;
+            statusStripText.Text = "Täytä kaikki pakolliset kentät (*)";
             // 
             // VillageNewbies
             // 
@@ -141,6 +141,6 @@
         private ToolStripLabel mainMenuToolStrip;
         private Panel appContainer;
         private StatusStrip appStatusStrip;
-        private ToolStripStatusLabel toolStripStatusLabel1;
+        private ToolStripStatusLabel statusStripText;
     }
 }

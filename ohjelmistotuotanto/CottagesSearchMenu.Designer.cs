@@ -104,6 +104,7 @@
             prevBtn.SizeMode = PictureBoxSizeMode.StretchImage;
             prevBtn.TabIndex = 26;
             prevBtn.TabStop = false;
+            prevBtn.Click += prevBtn_Click;
             // 
             // label1
             // 

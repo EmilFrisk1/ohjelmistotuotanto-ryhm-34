@@ -22,6 +22,8 @@ namespace ohjelmistotuotanto
 {
     public partial class VillageNewbies : Form // asdasdasdasdadasd
     {
+        public VillageNewbies mainForm;
+
         //public static Form formVaraukset; // luodaan varaukset form
         public MainMenuControl mainMenuControl;
         public ReservationMenuControl reservationMenuControl;
@@ -51,7 +53,7 @@ namespace ohjelmistotuotanto
         public AreaAddControl areaAddControl;
         public AreaRemoveControl areaRemoveControl;
         public AreaUpdateControl areaUpdateControl;
-        
+
 
         static PictureBox prevButton;
 
@@ -228,7 +230,7 @@ namespace ohjelmistotuotanto
             areaAddControl.statusStrip = appStatusStrip;
             cottagesAddMenuControl.statusStrip = appStatusStrip;
             cottagesRemoveMenuControl.statusStrip = appStatusStrip;
-            cottagesUpdateMenuControl.statusStrip= appStatusStrip;
+            cottagesUpdateMenuControl.statusStrip = appStatusStrip;
 
             // add appContainer reference to all menu's that need it
             addReservationMenuControl.appContainer = appContainer;
@@ -240,12 +242,17 @@ namespace ohjelmistotuotanto
             displaySearchResultsMenuControl.servicesSearchMenuControl = servicesSearchMenuControl;
             displaySearchResultsMenuControl.cottagesSearchMenuControl = cottagesSearchMenuControl;
 
+            // main form ref
+            cottagesAddMenuControl.mainForm = mainForm;
+
             // Show the initial User Control
             SwitchMenuControl(Constants.mainMenu);
         }
 
         private async void VillageNewbies_Load(object sender, EventArgs e)
         {
+            mainForm = this;
+
             _dbManager = new DatabaseManager(); // setup dbmanager
 
             CheckReservations();
@@ -381,33 +388,38 @@ namespace ohjelmistotuotanto
                 billingMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.billingMenu);
-            } else if (menu == Constants.cottagesMenu)
+            }
+            else if (menu == Constants.cottagesMenu)
             {
                 cottagesRootMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.cottagesMenu);
-            } else if (menu == Constants.cottagesAddMenu)
+            }
+            else if (menu == Constants.cottagesAddMenu)
             {
                 cottagesAddMenuControl.Visible = true;
                 appContainer.AutoScrollMinSize = new Size(0, 900);
                 menuhistory.Add(Constants.cottagesAddMenu);
-            } else if (menu == Constants.cottagesRemoveMenu)
+            }
+            else if (menu == Constants.cottagesRemoveMenu)
             {
                 cottagesRemoveMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.cottagesRemoveMenu);
-            } else if (menu == Constants.cottagesUpdateMenu)
+            }
+            else if (menu == Constants.cottagesUpdateMenu)
             {
                 cottagesUpdateMenuControl.Visible = true;
                 appContainer.AutoScrollMinSize = new Size(0, 1200);
                 menuhistory.Add(Constants.cottagesUpdateMenu);
-            } else if (menu == Constants.cottagesSearchMenu)
+            }
+            else if (menu == Constants.cottagesSearchMenu)
             {
                 cottagesSearchMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.cottagesSearchMenu);
             }
-                else if (menu == Constants.areasMenu) 
+            else if (menu == Constants.areasMenu)
             {
                 areasRootMenuControl.Visible = true;
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
@@ -509,23 +521,28 @@ namespace ohjelmistotuotanto
             else if (userControl is CustomersUpdateControl customersUpdate)
             {
                 customersUpdateControl.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is CottagesRootMenu cottagesRootMenu)
+            }
+            else if (userControl is CottagesRootMenu cottagesRootMenu)
             {
                 cottagesRootMenu.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is CottagesAddMenu cottagesAddMenu)
+            }
+            else if (userControl is CottagesAddMenu cottagesAddMenu)
             {
                 cottagesAddMenu.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is CottagesRemoveMenu cottagesRemoveMenu)
+            }
+            else if (userControl is CottagesRemoveMenu cottagesRemoveMenu)
             {
                 cottagesRemoveMenu.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is CottagesUpdateMenu cottagesUpdateMenuControl)
+            }
+            else if (userControl is CottagesUpdateMenu cottagesUpdateMenuControl)
             {
                 cottagesUpdateMenuControl.MenuSwitchRequested += SwitchMenuControl;
-            } else if (userControl is CottagesSearchMenu cottagesSearchMenu)
+            }
+            else if (userControl is CottagesSearchMenu cottagesSearchMenu)
             {
                 cottagesSearchMenu.MenuSwitchRequested += SwitchMenuControl;
             }
-                else if (userControl is AreasRootMenu areasRootMenuControl)
+            else if (userControl is AreasRootMenu areasRootMenuControl)
             {
                 areasRootMenuControl.MenuSwitchRequested += SwitchMenuControl;
             }
@@ -574,11 +591,26 @@ namespace ohjelmistotuotanto
                 case Constants.addRrvtMenu:
                     addReservationMenuControl.Visible = false;
                     break;
+                case Constants.updateRrvtMenu:
+                 updateReservationMenuControl.Visible = false;
+                    break;
                 case Constants.searchRrvtMenu:
                     searchReservationMenuControl.Visible = false;
                     break;
                 case Constants.srvcMenu:
                     servicesMenuControl.Visible = false;
+                    break;
+                case Constants.srvcAddMenu:
+                    servicesAddMenuControl.Visible = false;
+                    break;
+                case Constants.srvcRemoveMenu:
+                    servicesRemoveMenuControl.Visible = false;
+                    break;
+                case Constants.srvcSearchMenu:
+                    servicesSearchMenuControl.Visible = false;
+                    break;
+                case Constants.srvcUpdateMenu:
+                    servicesUpdateMenuControl.Visible = false;
                     break;
                 case Constants.customersMenu:
                     customersMenuControl.Visible = false;
@@ -615,6 +647,27 @@ namespace ohjelmistotuotanto
                     break;
                 case Constants.areasUpdate:
                     areaUpdateControl.Visible = false;
+                    break;
+                case Constants.cottagesMenu:
+                    cottagesRootMenuControl.Visible = false;
+                    break;
+                case Constants.cottagesAddMenu:
+                    cottagesAddMenuControl.Visible = false;
+                    break;
+                case Constants.cottagesRemoveMenu:
+                    cottagesRemoveMenuControl.Visible = false;
+                    break;
+                case Constants.cottagesSearchMenu:
+                    cottagesSearchMenuControl.Visible = false;
+                    break;
+                case Constants.cottagesUpdateMenu:
+                    cottagesUpdateMenuControl.Visible = false;
+                    break;
+                case Constants.billingMenu:
+                    billingMenuControl.Visible = false;
+                    break;
+                default:
+                    MessageBox.Show("Menu: " + currentMenu);
                     break;
             }
 

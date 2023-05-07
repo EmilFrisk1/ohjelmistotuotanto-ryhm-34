@@ -232,10 +232,10 @@ namespace ohjelmistotuotanto
             // Check that all form fields are valid
             if (cottageCbx.SelectedIndex == -1 || string.IsNullOrEmpty(cottageCbx.Text) || customerCbx.SelectedIndex == -1 || string.IsNullOrEmpty(cottageCbx.Text))
             {
-                statusStrip.Visible = true;
                 // Scroll the form to the bottom to show the status label
                 appContainer.VerticalScroll.Value = appContainer.VerticalScroll.Maximum;
-
+                statusStrip.Visible = true;
+                appContainer.VerticalScroll.Value = appContainer.VerticalScroll.Maximum;
                 return;
             }
             else

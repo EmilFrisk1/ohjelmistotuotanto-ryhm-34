@@ -42,6 +42,8 @@ namespace ohjelmistotuotanto
 
         private void prevBtn_Click(object sender, EventArgs e)
         {
+            Utility.DefaultStatusStrip(statusStrip);
+            Utility.HideErrors(statusStrip);
             this.Hide();
             VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
             MenuSwitchRequested?.Invoke(Constants.customersMenu);
@@ -57,8 +59,8 @@ namespace ohjelmistotuotanto
                                     { "email",emailTxtBox.Text},
                                     { "firstname", firstNameTxtBox.Text},
                                     { "lastname", lastNameTxtBox.Text},
-                                    { "phone", phoneNumberTxtBox.Text},
-                                    { "postal_code", postalCodeTxtBox.Text},
+                                    { "phone", phoneNumberTxtBox.Text.Replace(" ", "")},
+                                    { "postal_code", postalCodeTxtBox.Text.Replace(" ", "")},
                                     { "address", addressTxtBox.Text},
                                     { "city", cityTxtBox.Text},
                                 };
@@ -98,6 +100,67 @@ namespace ohjelmistotuotanto
         private void CustomersSearchControl_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void phoneNumberTxtBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!TextBoxUtility.MaxLength(sender, e, 18))
+            {
+                Utility.UpdateStatusStripText("Vain 18 merrkiä sallittu", statusStrip);
+                statusStrip.Visible = true;
+                return;
+            }
+            else
+            {
+                if (statusStrip.Visible) statusStrip.Hide();
+            }
+
+            if (TextBoxUtility.AllowOnlyNumbers(sender, e))
+            {
+                Utility.UpdateStatusStripText("Vain numerot ja yksi piste sallittu", statusStrip);
+                statusStrip.Visible = true;
+                return;
+            }
+            else
+            {
+                if (statusStrip.Visible) statusStrip.Hide();
+            }
+
+        }
+
+        private void postalCodeTxtBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!TextBoxUtility.MaxLength(sender, e, 9))
+            {
+                Utility.UpdateStatusStripText("Vain 9 merrkiä sallittu", statusStrip);
+                statusStrip.Visible = true;
+                return;
+            }
+            else
+            {
+                if (statusStrip.Visible) statusStrip.Hide();
+            }
+
+            if (TextBoxUtility.AllowOnlyNumbers(sender, e))
+            {
+                Utility.UpdateStatusStripText("Vain numerot ja yksi piste sallittu", statusStrip);
+                statusStrip.Visible = true;
+                return;
+            }
+            else
+            {
+                if (statusStrip.Visible) statusStrip.Hide();
+            }
+        }
+
+        private void phoneNumberTxtBox_Leave(object sender, EventArgs e)
+        {
+            if (statusStrip.Visible) { statusStrip.Hide(); }
+        }
+
+        private void postalCodeTxtBox_Leave(object sender, EventArgs e)
+        {
+            if (statusStrip.Visible) { statusStrip.Hide(); }
         }
     }
 }

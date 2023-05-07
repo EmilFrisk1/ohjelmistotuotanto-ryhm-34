@@ -23,6 +23,7 @@ namespace ohjelmistotuotanto
 
         private void prevBtn_Click(object sender, EventArgs e)
         {
+            HideErrors();
             this.Hide();
             MenuSwitchRequested?.Invoke(Constants.cottagesMenu);
             VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
@@ -39,6 +40,11 @@ namespace ohjelmistotuotanto
             MessageBox.Show("mökki poistettu onnistuneesti");
 
             GetCottages();
+        }
+
+        private void HideErrors()
+        {
+            if (statusStrip.Visible) statusStrip.Hide();
         }
 
         private async Task<bool> RemoveCottage()

@@ -17,6 +17,7 @@ namespace ohjelmistotuotanto
         public event MenuSwitchRequestHandler MenuSwitchRequested;
         public StatusStrip statusStrip;
         public Panel appContainer;
+        public Form mainForm;
 
         public List<Area> Areas { get; set; }
 
@@ -35,10 +36,11 @@ namespace ohjelmistotuotanto
             ComboBoxUtility.SetUpAreasCbx(areas, Areas, areaCbx);
         }
 
+
         private void prevBtn_Click(object sender, EventArgs e)
         {
-            this.Hide();
             HideErrors();
+            this.Hide();
             MenuDefaultState();
             VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
             MenuSwitchRequested?.Invoke(Constants.cottagesMenu);
@@ -49,6 +51,8 @@ namespace ohjelmistotuotanto
             if (!ValidateFields())
             {
                 // Scroll the form to the bottom to show the status label
+                appContainer.VerticalScroll.Value = appContainer.VerticalScroll.Maximum;
+                statusStrip.Show();
                 appContainer.VerticalScroll.Value = appContainer.VerticalScroll.Maximum;
                 return;
             }
@@ -100,7 +104,7 @@ namespace ohjelmistotuotanto
                 string.IsNullOrEmpty(squaresTxtBox.Text) || string.IsNullOrEmpty(addressTxtBox.Text) ||
                 string.IsNullOrEmpty(cottageNameTxtBox.Text))
             {
-                statusStrip.Show();
+                
                 return false;
             }
             else

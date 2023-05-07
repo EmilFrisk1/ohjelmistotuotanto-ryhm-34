@@ -64,6 +64,7 @@
             reservationsBtn.TabIndex = 1;
             reservationsBtn.Text = "Varaukset";
             reservationsBtn.UseVisualStyleBackColor = false;
+            reservationsBtn.Click += reservationsBtn_Click_1;
             // 
             // servicesBtn
             // 
@@ -76,6 +77,7 @@
             servicesBtn.TabIndex = 2;
             servicesBtn.Text = "Palvelut";
             servicesBtn.UseVisualStyleBackColor = false;
+            servicesBtn.Click += servicesBtn_Click;
             // 
             // billsBtn
             // 
@@ -88,6 +90,7 @@
             billsBtn.TabIndex = 3;
             billsBtn.Text = "Laskut";
             billsBtn.UseVisualStyleBackColor = false;
+            billsBtn.Click += billsBtn_Click;
             // 
             // customersBtn
             // 
