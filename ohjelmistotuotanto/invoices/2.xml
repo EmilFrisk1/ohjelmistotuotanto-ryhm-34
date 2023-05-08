@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Invoice>
+  <invoice_header>
+    <invoiceId> 2</invoiceId>
+    <invoiceType>Lasku</invoiceType>
+    <invoiceDate>08/05/2023</invoiceDate>
+    <dueDate>16/07/2023</dueDate>
+    <invCustomerName>Olli Kangasniemi</invCustomerName>
+    <invAddress1>Puitekuja 4</invAddress1>
+    <invZipcode>94450</invZipcode>
+    <invCity>Oulu</invCity>
+  </invoice_header>
+  <invoice_rows>
+    <rowId>1</rowId>
+    <itemDescription>Modern cottage with a pool</itemDescription>
+    <dayCount>39</dayCount>
+    <price>13650000</price>
+    <currency>€</currency>
+  </invoice_rows>
+  <invoice_total>
+    <invoicedAmount>13650000</invoicedAmount>
+    <ALV>3276000</ALV>
+    <totalAmount>16926000</totalAmount>
+    <currency>€</currency>
+  </invoice_total>
+  <invoice_payeeinfo>
+    <lol>who knows</lol>
+  </invoice_payeeinfo>
+</Invoice>

@@ -29,217 +29,216 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ServicesSearchMenu));
-            searchReservationBtn = new Button();
-            panel3 = new Panel();
-            dateRangeCheckBox = new CheckBox();
-            label3 = new Label();
-            dateErrorLabel = new Label();
-            whereDateLabel = new Label();
-            datePickerStart = new DateTimePicker();
-            label9 = new Label();
-            datePickerEnd = new DateTimePicker();
-            panel1 = new Panel();
-            label8 = new Label();
-            areaCbx = new ComboBox();
-            label2 = new Label();
-            prevBtn = new PictureBox();
-            label1 = new Label();
-            panel3.SuspendLayout();
-            panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)prevBtn).BeginInit();
-            SuspendLayout();
+            this.searchReservationBtn = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.dateRangeCheckBox = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dateErrorLabel = new System.Windows.Forms.Label();
+            this.whereDateLabel = new System.Windows.Forms.Label();
+            this.datePickerStart = new System.Windows.Forms.DateTimePicker();
+            this.label9 = new System.Windows.Forms.Label();
+            this.datePickerEnd = new System.Windows.Forms.DateTimePicker();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
+            this.areaCbx = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.prevBtn = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.prevBtn)).BeginInit();
+            this.SuspendLayout();
             // 
             // searchReservationBtn
             // 
-            searchReservationBtn.BackColor = Color.DarkSlateGray;
-            searchReservationBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            searchReservationBtn.ForeColor = Color.WhiteSmoke;
-            searchReservationBtn.Location = new Point(176, 545);
-            searchReservationBtn.Name = "searchReservationBtn";
-            searchReservationBtn.Size = new Size(451, 62);
-            searchReservationBtn.TabIndex = 26;
-            searchReservationBtn.Text = "Hae varaus";
-            searchReservationBtn.UseVisualStyleBackColor = false;
-            searchReservationBtn.Click += searchReservationBtn_Click;
+            this.searchReservationBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.searchReservationBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.searchReservationBtn.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.searchReservationBtn.Location = new System.Drawing.Point(176, 545);
+            this.searchReservationBtn.Name = "searchReservationBtn";
+            this.searchReservationBtn.Size = new System.Drawing.Size(451, 62);
+            this.searchReservationBtn.TabIndex = 26;
+            this.searchReservationBtn.Text = "Hae varaus";
+            this.searchReservationBtn.UseVisualStyleBackColor = false;
             // 
             // panel3
             // 
-            panel3.BackColor = Color.Transparent;
-            panel3.BorderStyle = BorderStyle.Fixed3D;
-            panel3.Controls.Add(dateRangeCheckBox);
-            panel3.Controls.Add(label3);
-            panel3.Controls.Add(dateErrorLabel);
-            panel3.Controls.Add(whereDateLabel);
-            panel3.Controls.Add(datePickerStart);
-            panel3.Controls.Add(label9);
-            panel3.Controls.Add(datePickerEnd);
-            panel3.ForeColor = Color.Transparent;
-            panel3.Location = new Point(176, 296);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(451, 198);
-            panel3.TabIndex = 25;
+            this.panel3.BackColor = System.Drawing.Color.Transparent;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel3.Controls.Add(this.dateRangeCheckBox);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.dateErrorLabel);
+            this.panel3.Controls.Add(this.whereDateLabel);
+            this.panel3.Controls.Add(this.datePickerStart);
+            this.panel3.Controls.Add(this.label9);
+            this.panel3.Controls.Add(this.datePickerEnd);
+            this.panel3.ForeColor = System.Drawing.Color.Transparent;
+            this.panel3.Location = new System.Drawing.Point(176, 296);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(451, 198);
+            this.panel3.TabIndex = 25;
             // 
             // dateRangeCheckBox
             // 
-            dateRangeCheckBox.AutoSize = true;
-            dateRangeCheckBox.Font = new Font("Segoe UI", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dateRangeCheckBox.Location = new Point(350, 124);
-            dateRangeCheckBox.Name = "dateRangeCheckBox";
-            dateRangeCheckBox.Size = new Size(15, 14);
-            dateRangeCheckBox.TabIndex = 24;
-            dateRangeCheckBox.UseVisualStyleBackColor = true;
+            this.dateRangeCheckBox.AutoSize = true;
+            this.dateRangeCheckBox.Font = new System.Drawing.Font("Segoe UI", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dateRangeCheckBox.Location = new System.Drawing.Point(350, 124);
+            this.dateRangeCheckBox.Name = "dateRangeCheckBox";
+            this.dateRangeCheckBox.Size = new System.Drawing.Size(15, 14);
+            this.dateRangeCheckBox.TabIndex = 24;
+            this.dateRangeCheckBox.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.ForeColor = Color.WhiteSmoke;
-            label3.Location = new Point(93, 104);
-            label3.Name = "label3";
-            label3.Size = new Size(220, 37);
-            label3.TabIndex = 23;
-            label3.Text = "Ei aikahaarukkaa";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label3.Location = new System.Drawing.Point(93, 104);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(220, 37);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Ei aikahaarukkaa";
             // 
             // dateErrorLabel
             // 
-            dateErrorLabel.AutoSize = true;
-            dateErrorLabel.BackColor = Color.Transparent;
-            dateErrorLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dateErrorLabel.ForeColor = Color.Cyan;
-            dateErrorLabel.Location = new Point(114, 141);
-            dateErrorLabel.Name = "dateErrorLabel";
-            dateErrorLabel.Size = new Size(208, 37);
-            dateErrorLabel.TabIndex = 22;
-            dateErrorLabel.Text = "Mihin liian pieni";
-            dateErrorLabel.Visible = false;
+            this.dateErrorLabel.AutoSize = true;
+            this.dateErrorLabel.BackColor = System.Drawing.Color.Transparent;
+            this.dateErrorLabel.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dateErrorLabel.ForeColor = System.Drawing.Color.Cyan;
+            this.dateErrorLabel.Location = new System.Drawing.Point(114, 141);
+            this.dateErrorLabel.Name = "dateErrorLabel";
+            this.dateErrorLabel.Size = new System.Drawing.Size(208, 37);
+            this.dateErrorLabel.TabIndex = 22;
+            this.dateErrorLabel.Text = "Mihin liian pieni";
+            this.dateErrorLabel.Visible = false;
             // 
             // whereDateLabel
             // 
-            whereDateLabel.AutoSize = true;
-            whereDateLabel.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            whereDateLabel.ForeColor = Color.WhiteSmoke;
-            whereDateLabel.Location = new Point(288, 6);
-            whereDateLabel.Name = "whereDateLabel";
-            whereDateLabel.Size = new Size(88, 37);
-            whereDateLabel.TabIndex = 18;
-            whereDateLabel.Text = "Mihin";
+            this.whereDateLabel.AutoSize = true;
+            this.whereDateLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.whereDateLabel.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.whereDateLabel.Location = new System.Drawing.Point(288, 6);
+            this.whereDateLabel.Name = "whereDateLabel";
+            this.whereDateLabel.Size = new System.Drawing.Size(88, 37);
+            this.whereDateLabel.TabIndex = 18;
+            this.whereDateLabel.Text = "Mihin";
             // 
             // datePickerStart
             // 
-            datePickerStart.Location = new Point(45, 58);
-            datePickerStart.Name = "datePickerStart";
-            datePickerStart.Size = new Size(150, 23);
-            datePickerStart.TabIndex = 14;
+            this.datePickerStart.Location = new System.Drawing.Point(45, 58);
+            this.datePickerStart.Name = "datePickerStart";
+            this.datePickerStart.Size = new System.Drawing.Size(150, 23);
+            this.datePickerStart.TabIndex = 14;
             // 
             // label9
             // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.ForeColor = Color.WhiteSmoke;
-            label9.Location = new Point(75, 6);
-            label9.Name = "label9";
-            label9.Size = new Size(85, 37);
-            label9.TabIndex = 15;
-            label9.Text = "Mistä";
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label9.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label9.Location = new System.Drawing.Point(75, 6);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(85, 37);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "Mistä";
             // 
             // datePickerEnd
             // 
-            datePickerEnd.Location = new Point(256, 58);
-            datePickerEnd.Name = "datePickerEnd";
-            datePickerEnd.Size = new Size(150, 23);
-            datePickerEnd.TabIndex = 16;
+            this.datePickerEnd.Location = new System.Drawing.Point(256, 58);
+            this.datePickerEnd.Name = "datePickerEnd";
+            this.datePickerEnd.Size = new System.Drawing.Size(150, 23);
+            this.datePickerEnd.TabIndex = 16;
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Transparent;
-            panel1.BorderStyle = BorderStyle.Fixed3D;
-            panel1.Controls.Add(label8);
-            panel1.Controls.Add(areaCbx);
-            panel1.Controls.Add(label2);
-            panel1.ForeColor = Color.Silver;
-            panel1.Location = new Point(176, 137);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(451, 129);
-            panel1.TabIndex = 24;
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.areaCbx);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.ForeColor = System.Drawing.Color.Silver;
+            this.panel1.Location = new System.Drawing.Point(176, 137);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(451, 129);
+            this.panel1.TabIndex = 24;
             // 
             // label8
             // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI Semibold", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.ForeColor = Color.WhiteSmoke;
-            label8.Location = new Point(173, 0);
-            label8.Name = "label8";
-            label8.Size = new Size(99, 50);
-            label8.TabIndex = 12;
-            label8.Text = "Alue";
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI Semibold", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label8.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label8.Location = new System.Drawing.Point(173, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(99, 50);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Alue";
             // 
             // areaCbx
             // 
-            areaCbx.BackColor = Color.DarkSlateGray;
-            areaCbx.DropDownStyle = ComboBoxStyle.DropDownList;
-            areaCbx.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            areaCbx.ForeColor = Color.Silver;
-            areaCbx.FormattingEnabled = true;
-            areaCbx.Location = new Point(114, 66);
-            areaCbx.Name = "areaCbx";
-            areaCbx.Size = new Size(315, 29);
-            areaCbx.TabIndex = 1;
+            this.areaCbx.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.areaCbx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.areaCbx.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.areaCbx.ForeColor = System.Drawing.Color.Silver;
+            this.areaCbx.FormattingEnabled = true;
+            this.areaCbx.Location = new System.Drawing.Point(114, 66);
+            this.areaCbx.Name = "areaCbx";
+            this.areaCbx.Size = new System.Drawing.Size(315, 29);
+            this.areaCbx.TabIndex = 1;
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.ForeColor = Color.WhiteSmoke;
-            label2.Location = new Point(8, 58);
-            label2.Name = "label2";
-            label2.Size = new Size(95, 37);
-            label2.TabIndex = 2;
-            label2.Text = "valitse";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label2.Location = new System.Drawing.Point(8, 58);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 37);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "valitse";
             // 
             // prevBtn
             // 
-            prevBtn.BackColor = Color.Transparent;
-            prevBtn.Image = (Image)resources.GetObject("prevBtn.Image");
-            prevBtn.Location = new Point(33, 33);
-            prevBtn.Name = "prevBtn";
-            prevBtn.Size = new Size(124, 62);
-            prevBtn.SizeMode = PictureBoxSizeMode.StretchImage;
-            prevBtn.TabIndex = 23;
-            prevBtn.TabStop = false;
-            prevBtn.Click += prevBtn_Click;
+            this.prevBtn.BackColor = System.Drawing.Color.Transparent;
+            this.prevBtn.Image = ((System.Drawing.Image)(resources.GetObject("prevBtn.Image")));
+            this.prevBtn.Location = new System.Drawing.Point(33, 33);
+            this.prevBtn.Name = "prevBtn";
+            this.prevBtn.Size = new System.Drawing.Size(124, 62);
+            this.prevBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.prevBtn.TabIndex = 23;
+            this.prevBtn.TabStop = false;
+            this.prevBtn.Click += new System.EventHandler(this.prevBtn_Click);
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Script MT Bold", 48F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.Silver;
-            label1.Location = new Point(223, 18);
-            label1.Name = "label1";
-            label1.Size = new Size(357, 77);
-            label1.TabIndex = 22;
-            label1.Text = "Hae palvelu";
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Script MT Bold", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.Silver;
+            this.label1.Location = new System.Drawing.Point(223, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(357, 77);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Hae palvelu";
             // 
             // ServicesSearchMenu
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.test3;
-            Controls.Add(searchReservationBtn);
-            Controls.Add(panel3);
-            Controls.Add(panel1);
-            Controls.Add(prevBtn);
-            Controls.Add(label1);
-            Name = "ServicesSearchMenu";
-            Size = new Size(804, 736);
-            Load += ServicesSearchMenu_Load;
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)prevBtn).EndInit();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::ohjelmistotuotanto.Properties.Resources.test3;
+            this.Controls.Add(this.searchReservationBtn);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.prevBtn);
+            this.Controls.Add(this.label1);
+            this.Name = "ServicesSearchMenu";
+            this.Size = new System.Drawing.Size(804, 736);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.prevBtn)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
