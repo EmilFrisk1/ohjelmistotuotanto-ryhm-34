@@ -15,7 +15,6 @@ namespace ohjelmistotuotanto
     {
         public delegate void MenuSwitchRequestHandler(string menu); // Function pointer 
         public event MenuSwitchRequestHandler MenuSwitchRequested;
-        public List<Area> Areas { get; set; }
         public static bool nameChanged = false;
         private bool isFirstLoad = true;
         private static int counter = 0;
@@ -29,8 +28,8 @@ namespace ohjelmistotuotanto
         {
             isFirstLoad = false;
             // Initialize lists
-            Areas = new List<Area>() { new Area { Id = -1, Name = string.Empty } };
-            string billQuery = $"SELECT r.start_date, r.end_date, b.id AS bill_id, b.sum, b.issue_date, b.due_date, c.city AS c_city, c.postal_code AS c_postal_code, c.address AS c_address, CONCAT(c.firstname, ' ', c.lastname) AS c_full_name, co.description FROM bill b JOIN reservation r ON b.reservation_id = r.id JOIN customer c ON r.customer_id = c.id JOIN cottage co ON r.cottage_id = co.id";
+            Invoices = new List<InvoiceDataModel>();
+            string billQuery = $"SELECT r.start_date, r.end_date, b.id AS bill_id, b.status AS tilanne, b.sum, b.issue_date, b.due_date, c.city AS c_city, c.postal_code AS c_postal_code, c.address AS c_address, CONCAT(c.firstname, ' ', c.lastname) AS c_full_name, co.description FROM bill b JOIN reservation r ON b.reservation_id = r.id JOIN customer c ON r.customer_id = c.id JOIN cottage co ON r.cottage_id = co.id;";
             var billsdetails = await VillageNewbies._dbManager.GetBillDetails(billQuery);
             billsDataGridView.DataSource = billsdetails;
         }
@@ -40,11 +39,11 @@ namespace ohjelmistotuotanto
             if (selectedRow != null)
             {
                 // Set the bill placeholder
-                string billName = (string)selectedRow.Cells["BillId"].Value;
-                if (billName != null)
+                string billStatus = (string)selectedRow.Cells["status"].Value;
+                if (billStatus != null)
                 {
-                    InvoiceDataModel selectedBill = Invoices.FirstOrDefault(b => b.BillId == billName);
-                    billsCbx.Text = selectedBill.BillId;
+                    InvoiceDataModel selectedBill = Invoices.FirstOrDefault(b => b.BillId == billStatus);
+                    billsCbx.SelectedValue = selectedBill.Status;
                 }
             }
         }
