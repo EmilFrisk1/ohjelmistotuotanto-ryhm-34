@@ -53,7 +53,7 @@ namespace ohjelmistotuotanto
         {
             this.Hide();
             VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
-            MenuSwitchRequested?.Invoke(Constants.rrvtMenu);
+            MenuSwitchRequested?.Invoke(Constants.srvcMenu);
         }
 
         private async void searchReservationBtn_Click(object sender, EventArgs e)
