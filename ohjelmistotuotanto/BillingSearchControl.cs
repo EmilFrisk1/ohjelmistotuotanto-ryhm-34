@@ -34,5 +34,10 @@ namespace ohjelmistotuotanto
         {
             GetBills();
         }
+
+        private void BillingSearchControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

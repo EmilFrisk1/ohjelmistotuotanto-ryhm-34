@@ -29,82 +29,82 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BillingSearchControl));
-            this.label1 = new System.Windows.Forms.Label();
-            this.searchBtn = new System.Windows.Forms.Button();
-            this.searchGrid = new System.Windows.Forms.DataGridView();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.searchGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.SuspendLayout();
+            label1 = new Label();
+            searchBtn = new Button();
+            searchGrid = new DataGridView();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)searchGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Script MT Bold", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.Silver;
-            this.label1.Location = new System.Drawing.Point(240, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(324, 77);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Hae laskut";
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Script MT Bold", 48F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.ForeColor = Color.Silver;
+            label1.Location = new Point(240, 18);
+            label1.Name = "label1";
+            label1.Size = new Size(324, 77);
+            label1.TabIndex = 18;
+            label1.Text = "Hae laskut";
             // 
             // searchBtn
             // 
-            this.searchBtn.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.searchBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.searchBtn.ForeColor = System.Drawing.Color.Silver;
-            this.searchBtn.Location = new System.Drawing.Point(117, 462);
-            this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(567, 62);
-            this.searchBtn.TabIndex = 17;
-            this.searchBtn.Text = "Hae";
-            this.searchBtn.UseVisualStyleBackColor = false;
-            this.searchBtn.Click += new System.EventHandler(this.searchBtn_Click);
+            searchBtn.BackColor = Color.DarkSlateGray;
+            searchBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+            searchBtn.ForeColor = Color.Silver;
+            searchBtn.Location = new Point(117, 462);
+            searchBtn.Name = "searchBtn";
+            searchBtn.Size = new Size(567, 62);
+            searchBtn.TabIndex = 17;
+            searchBtn.Text = "Hae";
+            searchBtn.UseVisualStyleBackColor = false;
+            searchBtn.Click += searchBtn_Click;
             // 
             // searchGrid
             // 
-            this.searchGrid.AllowUserToAddRows = false;
-            this.searchGrid.AllowUserToDeleteRows = false;
-            this.searchGrid.AllowUserToResizeColumns = false;
-            this.searchGrid.AllowUserToResizeRows = false;
-            this.searchGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.searchGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.searchGrid.Location = new System.Drawing.Point(117, 149);
-            this.searchGrid.MultiSelect = false;
-            this.searchGrid.Name = "searchGrid";
-            this.searchGrid.RowTemplate.Height = 25;
-            this.searchGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.searchGrid.Size = new System.Drawing.Size(567, 285);
-            this.searchGrid.TabIndex = 16;
+            searchGrid.AllowUserToAddRows = false;
+            searchGrid.AllowUserToDeleteRows = false;
+            searchGrid.AllowUserToResizeColumns = false;
+            searchGrid.AllowUserToResizeRows = false;
+            searchGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            searchGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            searchGrid.Location = new Point(117, 149);
+            searchGrid.MultiSelect = false;
+            searchGrid.Name = "searchGrid";
+            searchGrid.RowTemplate.Height = 25;
+            searchGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            searchGrid.Size = new Size(567, 285);
+            searchGrid.TabIndex = 16;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(33, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(124, 62);
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(33, 32);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(124, 62);
+            pictureBox1.TabIndex = 15;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // BillingSearchControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::ohjelmistotuotanto.Properties.Resources.test3;
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.searchBtn);
-            this.Controls.Add(this.searchGrid);
-            this.Controls.Add(this.pictureBox1);
-            this.Name = "BillingSearchControl";
-            this.Size = new System.Drawing.Size(804, 736);
-            ((System.ComponentModel.ISupportInitialize)(this.searchGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources.test3;
+            Controls.Add(label1);
+            Controls.Add(searchBtn);
+            Controls.Add(searchGrid);
+            Controls.Add(pictureBox1);
+            Name = "BillingSearchControl";
+            Size = new Size(804, 736);
+            Load += BillingSearchControl_Load;
+            ((System.ComponentModel.ISupportInitialize)searchGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

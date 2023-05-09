@@ -122,7 +122,6 @@ namespace ohjelmistotuotanto
             customersSearchControl.Hide();
             customersDeleteControl.Hide();
             customersUpdateControl.Hide();
-            billingMenuControl.Hide();
             cottagesRootMenuControl.Hide();
             cottagesAddMenuControl.Hide();
             cottagesRemoveMenuControl.Hide();
@@ -133,6 +132,7 @@ namespace ohjelmistotuotanto
             areaAddControl.Hide();
             areaRemoveControl.Hide();
             areaUpdateControl.Hide();
+            billingMenuControl.Hide();
             billingSearchControl.Hide();
 
             // Subscribe to the MenuSwitchRequested event for each User Control
@@ -153,7 +153,6 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(customersSearchControl);
             SubscribeToMenuSwitchEvents(customersDeleteControl);
             SubscribeToMenuSwitchEvents(customersUpdateControl);
-            SubscribeToMenuSwitchEvents(billingMenuControl);
             SubscribeToMenuSwitchEvents(cottagesRootMenuControl);
             SubscribeToMenuSwitchEvents(cottagesAddMenuControl);
             SubscribeToMenuSwitchEvents(cottagesRemoveMenuControl);
@@ -164,6 +163,7 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(areaAddControl);
             SubscribeToMenuSwitchEvents(areaRemoveControl);
             SubscribeToMenuSwitchEvents(areaUpdateControl);
+            SubscribeToMenuSwitchEvents(billingMenuControl);
             SubscribeToMenuSwitchEvents(billingSearchControl);
 
             // Make the controls fill the whole panel (fullscreen)
@@ -196,6 +196,7 @@ namespace ohjelmistotuotanto
             areaRemoveControl.Dock = DockStyle.Fill;
             areaUpdateControl.Dock = DockStyle.Fill;
             billingSearchControl.Dock = DockStyle.Fill;
+
             // add controls to app container
             appContainer.Controls.Add(mainMenuControl);
             appContainer.Controls.Add(reservationMenuControl);
@@ -227,6 +228,7 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(areaRemoveControl);
             appContainer.Controls.Add(areaUpdateControl);
             appContainer.Controls.Add(billingSearchControl);
+
             // Add app status strip to all menu's that need it
             mainMenuControl.statusStrip = appStatusStrip;
             addReservationMenuControl.statusStrip = appStatusStrip;
@@ -572,6 +574,9 @@ namespace ohjelmistotuotanto
             else if (userControl is AreaUpdateControl areaUpdateControl)
             {
                 areaUpdateControl.MenuSwitchRequested += SwitchMenuControl;
+            } else if (userControl is BillingMenuControl billingMenu)
+            {
+                billingMenu.MenuSwitchRequested += SwitchMenuControl;
             }
             else if (userControl is BillingSearchControl billingSearchControl)
             {
