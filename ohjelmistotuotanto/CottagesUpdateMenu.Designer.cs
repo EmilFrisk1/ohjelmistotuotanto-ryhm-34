@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CottagesUpdateMenu));
             panel1 = new Panel();
+            panel3 = new Panel();
+            label11 = new Label();
+            areaCbx = new ComboBox();
+            label12 = new Label();
             squaresErrLbl = new Label();
             priceErrLbl = new Label();
             label7 = new Label();
@@ -55,14 +59,10 @@
             cottageCbx = new ComboBox();
             label3 = new Label();
             cottageTxtBox = new TextBox();
-            panel3 = new Panel();
-            label11 = new Label();
-            areaCbx = new ComboBox();
-            label12 = new Label();
             panel1.SuspendLayout();
+            panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)prevBtn).BeginInit();
             panel2.SuspendLayout();
-            panel3.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
@@ -91,6 +91,53 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(451, 739);
             panel1.TabIndex = 26;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.Transparent;
+            panel3.BorderStyle = BorderStyle.Fixed3D;
+            panel3.Controls.Add(label11);
+            panel3.Controls.Add(areaCbx);
+            panel3.Controls.Add(label12);
+            panel3.ForeColor = Color.Silver;
+            panel3.Location = new Point(-3, 119);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(452, 129);
+            panel3.TabIndex = 45;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI Semibold", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.ForeColor = Color.WhiteSmoke;
+            label11.Location = new Point(173, 0);
+            label11.Name = "label11";
+            label11.Size = new Size(125, 50);
+            label11.TabIndex = 12;
+            label11.Text = "Alue *";
+            // 
+            // areaCbx
+            // 
+            areaCbx.BackColor = Color.DarkSlateGray;
+            areaCbx.DropDownStyle = ComboBoxStyle.DropDownList;
+            areaCbx.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            areaCbx.ForeColor = Color.Silver;
+            areaCbx.FormattingEnabled = true;
+            areaCbx.Location = new Point(114, 66);
+            areaCbx.Name = "areaCbx";
+            areaCbx.Size = new Size(315, 29);
+            areaCbx.TabIndex = 1;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.ForeColor = Color.WhiteSmoke;
+            label12.Location = new Point(8, 58);
+            label12.Name = "label12";
+            label12.Size = new Size(95, 37);
+            label12.TabIndex = 2;
+            label12.Text = "valitse";
             // 
             // squaresErrLbl
             // 
@@ -379,53 +426,6 @@
             cottageTxtBox.TabIndex = 3;
             cottageTxtBox.TextChanged += cottageTxtBox_TextChanged;
             // 
-            // panel3
-            // 
-            panel3.BackColor = Color.Transparent;
-            panel3.BorderStyle = BorderStyle.Fixed3D;
-            panel3.Controls.Add(label11);
-            panel3.Controls.Add(areaCbx);
-            panel3.Controls.Add(label12);
-            panel3.ForeColor = Color.Silver;
-            panel3.Location = new Point(-3, 119);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(452, 129);
-            panel3.TabIndex = 45;
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI Semibold", 27.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.WhiteSmoke;
-            label11.Location = new Point(173, 0);
-            label11.Name = "label11";
-            label11.Size = new Size(125, 50);
-            label11.TabIndex = 12;
-            label11.Text = "Alue *";
-            // 
-            // areaCbx
-            // 
-            areaCbx.BackColor = Color.DarkSlateGray;
-            areaCbx.DropDownStyle = ComboBoxStyle.DropDownList;
-            areaCbx.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            areaCbx.ForeColor = Color.Silver;
-            areaCbx.FormattingEnabled = true;
-            areaCbx.Location = new Point(114, 66);
-            areaCbx.Name = "areaCbx";
-            areaCbx.Size = new Size(315, 29);
-            areaCbx.TabIndex = 1;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI Semibold", 20.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.ForeColor = Color.WhiteSmoke;
-            label12.Location = new Point(8, 58);
-            label12.Name = "label12";
-            label12.Size = new Size(95, 37);
-            label12.TabIndex = 2;
-            label12.Text = "valitse";
-            // 
             // CottagesUpdateMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -438,13 +438,14 @@
             Name = "CottagesUpdateMenu";
             Size = new Size(804, 1200);
             Load += CottagesUpdateMenu_Load;
+            VisibleChanged += CottagesUpdateMenu_VisibleChanged;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)prevBtn).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }

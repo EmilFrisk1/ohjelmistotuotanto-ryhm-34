@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,9 @@ namespace ohjelmistotuotanto
         public event MenuSwitchRequestHandler MenuSwitchRequested;
         public List<Area> Areas { get; set; }
         public List<ServicesReport> Services { get; set; }
+
+        private bool isFirstLoad = true;
+        private static int counter = 0;
 
         public ServicesSearchMenu()
         {
@@ -36,7 +40,11 @@ namespace ohjelmistotuotanto
             datePickerStart.MinDate = DateTime.Today;
             datePickerEnd.MinDate = DateTime.Today;
 
-            // Get all areas and display them on the comboBox
+            GetAreas();
+        }
+
+        private async void GetAreas()
+        {
             var areas = await VillageNewbies._dbManager.SelectDataAsync("area", new List<string>() { "id", "name" });
             ComboBoxUtility.SetUpAreasCbx(areas, Areas, areaCbx);
         }
@@ -110,6 +118,18 @@ namespace ohjelmistotuotanto
             // Add more conditions for other filters here
 
             return queryBuilder.ToString();
+        }
+
+        private void ServicesSearchMenu_VisibleChanged(object sender, EventArgs e)
+        {
+            counter++;
+            if (isFirstLoad || counter <= 2)
+                return;
+
+            if (this.Visible)
+            {
+                GetAreas();
+            }
         }
     }
 }

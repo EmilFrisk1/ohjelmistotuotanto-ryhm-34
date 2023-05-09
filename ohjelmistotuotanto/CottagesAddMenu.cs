@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,9 @@ namespace ohjelmistotuotanto
         public Panel appContainer;
         public Form mainForm;
 
+        private bool isFirstLoad = true;
+        private static int counter = 0;
+
         public List<Area> Areas { get; set; }
 
         public CottagesAddMenu()
@@ -28,14 +32,20 @@ namespace ohjelmistotuotanto
 
         private async void CottagesAddMenu_Load(object sender, EventArgs e)
         {
+            isFirstLoad = false;
+
             // Initialize lists
             Areas = new List<Area>() { new Area { Id = -1, Name = string.Empty } };
 
-            // Get all areas and display them on the comboBox
+            GetAreas();
+        }
+
+        private async void GetAreas()
+        {
+            // Get services and display then on a combobox | each entry linked with id
             var areas = await VillageNewbies._dbManager.SelectDataAsync("area", new List<string>() { "id", "name" });
             ComboBoxUtility.SetUpAreasCbx(areas, Areas, areaCbx);
         }
-
 
         private void prevBtn_Click(object sender, EventArgs e)
         {
@@ -85,7 +95,8 @@ namespace ohjelmistotuotanto
                 if (result > 0)
                 {
                     return true;
-                } else
+                }
+                else
                 {
                     throw new Exception("Error occurred while inserting data into the database.");
                 }
@@ -104,7 +115,7 @@ namespace ohjelmistotuotanto
                 string.IsNullOrEmpty(squaresTxtBox.Text) || string.IsNullOrEmpty(addressTxtBox.Text) ||
                 string.IsNullOrEmpty(cottageNameTxtBox.Text))
             {
-                
+
                 return false;
             }
             else
@@ -126,7 +137,7 @@ namespace ohjelmistotuotanto
                 priceErrLbl.Text = "Vain 10 merkkiä sallittu";
                 return;
             }
-               
+
 
             if (TextBoxUtility.AllowOnlyNumbers(sender, e))
             {
@@ -151,7 +162,7 @@ namespace ohjelmistotuotanto
 
             // No errors
             if (squaresErrLbl.Visible)
-                squaresErrLbl.Visible= false;
+                squaresErrLbl.Visible = false;
         }
 
         private void HideErrors()
@@ -175,6 +186,18 @@ namespace ohjelmistotuotanto
             squaresTxtBox.Text = string.Empty;
             addressTxtBox.Text = string.Empty;
             cottageNameTxtBox.Text = string.Empty;
+        }
+
+        private void CottagesAddMenu_VisibleChanged(object sender, EventArgs e)
+        {
+            counter++;
+            if (isFirstLoad || counter <= 2)
+                return;
+
+            if (this.Visible)
+            {
+                GetAreas();
+            }
         }
     }
 }

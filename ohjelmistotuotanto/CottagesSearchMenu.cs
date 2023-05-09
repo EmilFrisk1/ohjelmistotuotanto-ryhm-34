@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,9 @@ namespace ohjelmistotuotanto
         public List<Area> Areas { get; set; }
         public List<CottageDataModel> Cottages { get; set; }
 
+        public static int counter = 0;
+        public static bool isFirstLoad = true;
+
         public CottagesSearchMenu()
         {
             InitializeComponent();
@@ -24,10 +28,16 @@ namespace ohjelmistotuotanto
 
         private async void CottagesSearchMenu_Load(object sender, EventArgs e)
         {
+            isFirstLoad = false;
+
             Areas = new List<Area>() { new Area { Id = -1, Name = "Kaikki" } };
             Cottages = new List<CottageDataModel>();
 
-            // Get all areas and display them on the comboBox
+            GetAreas();
+        }
+
+        private async void GetAreas()
+        {
             var areas = await VillageNewbies._dbManager.SelectDataAsync("area", new List<string>() { "id", "name" });
             ComboBoxUtility.SetUpAreasCbx(areas, Areas, areaCbx);
         }
@@ -106,6 +116,18 @@ namespace ohjelmistotuotanto
             this.Hide();
             VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
             MenuSwitchRequested?.Invoke(Constants.cottagesMenu);
+        }
+
+        private void CottagesSearchMenu_VisibleChanged(object sender, EventArgs e)
+        {
+            counter++;
+            if (isFirstLoad || counter <= 2)
+                return;
+
+            if (this.Visible)
+            {
+                GetAreas();
+            }
         }
     }
 }

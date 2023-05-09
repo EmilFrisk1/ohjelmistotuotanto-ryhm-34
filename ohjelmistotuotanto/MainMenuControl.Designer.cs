@@ -35,10 +35,7 @@
             billsBtn = new Button();
             customersBtn = new Button();
             areasBtn = new Button();
-            button1 = new Button();
-            testContainer = new DataGridView();
             cottagesBtn = new Button();
-            ((System.ComponentModel.ISupportInitialize)testContainer).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -118,24 +115,6 @@
             areasBtn.UseVisualStyleBackColor = false;
             areasBtn.Click += areasBtn_Click;
             // 
-            // button1
-            // 
-            button1.Location = new Point(667, 184);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 6;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // testContainer
-            // 
-            testContainer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            testContainer.Location = new Point(549, 286);
-            testContainer.Name = "testContainer";
-            testContainer.RowTemplate.Height = 25;
-            testContainer.Size = new Size(240, 150);
-            testContainer.TabIndex = 7;
-            // 
             // cottagesBtn
             // 
             cottagesBtn.BackColor = Color.DarkSlateGray;
@@ -155,8 +134,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             Controls.Add(cottagesBtn);
-            Controls.Add(testContainer);
-            Controls.Add(button1);
             Controls.Add(areasBtn);
             Controls.Add(customersBtn);
             Controls.Add(billsBtn);
@@ -165,7 +142,6 @@
             Controls.Add(label1);
             Name = "MainMenuControl";
             Size = new Size(804, 736);
-            ((System.ComponentModel.ISupportInitialize)testContainer).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -178,8 +154,6 @@
         private Button billsBtn;
         private Button customersBtn;
         private Button areasBtn;
-        private Button button1;
-        private DataGridView testContainer;
         private Button cottagesBtn;
     }
 }

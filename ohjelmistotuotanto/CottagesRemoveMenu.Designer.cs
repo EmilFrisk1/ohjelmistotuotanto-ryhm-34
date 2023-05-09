@@ -162,6 +162,7 @@
             Name = "CottagesRemoveMenu";
             Size = new Size(804, 736);
             Load += CottagesRemoveMenu_Load;
+            VisibleChanged += CottagesRemoveMenu_VisibleChanged;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)prevBtn).EndInit();

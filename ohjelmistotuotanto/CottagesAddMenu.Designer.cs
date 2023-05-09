@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CottagesAddMenu));
             prevBtn = new PictureBox();
             panel1 = new Panel();
+            squaresErrLbl = new Label();
+            priceErrLbl = new Label();
             panel2 = new Panel();
             label9 = new Label();
             areaCbx = new ComboBox();
@@ -50,8 +52,6 @@
             priceTxtBox = new TextBox();
             addCustomerBtn = new Button();
             label1 = new Label();
-            priceErrLbl = new Label();
-            squaresErrLbl = new Label();
             ((System.ComponentModel.ISupportInitialize)prevBtn).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -95,6 +95,32 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(458, 675);
             panel1.TabIndex = 20;
+            // 
+            // squaresErrLbl
+            // 
+            squaresErrLbl.AutoSize = true;
+            squaresErrLbl.BackColor = Color.Transparent;
+            squaresErrLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            squaresErrLbl.ForeColor = Color.Cyan;
+            squaresErrLbl.Location = new Point(210, 463);
+            squaresErrLbl.Name = "squaresErrLbl";
+            squaresErrLbl.Size = new Size(207, 21);
+            squaresErrLbl.TabIndex = 30;
+            squaresErrLbl.Text = "Vain numerot ja piste sallittu";
+            squaresErrLbl.Visible = false;
+            // 
+            // priceErrLbl
+            // 
+            priceErrLbl.AutoSize = true;
+            priceErrLbl.BackColor = Color.Transparent;
+            priceErrLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            priceErrLbl.ForeColor = Color.Cyan;
+            priceErrLbl.Location = new Point(212, 283);
+            priceErrLbl.Name = "priceErrLbl";
+            priceErrLbl.Size = new Size(207, 21);
+            priceErrLbl.TabIndex = 29;
+            priceErrLbl.Text = "Vain numerot ja piste sallittu";
+            priceErrLbl.Visible = false;
             // 
             // panel2
             // 
@@ -307,32 +333,6 @@
             label1.TabIndex = 19;
             label1.Text = "Lisää mökki";
             // 
-            // priceErrLbl
-            // 
-            priceErrLbl.AutoSize = true;
-            priceErrLbl.BackColor = Color.Transparent;
-            priceErrLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            priceErrLbl.ForeColor = Color.Cyan;
-            priceErrLbl.Location = new Point(212, 283);
-            priceErrLbl.Name = "priceErrLbl";
-            priceErrLbl.Size = new Size(207, 21);
-            priceErrLbl.TabIndex = 29;
-            priceErrLbl.Text = "Vain numerot ja piste sallittu";
-            priceErrLbl.Visible = false;
-            // 
-            // squaresErrLbl
-            // 
-            squaresErrLbl.AutoSize = true;
-            squaresErrLbl.BackColor = Color.Transparent;
-            squaresErrLbl.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            squaresErrLbl.ForeColor = Color.Cyan;
-            squaresErrLbl.Location = new Point(210, 463);
-            squaresErrLbl.Name = "squaresErrLbl";
-            squaresErrLbl.Size = new Size(207, 21);
-            squaresErrLbl.TabIndex = 30;
-            squaresErrLbl.Text = "Vain numerot ja piste sallittu";
-            squaresErrLbl.Visible = false;
-            // 
             // CottagesAddMenu
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -344,6 +344,7 @@
             Name = "CottagesAddMenu";
             Size = new Size(804, 1000);
             Load += CottagesAddMenu_Load;
+            VisibleChanged += CottagesAddMenu_VisibleChanged;
             ((System.ComponentModel.ISupportInitialize)prevBtn).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

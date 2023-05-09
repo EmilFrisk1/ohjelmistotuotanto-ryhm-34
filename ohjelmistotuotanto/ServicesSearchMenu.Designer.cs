@@ -233,6 +233,7 @@
             Name = "ServicesSearchMenu";
             Size = new Size(804, 736);
             Load += ServicesSearchMenu_Load;
+            VisibleChanged += ServicesSearchMenu_VisibleChanged;
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             panel1.ResumeLayout(false);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,9 @@ namespace ohjelmistotuotanto
         private bool squaresChanged = false;
         private bool addressChanged = false;
         private bool areaChanged = false;
+
+        public static int counter = 0;
+        public static bool isFirstLoad = true;
 
         public List<CottageDataModel> Cottages { get; set; }
         public List<Area> Areas { get; set; }
@@ -207,12 +211,19 @@ namespace ohjelmistotuotanto
 
         private async void CottagesUpdateMenu_Load(object sender, EventArgs e)
         {
+            isFirstLoad = false;
+
             // Initialize all needed lists
             Cottages = new List<CottageDataModel>() { new CottageDataModel { Id = -1, AreaId = -1, Price = -1, Description = string.Empty, Equipment = string.Empty, Squares = -1, Address = string.Empty, CottageName = string.Empty } };
             Areas = new List<Area>() { new Area { Id = -1, Name = string.Empty } };
 
             GetCottages();
-            // Get all areas and display them on the comboBox
+            GetAreas();
+        }
+
+        private async void GetAreas()
+        {
+            // Get services and display then on a combobox | each entry linked with id
             var areas = await VillageNewbies._dbManager.SelectDataAsync("area", new List<string>() { "id", "name" });
             ComboBoxUtility.SetUpAreasCbx(areas, Areas, areaCbx);
         }
@@ -270,6 +281,19 @@ namespace ohjelmistotuotanto
                 addressTxtBox.Text = targetCottage.Address;
                 cottageNameTxtBox.Text = targetCottage.CottageName;
                 areaCbx.SelectedItem = targetArea;
+            }
+        }
+
+        private void CottagesUpdateMenu_VisibleChanged(object sender, EventArgs e)
+        {
+            counter++;
+            if (isFirstLoad || counter <= 2)
+                return;
+
+            if (this.Visible)
+            {
+                GetAreas();
+                GetCottages();
             }
         }
     }

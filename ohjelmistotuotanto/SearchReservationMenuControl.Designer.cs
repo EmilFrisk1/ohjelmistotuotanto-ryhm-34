@@ -233,6 +233,7 @@
             Name = "SearchReservationMenuControl";
             Size = new Size(804, 736);
             Load += SearchReservationMenuControl_Load;
+            VisibleChanged += SearchReservationMenuControl_VisibleChanged;
             ((System.ComponentModel.ISupportInitialize)prevBtn).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();

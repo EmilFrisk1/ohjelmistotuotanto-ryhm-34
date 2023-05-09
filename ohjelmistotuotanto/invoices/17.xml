@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Invoice>
+  <invoice_header>
+    <invoiceId> 17</invoiceId>
+    <invoiceType>Lasku</invoiceType>
+    <invoiceDate>09/05/2023</invoiceDate>
+    <dueDate>13/06/2023</dueDate>
+    <invCustomerName>John Doe</invCustomerName>
+    <invAddress1>1 Main St, Anytown</invAddress1>
+    <invZipcode>12345</invZipcode>
+    <invCity>city 1</invCity>
+  </invoice_header>
+  <invoice_rows>
+    <rowId>1</rowId>
+    <itemDescription>Modern cottage with a pool</itemDescription>
+    <dayCount>3</dayCount>
+    <price>1050000</price>
+    <currency>€</currency>
+  </invoice_rows>
+  <invoice_total>
+    <invoicedAmount>1050000</invoicedAmount>
+    <ALV>252000</ALV>
+    <totalAmount>1302000</totalAmount>
+    <currency>€</currency>
+  </invoice_total>
+  <invoice_payeeinfo>
+    <lol>who knows</lol>
+  </invoice_payeeinfo>
+</Invoice>

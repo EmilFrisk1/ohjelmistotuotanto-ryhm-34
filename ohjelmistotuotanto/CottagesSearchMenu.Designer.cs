@@ -214,6 +214,7 @@
             Name = "CottagesSearchMenu";
             Size = new Size(804, 736);
             Load += CottagesSearchMenu_Load;
+            VisibleChanged += CottagesSearchMenu_VisibleChanged;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)prevBtn).EndInit();

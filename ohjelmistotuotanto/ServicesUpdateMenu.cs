@@ -71,7 +71,7 @@ namespace ohjelmistotuotanto
             {
                 if (!Validate())
                     return;
-                
+
                 if (!ConfirmChange())
                     return;
 
@@ -100,8 +100,8 @@ namespace ohjelmistotuotanto
             servicesCbx.SelectedIndex = 0;
             if (serviceErrorLabel.Visible)
                 serviceErrorLabel.Visible = false;
-            if(priceErrLabel.Visible)
-                priceErrLabel.Visible = false;  
+            if (priceErrLabel.Visible)
+                priceErrLabel.Visible = false;
         }
 
         private bool Validate()
@@ -123,7 +123,7 @@ namespace ohjelmistotuotanto
                 if (serviceErrorLabel.Visible)
                 {
                     serviceErrorLabel.Visible = false;
-                } 
+                }
 
                 if (priceErrLabel.Visible)
                 {

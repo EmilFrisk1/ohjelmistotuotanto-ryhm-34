@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.DirectoryServices;
 using System.Drawing;
 using System.Linq;
@@ -17,6 +18,9 @@ namespace ohjelmistotuotanto
         public event MenuSwitchRequestHandler MenuSwitchRequested;
         private List<Reservation> reservationsList = new List<Reservation>();
 
+        public static int counter = 0;
+        public static bool isFirstLoad = true;
+
         public List<Area> Areas { get; set; }
         public SearchReservationMenuControl()
         {
@@ -25,7 +29,9 @@ namespace ohjelmistotuotanto
 
         private async void SearchReservationMenuControl_Load(object sender, EventArgs e)
         {
-            Areas = new List<Area>() { new Area { Id = -1, Name = string.Empty } };
+            isFirstLoad = false;
+
+            Areas = new List<Area>() { new Area { Id = -1, Name = "Kaikki" } };
 
             // Set the default value to the current date
             datePickerStart.Value = DateTime.Today;
@@ -35,7 +41,11 @@ namespace ohjelmistotuotanto
             datePickerStart.MinDate = DateTime.Today;
             datePickerEnd.MinDate = DateTime.Today;
 
-            // Get all areas and display them on the comboBox
+            GetAreas();
+        }
+
+        private async void GetAreas()
+        {
             var areas = await VillageNewbies._dbManager.SelectDataAsync("area", new List<string>() { "id", "name" });
             ComboBoxUtility.SetUpAreasCbx(areas, Areas, areaCbx);
         }
@@ -49,16 +59,17 @@ namespace ohjelmistotuotanto
 
         private async void searchReservationBtn_Click(object sender, EventArgs e)
         {
-            
+
 
             // Validate input
             if (DateTime.Compare(datePickerStart.Value.Date, datePickerEnd.Value.Date) > 0)
             {
                 dateErrorLabel.Visible = true;
                 return;
-            } else
+            }
+            else
             {
-                if (dateErrorLabel.Visible) 
+                if (dateErrorLabel.Visible)
                     dateErrorLabel.Visible = false;
             }
 
@@ -116,6 +127,18 @@ namespace ohjelmistotuotanto
                 var endDate = (DateTime)row["end_date"];
                 var customerId = (int)row["customer_id"];
                 reservationsList.Add(new Reservation() { Id = id, MökkiId = cottageId, AloitusPvm = startDate, LoppuPvm = endDate, AsiakasId = customerId });
+            }
+        }
+
+        private void SearchReservationMenuControl_VisibleChanged(object sender, EventArgs e)
+        {
+            counter++;
+            if (isFirstLoad || counter <= 2)
+                return;
+
+            if (this.Visible)
+            {
+                GetAreas();
             }
         }
     }

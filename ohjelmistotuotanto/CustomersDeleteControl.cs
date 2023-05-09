@@ -36,11 +36,6 @@ namespace ohjelmistotuotanto
             MenuDefaultState();
         }
 
-        private void deleteBtn_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private async Task<bool> RemoveCustomer()
         {
             try
@@ -104,10 +99,39 @@ namespace ohjelmistotuotanto
             if (!Validate())
                 return;
 
+            if (!await IsRemovable())
+            {
+                MessageBox.Show("Tämä asiakas on sidottuna varaukseen, sitä ei voi poistaa");
+                return;
+            }
+
             if (!await RemoveCustomer())
                 return;
 
             GetCustomers();
+        }
+
+        private async Task<bool> IsRemovable()
+        {
+            try
+            {
+                var response = await VillageNewbies._dbManager.IsRemovable($"SELECT * FROM reservation WHERE customer_id = {(int)customerCbx.SelectedValue}");
+                if (response == null)
+                {
+                    return false;
+
+                }
+                else if (response > 0)
+                {
+                    return false;
+                }
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         private void CustomersDeleteControl_VisibleChanged(object sender, EventArgs e)
@@ -120,7 +144,6 @@ namespace ohjelmistotuotanto
             {
                 GetCustomers();
             }
-
         }
     }
 }

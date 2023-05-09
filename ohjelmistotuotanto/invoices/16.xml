@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Invoice>
+  <invoice_header>
+    <invoiceId> 16</invoiceId>
+    <invoiceType>Lasku</invoiceType>
+    <invoiceDate>07/05/2023</invoiceDate>
+    <dueDate>07/06/2023</dueDate>
+    <invCustomerName>David Wilson</invCustomerName>
+    <invAddress1>5 Maple St, Anytown</invAddress1>
+    <invZipcode>86420</invZipcode>
+    <invCity>city 5</invCity>
+  </invoice_header>
+  <invoice_rows>
+    <rowId>1</rowId>
+    <itemDescription>Beautiful cottage with lake view</itemDescription>
+    <dayCount>1</dayCount>
+    <price>250000</price>
+    <currency>€</currency>
+  </invoice_rows>
+  <invoice_total>
+    <invoicedAmount>250000</invoicedAmount>
+    <ALV>60000</ALV>
+    <totalAmount>310000</totalAmount>
+    <currency>€</currency>
+  </invoice_total>
+  <invoice_payeeinfo>
+    <lol>who knows</lol>
+  </invoice_payeeinfo>
+</Invoice>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Invoice>
+  <invoice_header>
+    <invoiceId> 19</invoiceId>
+    <invoiceType>Lasku</invoiceType>
+    <invoiceDate>09/05/2023</invoiceDate>
+    <dueDate>09/06/2023</dueDate>
+    <invCustomerName>David Wilson</invCustomerName>
+    <invAddress1>5 Maple St, Anytown</invAddress1>
+    <invZipcode>86420</invZipcode>
+    <invCity>city 5</invCity>
+  </invoice_header>
+  <invoice_rows>
+    <rowId>1</rowId>
+    <itemDescription>adasda</itemDescription>
+    <dayCount>1</dayCount>
+    <price>11212</price>
+    <currency>€</currency>
+  </invoice_rows>
+  <invoice_total>
+    <invoicedAmount>11212</invoicedAmount>
+    <ALV>2690.88</ALV>
+    <totalAmount>13902.880000000001</totalAmount>
+    <currency>€</currency>
+  </invoice_total>
+  <invoice_payeeinfo>
+    <lol>who knows</lol>
+  </invoice_payeeinfo>
+</Invoice>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace ohjelmistotuotanto
         public delegate void MenuSwitchRequestHandler(string menu); // Function pointer 
         public event MenuSwitchRequestHandler MenuSwitchRequested;
         public StatusStrip statusStrip;
+        public static int counter = 0;
+        public static bool isFirstLoad = true;
         public List<Cottage> Cottages { get; set; }
         public CottagesRemoveMenu()
         {
@@ -34,12 +37,41 @@ namespace ohjelmistotuotanto
             if (!Validate())
                 return;
 
+            if (!await IsRemovable())
+            {
+                MessageBox.Show("Tämä mökki on sidottuna varaukseen, sitä ei voi poistaa");
+                return;
+            }
+
             if (!await RemoveCottage())
                 return;
 
             MessageBox.Show("mökki poistettu onnistuneesti");
 
             GetCottages();
+        }
+
+        private async Task<bool> IsRemovable()
+        {
+            try
+            {
+                var response = await VillageNewbies._dbManager.IsRemovable($"SELECT * FROM reservation WHERE cottage_id = {(int)cottageCbx.SelectedValue}");
+                if (response == null)
+                {
+                    return false;
+
+                }
+                else if (response > 0)
+                {
+                    return false;
+                }
+                else
+                    return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         private void HideErrors()
@@ -70,6 +102,8 @@ namespace ohjelmistotuotanto
 
         private async void CottagesRemoveMenu_Load(object sender, EventArgs e)
         {
+            isFirstLoad = false;
+
             // Initialize all needed lists
             Cottages = new List<Cottage>() { new Cottage { Id = -1, Name = string.Empty } };
 
@@ -109,6 +143,18 @@ namespace ohjelmistotuotanto
         private void cottageTxtBox_TextChanged(object sender, EventArgs e)
         {
             ComboBoxUtility.FilterCottages(cottageCbx, Cottages, cottageTxtBox.Text);
+        }
+
+        private void CottagesRemoveMenu_VisibleChanged(object sender, EventArgs e)
+        {
+            counter++;
+            if (isFirstLoad || counter <= 2)
+                return;
+
+            if (this.Visible)
+            {
+                GetCottages();
+            }
         }
     }
 }
