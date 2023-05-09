@@ -37,6 +37,7 @@ namespace ohjelmistotuotanto
         public const string areasAdd = "areasAdd";
         public const string areasRemove = "areasRemove";
         public const string areasUpdate = "areasUpdate";
+        public const string billingSearch = "billingSearch";
 
     }
 }

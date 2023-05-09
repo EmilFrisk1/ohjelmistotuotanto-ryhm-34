@@ -24,6 +24,7 @@ namespace ohjelmistotuotanto
     {
         public VillageNewbies mainForm;
 
+
         //public static Form formVaraukset; // luodaan varaukset form
         public MainMenuControl mainMenuControl;
         public ReservationMenuControl reservationMenuControl;
@@ -53,6 +54,7 @@ namespace ohjelmistotuotanto
         public AreaAddControl areaAddControl;
         public AreaRemoveControl areaRemoveControl;
         public AreaUpdateControl areaUpdateControl;
+        public BillingSearchControl billingSearchControl;
 
 
         static PictureBox prevButton;
@@ -100,6 +102,7 @@ namespace ohjelmistotuotanto
             areaAddControl = new AreaAddControl();
             areaRemoveControl = new AreaRemoveControl();
             areaUpdateControl = new AreaUpdateControl();
+            billingSearchControl = new BillingSearchControl();
 
             // hide controls
             mainMenuControl.Hide();
@@ -130,6 +133,7 @@ namespace ohjelmistotuotanto
             areaAddControl.Hide();
             areaRemoveControl.Hide();
             areaUpdateControl.Hide();
+            billingSearchControl.Hide();
 
             // Subscribe to the MenuSwitchRequested event for each User Control
             SubscribeToMenuSwitchEvents(mainMenuControl);
@@ -160,6 +164,7 @@ namespace ohjelmistotuotanto
             SubscribeToMenuSwitchEvents(areaAddControl);
             SubscribeToMenuSwitchEvents(areaRemoveControl);
             SubscribeToMenuSwitchEvents(areaUpdateControl);
+            SubscribeToMenuSwitchEvents(billingSearchControl);
 
             // Make the controls fill the whole panel (fullscreen)
             mainMenuControl.Dock = DockStyle.Fill;
@@ -190,7 +195,7 @@ namespace ohjelmistotuotanto
             areaAddControl.Dock = DockStyle.Fill;
             areaRemoveControl.Dock = DockStyle.Fill;
             areaUpdateControl.Dock = DockStyle.Fill;
-
+            billingSearchControl.Dock = DockStyle.Fill;
             // add controls to app container
             appContainer.Controls.Add(mainMenuControl);
             appContainer.Controls.Add(reservationMenuControl);
@@ -221,7 +226,7 @@ namespace ohjelmistotuotanto
             appContainer.Controls.Add(areaAddControl);
             appContainer.Controls.Add(areaRemoveControl);
             appContainer.Controls.Add(areaUpdateControl);
-
+            appContainer.Controls.Add(billingSearchControl);
             // Add app status strip to all menu's that need it
             mainMenuControl.statusStrip = appStatusStrip;
             addReservationMenuControl.statusStrip = appStatusStrip;
@@ -449,6 +454,12 @@ namespace ohjelmistotuotanto
                 SetDefaultAppSize(appContainer, defaultAppContainerSize);
                 menuhistory.Add(Constants.areasUpdate);
             }
+            else if (menu == Constants.billingSearch)
+            {
+                billingSearchControl.Visible = true;
+                SetDefaultAppSize(appContainer, defaultAppContainerSize);
+                menuhistory.Add(Constants.billingSearch);
+            }
         }
 
         private void SubscribeToMenuSwitchEvents(UserControl userControl)
@@ -562,6 +573,10 @@ namespace ohjelmistotuotanto
             {
                 areaUpdateControl.MenuSwitchRequested += SwitchMenuControl;
             }
+            else if (userControl is BillingSearchControl billingSearchControl)
+            {
+                billingSearchControl.MenuSwitchRequested += SwitchMenuControl;
+            }
         }
 
         // Makes sure we don't use vertical scrollbars when we don't need them
@@ -665,6 +680,9 @@ namespace ohjelmistotuotanto
                     break;
                 case Constants.billingMenu:
                     billingMenuControl.Visible = false;
+                    break;
+                case Constants.billingSearch:
+                    billingSearchControl.Visible = false;
                     break;
                 default:
                     MessageBox.Show("Menu: " + currentMenu);

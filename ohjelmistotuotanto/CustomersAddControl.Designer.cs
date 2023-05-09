@@ -101,7 +101,7 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Script MT Bold", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Silver;
-            this.label1.Location = new System.Drawing.Point(194, 17);
+            this.label1.Location = new System.Drawing.Point(194, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(415, 77);
             this.label1.TabIndex = 14;

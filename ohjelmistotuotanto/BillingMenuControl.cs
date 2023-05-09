@@ -12,9 +12,17 @@ namespace ohjelmistotuotanto
 {
     public partial class BillingMenuControl : UserControl
     {
+        public delegate void MenuSwitchRequestHandler(string newControl); // Function pointer 
+        public event MenuSwitchRequestHandler MenuSwitchRequested;
         public BillingMenuControl()
         {
             InitializeComponent();
+        }
+
+        private void BillingSearchBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.billingSearch);
         }
     }
 }

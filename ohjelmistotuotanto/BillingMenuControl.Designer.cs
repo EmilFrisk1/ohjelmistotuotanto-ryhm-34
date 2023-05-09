@@ -57,6 +57,7 @@
             this.BillingSearchBtn.TabIndex = 1;
             this.BillingSearchBtn.Text = "Hae";
             this.BillingSearchBtn.UseVisualStyleBackColor = false;
+            this.BillingSearchBtn.Click += new System.EventHandler(this.BillingSearchBtn_Click);
             // 
             // BillingDeleteBtn
             // 
@@ -92,7 +93,7 @@
             this.Controls.Add(this.BillingSearchBtn);
             this.Controls.Add(this.LaskuLabel1);
             this.Name = "BillingMenuControl";
-            this.Size = new System.Drawing.Size(820, 860);
+            this.Size = new System.Drawing.Size(804, 736);
             this.ResumeLayout(false);
             this.PerformLayout();
 
