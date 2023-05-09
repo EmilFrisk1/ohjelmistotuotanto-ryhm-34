@@ -38,6 +38,6 @@ namespace ohjelmistotuotanto
         public const string areasRemove = "areasRemove";
         public const string areasUpdate = "areasUpdate";
         public const string billingSearch = "billingSearch";
-
+        public const string billingUpdate = "billingUpdate";
     }
 }

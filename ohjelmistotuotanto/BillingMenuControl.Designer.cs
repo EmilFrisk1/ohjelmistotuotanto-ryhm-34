@@ -30,7 +30,6 @@
         {
             this.LaskuLabel1 = new System.Windows.Forms.Label();
             this.BillingSearchBtn = new System.Windows.Forms.Button();
-            this.BillingDeleteBtn = new System.Windows.Forms.Button();
             this.BillingUpdateBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -59,29 +58,18 @@
             this.BillingSearchBtn.UseVisualStyleBackColor = false;
             this.BillingSearchBtn.Click += new System.EventHandler(this.BillingSearchBtn_Click);
             // 
-            // BillingDeleteBtn
-            // 
-            this.BillingDeleteBtn.BackColor = System.Drawing.Color.DarkSlateGray;
-            this.BillingDeleteBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.BillingDeleteBtn.ForeColor = System.Drawing.Color.Silver;
-            this.BillingDeleteBtn.Location = new System.Drawing.Point(176, 262);
-            this.BillingDeleteBtn.Name = "BillingDeleteBtn";
-            this.BillingDeleteBtn.Size = new System.Drawing.Size(451, 62);
-            this.BillingDeleteBtn.TabIndex = 2;
-            this.BillingDeleteBtn.Text = "Poista";
-            this.BillingDeleteBtn.UseVisualStyleBackColor = false;
-            // 
             // BillingUpdateBtn
             // 
             this.BillingUpdateBtn.BackColor = System.Drawing.Color.DarkSlateGray;
             this.BillingUpdateBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.BillingUpdateBtn.ForeColor = System.Drawing.Color.Silver;
-            this.BillingUpdateBtn.Location = new System.Drawing.Point(176, 372);
+            this.BillingUpdateBtn.Location = new System.Drawing.Point(176, 262);
             this.BillingUpdateBtn.Name = "BillingUpdateBtn";
             this.BillingUpdateBtn.Size = new System.Drawing.Size(451, 62);
             this.BillingUpdateBtn.TabIndex = 3;
             this.BillingUpdateBtn.Text = "Päivitä";
             this.BillingUpdateBtn.UseVisualStyleBackColor = false;
+            this.BillingUpdateBtn.Click += new System.EventHandler(this.BillingUpdateBtn_Click);
             // 
             // BillingMenuControl
             // 
@@ -89,7 +77,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::ohjelmistotuotanto.Properties.Resources.test3;
             this.Controls.Add(this.BillingUpdateBtn);
-            this.Controls.Add(this.BillingDeleteBtn);
             this.Controls.Add(this.BillingSearchBtn);
             this.Controls.Add(this.LaskuLabel1);
             this.Name = "BillingMenuControl";
@@ -103,7 +90,6 @@
 
         private Label LaskuLabel1;
         private Button BillingSearchBtn;
-        private Button BillingDeleteBtn;
         private Button BillingUpdateBtn;
     }
 }

@@ -24,5 +24,11 @@ namespace ohjelmistotuotanto
             this.Hide();
             MenuSwitchRequested?.Invoke(Constants.billingSearch);
         }
+
+        private void BillingUpdateBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            MenuSwitchRequested?.Invoke(Constants.billingUpdate);
+        }
     }
 }
