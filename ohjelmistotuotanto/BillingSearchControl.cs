@@ -27,7 +27,7 @@ namespace ohjelmistotuotanto
         }
         private async void searchBtn_Click(object sender, EventArgs e)
         {
-            string billQuery = $"SELECT r.start_date, r.end_date, b.id AS bill_id, b.sum, b.issue_date, b.due_date, c.city AS c_city, c.postal_code AS c_postal_code, c.address AS c_address, CONCAT(c.firstname, ' ', c.lastname) AS c_full_name, co.description FROM bill b JOIN reservation r ON b.reservation_id = r.id JOIN customer c ON r.customer_id = c.id JOIN cottage co ON r.cottage_id = co.id";
+            string billQuery = $"SELECT r.start_date, r.end_date, b.id AS bill_id, b.status AS tilanne, b.sum, b.issue_date, b.due_date, c.city AS c_city, c.postal_code AS c_postal_code, c.address AS c_address, CONCAT(c.firstname, ' ', c.lastname) AS c_full_name, co.description FROM bill b JOIN reservation r ON b.reservation_id = r.id JOIN customer c ON r.customer_id = c.id JOIN cottage co ON r.cottage_id = co.id;";
             var billsdetails = await VillageNewbies._dbManager.GetBillDetails(billQuery);
             searchGrid.DataSource = billsdetails;
         }

@@ -360,6 +360,7 @@ public class DatabaseManager
                         invoice.StartDate = reader.GetDateTime("start_date").ToString().Substring(0, 10); // Converts the date into dd/mm/yyyy format
                         invoice.EndDate = reader.GetDateTime("end_date").ToString().Substring(0, 10);
                         invoice.BillId = reader.GetInt32("bill_id").ToString();
+                        invoice.Status = reader.GetString("tilanne");
                         invoice.IssueDate = reader.GetDateTime("issue_date").ToString().Substring(0, 10);
                         invoice.DueDate = reader.GetDateTime("due_date").ToString().Substring(0, 10);
                         invoice.CusCity = reader.GetString("c_city");

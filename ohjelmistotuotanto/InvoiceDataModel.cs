@@ -9,6 +9,7 @@ namespace ohjelmistotuotanto
     public class InvoiceDataModel
     {
         public string BillId { get; set; }
+        public string Status { get; set; }
         public string Sum { get; set; }
         public string IssueDate { get; set; }
         public string DueDate { get; set; }
