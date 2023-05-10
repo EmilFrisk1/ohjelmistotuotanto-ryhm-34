@@ -40,6 +40,16 @@
             // 
             // updateBtn
             // 
+            this.updateBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.updateBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.updateBtn.ForeColor = System.Drawing.Color.Silver;
+            this.updateBtn.Location = new System.Drawing.Point(189, 443);
+            this.updateBtn.Name = "updateBtn";
+            this.updateBtn.Size = new System.Drawing.Size(451, 62);
+            this.updateBtn.TabIndex = 21;
+            this.updateBtn.Text = "Päivitä";
+            this.updateBtn.UseVisualStyleBackColor = false;
+            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
             updateBtn.BackColor = Color.DarkSlateGray;
             updateBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
             updateBtn.ForeColor = Color.Silver;
@@ -88,6 +98,16 @@
             // 
             // deleteBtn
             // 
+            this.deleteBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.deleteBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.deleteBtn.ForeColor = System.Drawing.Color.Silver;
+            this.deleteBtn.Location = new System.Drawing.Point(189, 351);
+            this.deleteBtn.Name = "deleteBtn";
+            this.deleteBtn.Size = new System.Drawing.Size(451, 62);
+            this.deleteBtn.TabIndex = 17;
+            this.deleteBtn.Text = "Poista";
+            this.deleteBtn.UseVisualStyleBackColor = false;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             deleteBtn.BackColor = Color.DarkSlateGray;
             deleteBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
             deleteBtn.ForeColor = Color.Silver;
@@ -100,6 +120,16 @@
             // 
             // addBtn
             // 
+            this.addBtn.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.addBtn.Font = new System.Drawing.Font("Segoe UI", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addBtn.ForeColor = System.Drawing.Color.Silver;
+            this.addBtn.Location = new System.Drawing.Point(189, 249);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(451, 62);
+            this.addBtn.TabIndex = 16;
+            this.addBtn.Text = "Lisää";
+            this.addBtn.UseVisualStyleBackColor = false;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             addBtn.BackColor = Color.DarkSlateGray;
             addBtn.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
             addBtn.ForeColor = Color.Silver;
