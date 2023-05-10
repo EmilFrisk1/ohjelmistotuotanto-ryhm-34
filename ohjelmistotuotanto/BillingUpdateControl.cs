@@ -46,7 +46,16 @@ namespace ohjelmistotuotanto
                 if (billStatus != null)
                 {
                     InvoiceDataModel selectedBill = Invoices.FirstOrDefault(b => b.BillId == billId);
-                    billsCbx.SelectedValue = selectedBill.Status;
+                    if (selectedBill.Status == "PENDING")
+                    {
+                        billsCbx.SelectedIndex = 0;
+                    } else if (selectedBill.Status == "PAID")
+                    {
+                        billsCbx.SelectedIndex = 1;
+                    } else if (selectedBill.Status == "CANCELLED")
+                    {
+                        billsCbx.SelectedIndex = 2;
+                    }
                 }
             }
         }
@@ -54,6 +63,57 @@ namespace ohjelmistotuotanto
         private void billsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             PopulatePlaceholderValues();
+        }
+
+        // private void 
+
+        private bool Validate()
+        {
+            if (billsCbx.SelectedIndex == -1)
+                return false;
+            else
+                return true;
+        }
+
+        private async void editBillBtn_Click(object sender, EventArgs e)
+        {
+            if (!Validate())
+                return;
+
+            try
+            {
+                DataGridViewRow selectedRow = billsDataGridView.CurrentRow;
+                var selectedIndex= (int)billsCbx.SelectedIndex;
+                string billId = (string)selectedRow.Cells["BillId"].Value;
+
+                Dictionary<string, object> columnValues = new Dictionary<string, object>();
+
+                if (selectedIndex == 0)
+                {
+                    columnValues.Add("status", "PENDING");
+
+                } else if(selectedIndex == 1)
+                {
+                    columnValues.Add("status", "PAID");
+                } else if (selectedIndex == 2)
+                {
+                    columnValues.Add("status", "CANCELLED");
+                }
+
+                var response = await VillageNewbies._dbManager.AlterDataAsync("bill", columnValues, $"id = {billId}");
+                if (response == null || response <= 0)
+                {
+                    throw new Exception("Error occurred while inserting data into the database.");
+                }
+                else
+                {
+                    MessageBox.Show("Palvelu muokattu onnistuneesti!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("jokin meni pieleen: " + ex.Message);
+            }
         }
     }
 }
