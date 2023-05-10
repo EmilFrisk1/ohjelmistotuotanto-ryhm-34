@@ -30,5 +30,12 @@ namespace ohjelmistotuotanto
             this.Hide();
             MenuSwitchRequested?.Invoke(Constants.billingUpdate);
         }
+
+        private void prevBtn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            VillageNewbies.menuhistory.RemoveAt(VillageNewbies.menuhistory.Count - 1);
+            MenuSwitchRequested?.Invoke(Constants.mainMenu);
+        }
     }
 }
