@@ -27,10 +27,44 @@ namespace ohjelmistotuotanto
         {
 
         }
+        private void phoneNumberTxtBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!TextBoxUtility.MaxLength(sender, e, 18))
+            {
+                Utility.UpdateStatusStripText("Vain 18 merrkiä sallittu", statusStrip);
+                statusStrip.Visible = true;
+                return;
+            }
+            else
+            {
+                if (statusStrip.Visible) statusStrip.Hide();
+            }
 
+            if (TextBoxUtility.AllowOnlyNumbers(sender, e))
+            {
+                Utility.UpdateStatusStripText("Vain numerot ja yksi piste sallittu", statusStrip);
+                statusStrip.Visible = true;
+                return;
+            }
+            else
+            {
+                if (statusStrip.Visible) statusStrip.Hide();
+            }
+
+        }
         private void priceTxtBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBoxUtility.AllowOnlyNumbers(sender, e);
+            if (TextBoxUtility.AllowOnlyNumbers(sender, e))
+            {
+                Utility.UpdateStatusStripText("Vain numerot ja yksi piste sallittu", statusStrip);
+                statusStrip.Visible = true;
+                return;
+            }
+            else
+            {
+                if (statusStrip.Visible) statusStrip.Hide();
+            }
         }
 
         private void prevBtn_Click(object sender, EventArgs e)
@@ -58,6 +92,7 @@ namespace ohjelmistotuotanto
                 return true;
             }
         }
+
 
         private async Task<bool> AddService()
         {
@@ -89,6 +124,7 @@ namespace ohjelmistotuotanto
                 return false;
             }
         }
+
 
         private async void addServiceBtn_Click(object sender, EventArgs e)
         {

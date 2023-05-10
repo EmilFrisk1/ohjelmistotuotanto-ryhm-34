@@ -49,6 +49,7 @@
             this.updateBtn.TabIndex = 21;
             this.updateBtn.Text = "Päivitä";
             this.updateBtn.UseVisualStyleBackColor = false;
+            this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
             // 
             // prevBtn
             // 
@@ -97,6 +98,7 @@
             this.deleteBtn.TabIndex = 17;
             this.deleteBtn.Text = "Poista";
             this.deleteBtn.UseVisualStyleBackColor = false;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // addBtn
             // 
@@ -109,6 +111,7 @@
             this.addBtn.TabIndex = 16;
             this.addBtn.Text = "Lisää";
             this.addBtn.UseVisualStyleBackColor = false;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // ServicesMenuControl
             // 
